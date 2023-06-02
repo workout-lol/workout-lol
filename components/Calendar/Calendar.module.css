@@ -1,0 +1,7 @@
+.today input {
+  border: 3px solid #228be6;
+}
+
+.future {
+  visibility: hidden;
+}

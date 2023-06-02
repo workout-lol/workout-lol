@@ -1,0 +1,33 @@
+{
+  "name": "simple-workout",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.0",
+    "@emotion/server": "^11.11.0",
+    "@mantine/core": "^6.0.10",
+    "@mantine/hooks": "^6.0.10",
+    "@mantine/next": "^6.0.10",
+    "@svgr/webpack": "^8.0.1",
+    "@tabler/icons-react": "^2.18.0",
+    "eslint": "8.40.0",
+    "eslint-config-next": "13.4.1",
+    "mongodb": "^5.4.0",
+    "next": "13.4.1",
+    "party-js": "^2.2.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-lazyload": "^3.2.0",
+    "swr": "^2.1.5",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodejs-web-scraper": "^6.1.3"
+  }
+}

@@ -1,0 +1,18 @@
+.svgContainer {
+  text-align: center;
+  margin: 2em 0;
+}
+
+.illustration {
+  width: 100%;
+  height: auto;
+}
+
+.hover {
+  fill: #69b0ee;
+  cursor: pointer;
+}
+
+.active {
+  fill: #228be6;
+}

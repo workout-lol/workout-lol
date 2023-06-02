@@ -1,0 +1,10 @@
+.link {
+  text-decoration: none;
+  color: #000;
+}
+
+@media screen and (max-width: 560px) {
+  .title {
+    display: none;
+  }
+}

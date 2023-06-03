@@ -28,6 +28,7 @@ export default function Home() {
       </Text>
       {/* <Link href="/sign-up">Create an account</Link> to ensure it is not getting lost</Text> */}
     </Paper>
+
     <Calendar variant="full" user={user} />
 
 

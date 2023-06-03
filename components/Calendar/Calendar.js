@@ -1,12 +1,22 @@
 import React from 'react'
-import { Checkbox, Flex, Tooltip } from '@mantine/core';
+import { Checkbox, Flex, Tooltip, Text } from '@mantine/core';
 import styles from './Calendar.module.css'
 
-const Calendar = ({ user, variant = "small" }) => {
+const Calendar = ({ user = {}, variant = "small" }) => {
   const rows = variant === "small"? 6 : 7;
   const columns = variant === "small"? 1 : 20;
+  const allWorkouts = user.workouts || []
 
-  return <Flex>
+  return <Flex justify="center">
+    {variant !== 'small' && <Flex direction="column" mr="sm">
+      <Text c="dimmed" style={{ fontSize: '0.7em', lineHeight: '2em' }}>Mo</Text>
+      <Text c="dimmed" style={{ fontSize: '0.7em', lineHeight: '2em' }}>Tu</Text>
+      <Text c="dimmed" style={{ fontSize: '0.7em', lineHeight: '2em' }}>We</Text>
+      <Text c="dimmed" style={{ fontSize: '0.7em', lineHeight: '2em' }}>Th</Text>
+      <Text c="dimmed" style={{ fontSize: '0.7em', lineHeight: '2em' }}>Fr</Text>
+      <Text c="dimmed" style={{ fontSize: '0.7em', lineHeight: '2em' }}>Sa</Text>
+      <Text c="dimmed" style={{ fontSize: '0.7em', lineHeight: '2em' }}>Su</Text>
+    </Flex> }
     { [...Array(columns)].map((x, i) => {
       return <Flex key={`calendar-${variant}-${i}`} direction={variant === 'small' ? 'row' : 'column'}>
         { [...Array(rows)].map((x, j) => {
@@ -17,8 +27,8 @@ const Calendar = ({ user, variant = "small" }) => {
 
           const days = (7*i) + j
           date.setDate(date.getDate() - days);
-          const dayWorkouts = []// TODO user.workouts && user.workouts
-          const checked = dayWorkouts && dayWorkouts.some(w => w.every(e => e.completed))
+          const dayWorkouts = allWorkouts.filter(w => w.created_at.slice(0, 10) === date.toISOString().slice(0, 10))
+          const checked = dayWorkouts.some(w => w.exercises.every(e => e.completed))
 
           const isToday = (new Date().toDateString() === date.toDateString())
           const isFuture = (new Date() < date)

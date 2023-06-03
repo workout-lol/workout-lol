@@ -11,7 +11,7 @@ const fetcher = query => fetch(`/api/exercises${query}`)
   .then(res => res.json())
 
 const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
-  const defaultCount = Math.round(6 / muscles.length) // default around 6 exercises
+  const defaultCount = Math.round(6 / muscles.length) || 1 // default around 6 exercises
   const sortedEquipments = equipment.sort().join(',')
   const sortedMuscles = muscles.sort().join(',')
   const query = `?equipment=${sortedEquipments}&muscles=${sortedMuscles}`

@@ -19,9 +19,9 @@ const Footer = () => {
           </a>
         </Flex>
       </div>
-      <div>
+      <Text>
         <Link href="/privacy">privacy policy</Link>
-      </div>
+      </Text>
     </Flex>
   </>
 }

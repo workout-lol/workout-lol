@@ -71,7 +71,8 @@ const HomeScreen = ({ user, setUser }) => {
   }
 
   const nextDisabled = (active === 0 && equipment.length === 0)
-    || (active === 1 && muscles.length === 0);
+    || (active === 1 && muscles.length === 0)
+    || (active === 2 && workout.length === 0)
 
   return (
     <Layout user={user}>
@@ -91,7 +92,7 @@ const HomeScreen = ({ user, setUser }) => {
       </Stepper>
 
       { active !== 3 && <Group position="center" mt="xl">
-        { active === 2 && <Button variant="outline" onClick={saveForLater}>
+        { active === 2 && <Button variant="outline" onClick={saveForLater} disabled={nextDisabled}>
           Save for later
         </Button>}
         <Button onClick={nextStep} disabled={nextDisabled}>

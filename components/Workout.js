@@ -59,23 +59,14 @@ const Workout = ({ workout, updateProgress, user }) => {
             { exercise.steps.map(step => <List.Item key={step}>{step}</List.Item>)}
           </List>
 
-          <Flex>
-            <Input placeholder="1. Set" maxLength={6} w={70} mr="sm" onChange={e => handleChange(e.target.value, 0)} />
-            <Input placeholder="2. Set" maxLength={6} w={70} mr="sm" onChange={e => handleChange(e.target.value, 1)} disabled={!sets[0]}/>
-            <Input placeholder="3. Set" maxLength={6} w={70} mr="sm" onChange={e => handleChange(e.target.value, 2)} disabled={!sets[1]}/>
+          <Flex direction={{ base: 'column', xs: 'row' }}>
+            <Flex mb={{ base: 'sm', xs: 0 }}>
+              <Input placeholder="1. Set" maxLength={6} w={70} mr="sm" onChange={e => handleChange(e.target.value, 0)} />
+              <Input placeholder="2. Set" maxLength={6} w={70} mr="sm" onChange={e => handleChange(e.target.value, 1)} disabled={!sets[0]}/>
+              <Input placeholder="3. Set" maxLength={6} w={70} mr="sm" onChange={e => handleChange(e.target.value, 2)} disabled={!sets[1]}/>
+            </Flex>
             <Button onClick={goNext}>Next Exercise</Button>
           </Flex>
-          <Popover width={300} withArrow shadow="md">
-            <Popover.Target>
-              <Badge mb="md" mt="sm">
-                What is this?
-              </Badge>
-            </Popover.Target>
-
-            <Popover.Dropdown>
-              <Text size="sm">(Optional) Track your repititions or times. ... more description text TODO</Text>
-            </Popover.Dropdown>
-          </Popover>
         </Timeline.Item>
         : <Timeline.Item key={exercise._id} bullet={active > index && <IconCheck />}>
           <Text mr="xs" fw={500}>{exercise.title}</Text>

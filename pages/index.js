@@ -13,7 +13,7 @@ import useLocalStorage from '../utils/localStorage'
 const HomeScreen = ({ user, setUser }) => {
   const router = useRouter()
   const repeatWorkoutId = router.query && router.query.w_id
-  const repeatWorkout = user.workouts.find(w => w.id === repeatWorkoutId)
+  const repeatWorkout = (user.workouts || []).find(w => w.id === repeatWorkoutId)
   const [active, setActive] = useState(user.equipment ? 1 : 0);
   const nextStep = () => {
     if (active === 2) {

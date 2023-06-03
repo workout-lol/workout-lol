@@ -18,9 +18,9 @@ export default function Home() {
       <p>Effective date: January 15, 2020</p>
         <p>Updated date: May 07 2020</p>
         <p>
-          Vincent Will ('us', 'we', or 'our') operates the
+          Vincent Will (&#39;us&#39;, &#39;we&#39;, or &#39;our&#39;) operates the
           https://workout.lol website (hereinafter referred to
-          as the 'Service').
+          as the &#39;Service&#39;).
         </p>
         <p>
           This page informs you of our policies regarding the
@@ -52,8 +52,8 @@ export default function Home() {
         <p>
           While using our Service, we may ask you to provide us
           with certain personally identifiable information that
-          can be used to contact or identify you ('Personal
-          Data'). Personally identifiable information may include,
+          can be used to contact or identify you (&#39;Personal
+          Data&#39;). Personally identifiable information may include,
           but is not limited to:
         </p>
         <ul>
@@ -62,8 +62,8 @@ export default function Home() {
         <h4>Usage Data</h4>
         <p>
           We may also collect information on how the Service is
-          accessed and used ('Usage Data'). This Usage Data may
-          include information such as your computer's Internet
+          accessed and used (&#39;Usage Data&#39;). This Usage Data may
+          include information such as your computer&#39;s Internet
           Protocol address (e.g. IP address), browser type,
           browser version, the pages of our Service that you
           visit, the time and date of your visit, the time spent
@@ -152,7 +152,7 @@ export default function Home() {
         <h2>Service Providers</h2>
         <p>
             We may employ third party companies and individuals to
-            facilitate our Service ('Service Providers'), to provide
+            facilitate our Service (&#39;Service Providers&#39;), to provide
             the Service on our behalf, to perform Service-related
             services or to assist us in analyzing how our Service is
             used.
@@ -182,7 +182,7 @@ export default function Home() {
         <p>
             Our Service may contain links to other sites that are
             not operated by us. If you click on a third party link,
-            you will be directed to that third party's site. We
+            you will be directed to that third party&#39;s site. We
             strongly advise you to review the Privacy Policy of
             every site you visit.
         </p>
@@ -191,10 +191,10 @@ export default function Home() {
             the content, privacy policies or practices of any third
             party sites or services.
         </p>
-        <h2>Children's Privacy</h2>
+        <h2>Children&#39;s Privacy</h2>
         <p>
             Our Service does not address anyone under the age of 18
-            ('Children').
+            (&#39;Children&#39;).
         </p>
         <p>
             We do not knowingly collect personally identifiable
@@ -215,7 +215,7 @@ export default function Home() {
         <p>
           We will let you know via email and/or a prominent notice
           on our Service, prior to the change becoming effective
-          and update the 'effective date' at the top of this
+          and update the &#39;effective date&#39; at the top of this
           Privacy Policy.
         </p>
         <p>

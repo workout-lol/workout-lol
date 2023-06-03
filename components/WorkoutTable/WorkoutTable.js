@@ -11,6 +11,7 @@ const WorkoutTable = ({ workouts, deleteWorkout }) => {
           <tr>
             <th style={{ width: '130px' }}>Date</th>
             <th>Exercises</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>

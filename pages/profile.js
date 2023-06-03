@@ -1,10 +1,8 @@
-import Link from 'next/link'
-import { Paper, Text, Accordion, Badge, Tooltip, Table, ActionIcon } from '@mantine/core'
-import { IconTrash, IconRepeat } from '@tabler/icons-react'
+import { Paper, Text } from '@mantine/core'
 import Layout from '../components/Layout/Layout'
 import Calendar from '../components/Calendar/Calendar'
+import WorkoutTable from '../components/WorkoutTable/WorkoutTable'
 import useLocalStorage from '../utils/localStorage'
-import { muscleToColor } from '../components/Exercises/utils'
 
 export default function Home() {
   const [user, setUser] = useLocalStorage('user');
@@ -33,48 +31,6 @@ export default function Home() {
 
 
     <Text mt="lg" mb="md" fw="bold">Workout History [{workouts.length}]</Text>
-    <Table striped>
-      <thead>
-        <tr>
-          <th></th>
-          <th style={{ width: '110px' }}>Date</th>
-          <th>Exercises</th>
-        </tr>
-      </thead>
-      <tbody>
-        {workouts.map((w, i) => <tr key={`history-${i}`} mb="sm">
-          <td>
-            { w.exercises.every(e => e.completed) && '✅' }
-          </td>
-          <td><Text>{w.created_at.slice(0,10)}</Text></td>
-
-          <td>
-            { w.exercises.map((e, j) =>
-              <Tooltip key={`history-${i}-${j}`} label={e.mainMuscle}>
-                <Badge color={muscleToColor[e.mainMuscle]} variant="outline" mr="xs" mb={4} mt={4}>
-                  {e.title}
-                </Badge>
-              </Tooltip>
-            )}
-          </td>
-          <td>
-            <Link href={`/?w_id=${w.id}`}>
-              <Tooltip label="Repeat workout">
-                <ActionIcon color="blue" variant="subtle">
-                  <IconRepeat />
-                </ActionIcon>
-              </Tooltip>
-            </Link>
-          </td>
-          <td>
-            <Tooltip label="Delete workout">
-              <ActionIcon color="red" variant="subtle" onClick={() => deleteWorkout(w.id)}>
-                <IconTrash />
-              </ActionIcon>
-            </Tooltip>
-          </td>
-        </tr> )}
-      </tbody>
-    </Table>
+    <WorkoutTable workouts={workouts} deleteWorkout={deleteWorkout} />
   </Layout>
 }

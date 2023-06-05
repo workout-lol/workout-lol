@@ -8,11 +8,32 @@
   height: auto;
 }
 
-.hover {
+.enabled.hover {
   fill: #69b0ee;
   cursor: pointer;
 }
 
-.active {
+.enabled.active {
   fill: #228be6;
+}
+
+.enabled {
+  fill: #bdbdbd;
+}
+
+.loading {
+  fill: #757575;
+  animation: pulse 2s linear infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.5;
+  }
 }

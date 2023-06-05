@@ -81,7 +81,7 @@ const HomeScreen = ({ user, setUser }) => {
           <Equipment {...{ equipment, updateEquipment }} />
         </Stepper.Step>
         <Stepper.Step label="Muscles" description="Choose your training">
-          <Muscles {...{ muscles, setMuscles, workout, setWorkout }} />
+          <Muscles {...{ muscles, setMuscles, workout, setWorkout, equipment }} />
         </Stepper.Step>
         <Stepper.Step label="Exercises" description="Customize your workout">
           <Exercises {...{ equipment, muscles, workout, setWorkout }} />

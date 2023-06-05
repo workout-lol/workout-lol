@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { Text, Timeline, Flex, Paper, Button, List, Input, Popover, Badge, Title } from '@mantine/core'
+import { Text, Timeline, Flex, Paper, Button, List, Input, Indicator, Title } from '@mantine/core'
 import { IconCheck } from '@tabler/icons-react'
 import party from "party-js"
 

@@ -52,6 +52,7 @@ export const muscleToColor = {
   Forearms: "indigo",
   Glutes: "blue",
   Hamstrings: "cyan",
+  Lats: "lime",
   "Lower back": "teal",
   Obliques: "green",
   Quads: "lime",

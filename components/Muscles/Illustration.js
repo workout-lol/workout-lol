@@ -540,7 +540,7 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount, isLoading }) 
              410.78,209.06 410.64,208.25 410.64,207.44
              410.63,188.73 410.63,170.03 410.63,151.32" />
   <path id="path24"
-        className={styles.muscle} data-elem="Obliques"
+        className={styles.muscle} data-elem="Lats"
         fill="#757575" stroke="black" strokeWidth="0"
         d="M 452.92,116.24
            C 452.92,116.24 452.75,111.80 452.75,111.80
@@ -560,7 +560,7 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount, isLoading }) 
              452.39,133.25 453.16,127.59 453.20,120.88
              453.14,119.93 453.06,118.08 452.92,116.24" />
   <path id="path26"
-        className={styles.muscle} data-elem="Obliques"
+        className={styles.muscle} data-elem="Lats"
         fill="#757575" stroke="black" strokeWidth="0"
         d="M 403.69,137.15
            C 405.75,134.61 405.91,133.56 404.16,130.82
@@ -583,7 +583,7 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount, isLoading }) 
              388.07,149.59 391.14,148.39 393.98,146.49
              397.77,143.96 400.84,140.67 403.69,137.15" />
   <path id="path28"
-        className={styles.muscle} data-elem="Obliques"
+        className={styles.muscle} data-elem="Lats"
         fill="#757575" stroke="black" strokeWidth="0"
         d="M 451.05,138.61
            C 450.93,138.58 450.82,138.55 450.71,138.52
@@ -598,7 +598,7 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount, isLoading }) 
              448.22,156.01 449.70,149.17 450.64,142.19
              450.80,141.00 450.91,139.80 451.05,138.61" />
   <path id="path30"
-        className={styles.muscle} data-elem="Obliques"
+        className={styles.muscle} data-elem="Lats"
         fill="#757575" stroke="black" strokeWidth="0"
         d="M 392.64,149.10
            C 392.27,149.18 392.12,149.19 391.99,149.25
@@ -688,7 +688,7 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount, isLoading }) 
              388.06,31.26 386.60,33.77 387.21,35.14
              387.98,36.86 388.74,38.59 389.54,40.30" />
   <path id="path36"
-        className={styles.muscle} data-elem="Obliques"
+        className={styles.muscle} data-elem="Lats"
         fill="#757575" stroke="black" strokeWidth="0"
         d="M 388.14,174.91
            C 388.01,174.75 387.84,174.60 387.64,174.46
@@ -771,7 +771,7 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount, isLoading }) 
              411.17,219.22 411.12,217.20 409.24,214.80
              403.02,206.79 398.22,198.20 395.62,188.85" />
   <path id="path44"
-        className={styles.muscle} data-elem="Obliques"
+        className={styles.muscle} data-elem="Lats"
         fill="#757575" stroke="black" strokeWidth="0"
         d="M 374.54,178.09
            C 375.35,177.34 375.98,176.40 376.84,175.71
@@ -891,7 +891,7 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount, isLoading }) 
              391.09,383.91 391.48,382.20 391.92,380.26
              388.46,383.07 386.45,382.97 383.21,380.05" />
   <path id="path56"
-        className={styles.muscle} data-elem="Obliques"
+        className={styles.muscle} data-elem="Lats"
         fill="#757575" stroke="black" strokeWidth="0"
         d="M 431.03,186.03
            C 434.21,186.80 437.40,187.52 440.48,188.54
@@ -929,7 +929,7 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount, isLoading }) 
              437.79,314.07 436.20,317.16 434.26,320.11
              433.54,321.21 433.74,321.62 434.82,322.36" />
   <path id="path60"
-        className={styles.muscle} data-elem="Obliques"
+        className={styles.muscle} data-elem="Lats"
         fill="#757575" stroke="black" strokeWidth="0"
         d="M 446.16,166.84
            C 444.58,168.72 443.04,170.63 441.50,172.50

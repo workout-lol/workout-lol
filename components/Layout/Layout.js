@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card } from '@mantine/core'
 import Header from '../Header/Header'
-import Footer from '../Footer'
+import Footer from '../Footer/Footer'
 import styles from './Layout.module.css'
 
 const Layout = ({ children, user }) => {

@@ -2,10 +2,11 @@ import React from 'react'
 import Link from 'next/link'
 import { Text, Flex, ActionIcon } from '@mantine/core'
 import { IconBrandGithub, IconMail, IconBrandTwitter } from '@tabler/icons-react'
+import styles from './Footer.module.css'
 
 const Footer = () => {
   return <>
-    <Flex justify="space-between">
+    <Flex justify="space-between" align="center">
       <div>
         <Flex>
           <a href="https://github.com/Vincenius/simple-workout" target="_blank" rel="noopener noreferrer">
@@ -19,8 +20,12 @@ const Footer = () => {
           </a>
         </Flex>
       </div>
-      <Text>
-        <Link href="/privacy">privacy policy</Link>
+      <Text className={styles.links}>
+        <Flex gap={{ base: 0, xs: 'md' }} direction={{ base: 'column', xs: 'row' }}>
+          <Link href="https://ko-fi.com/wweb_dev">Donate</Link>
+          <Link href="/about">About</Link>
+          <Link href="/privacy">Privacy Policy</Link>
+        </Flex>
       </Text>
     </Flex>
   </>

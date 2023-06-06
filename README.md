@@ -19,7 +19,7 @@
 ## Link
 + You can self-host the project or use the web app on [workout.lol](https://workout.lol).
 
-TODO ## Steps to run it locally
+## Steps to run it locally
 1. Clone the repository to your local machine <br>
    `git clone https://github.com/Vincenius/workout-lol.git`
 2. Navigate to the app directory <br>

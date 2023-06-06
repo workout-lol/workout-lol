@@ -9,7 +9,7 @@ const Footer = () => {
     <Flex justify="space-between" align="center">
       <div>
         <Flex>
-          <a href="https://github.com/Vincenius/simple-workout" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/Vincenius/workout-lol" target="_blank" rel="noopener noreferrer">
             <ActionIcon mr="md"><IconBrandGithub/></ActionIcon>
           </a>
           <a href="https://twitter.com/wweb_dev" target="_blank" rel="noopener noreferrer">

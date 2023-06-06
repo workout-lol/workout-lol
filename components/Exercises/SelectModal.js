@@ -33,7 +33,7 @@ const SelectModal = ({ exercises, workout, setWorkout, defaultMuscle, index, clo
                   mr="xs"
                   compact
                   variant="subtle"
-                  disabled={workout.some(w => w._id === exercise._id)}
+                  disabled={workout.some(w => w._id === exercise._id)} // TODO allow duplicate workouts
                   onClick={() => selectExercise(exercise)}
                 >
                   {exercise.title}

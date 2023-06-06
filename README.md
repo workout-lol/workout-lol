@@ -19,18 +19,19 @@
 ## Link
 + You can self-host the project or use the web app on [workout.lol](https://workout.lol).
 
-<!-- TODO ## Steps to run it locally
+TODO ## Steps to run it locally
 1. Clone the repository to your local machine <br>
    `git clone https://github.com/Vincenius/workout-lol.git`
 2. Navigate to the app directory <br>
    `cd workout-lol`
 3. Install the necessary dependencies <br>
    `npm install`
-4. Setup a MongoDB database with three collections: `users`, `projects` and `donations`
-5. copy the `.env.dist` file to `.env.local` and set environment variables as described in the file<br>
+4. Initialize the Mongo DB by importing the dump files from `lib/dump/prod`
+   `mongoimport --uri mongodb+srv://admin:<PASSWORD>@cluster0.<URI>.mongodb.net/<DATABASE> --collection <COLLECTION> --type <FILETYPE> --file <FILENAME>`
+5. copy the `.env.dist` file to `.env` and set environment variables as described in the file<br>
 6. Start the local development server <br>
    `npm run dev`
-7. Open your browser to http://localhost:3000 -->
+7. Open your browser to http://localhost:3000
 
 ## Created By
 <!-- [Vincent Will](https://twitter.com/wweb_dev) -->

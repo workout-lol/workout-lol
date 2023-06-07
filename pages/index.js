@@ -11,10 +11,13 @@ import Layout from '../components/Layout/Layout'
 import useLocalStorage from '../utils/localStorage'
 
 const HomeScreen = ({ user, setUser }) => {
+  console.log('user:', user)
   const router = useRouter()
   const repeatWorkoutId = router.query && router.query.w_id
   const repeatWorkout = (user.workouts || []).find(w => w.id === repeatWorkoutId)
   const [active, setActive] = useState(user.equipment ? 1 : 0);
+
+
   const nextStep = () => {
     if (active === 2) {
       saveWorkout()
@@ -22,6 +25,11 @@ const HomeScreen = ({ user, setUser }) => {
     setActive((current) => (current < 3 ? current + 1 : current))
   };
   const jumpToStep = (step) => {
+    const isFirstStep = active === 0;
+    const hasEquipment = user.equipment.length > 0;
+
+    if (isFirstStep && !hasEquipment) return;
+
     if ((active !== 2 || muscles.length > 0) && active !== 3) {
       setActive(step)
     }

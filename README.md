@@ -25,7 +25,7 @@
 2. Navigate to the app directory <br>
    `cd workout-lol`
 3. Install the necessary dependencies <br>
-   `npm install`
+   `yarn`
 4. Initialize the Mongo DB by importing the dump files from `lib/dump/prod`:
 
    4.1 For the <COLLECTION>.metadata.json, you'll have to do this :

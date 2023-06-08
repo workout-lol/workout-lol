@@ -23,7 +23,7 @@ const HomeScreen = ({ user, setUser }) => {
   };
   const jumpToStep = (step) => {
     const isFirstStep = active === 0;
-    const hasEquipment = user.equipment.length > 0;
+    const hasEquipment = user.equipment && user.equipment.length > 0;
 
     if (isFirstStep && !hasEquipment) return;
     if ((active !== 2 || muscles.length > 0) && active !== 3) {

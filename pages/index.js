@@ -24,8 +24,12 @@ const HomeScreen = ({ user, setUser }) => {
   const jumpToStep = (step) => {
     const isFirstStep = active === 0;
     const hasEquipment = user.equipment && user.equipment.length > 0;
+    const isSecondStep = active === 1;
+    const hasEquipment = equipment.length > 0;
+    const hasMuscles = muscles.length > 0
 
     if (isFirstStep && !hasEquipment) return;
+    if (isSecondStep && !hasMuscles && step === 2) return
     if ((active !== 2 || muscles.length > 0) && active !== 3) {
       setActive(step)
     }

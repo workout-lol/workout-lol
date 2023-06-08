@@ -26,8 +26,15 @@
    `cd workout-lol`
 3. Install the necessary dependencies <br>
    `npm install`
-4. Initialize the Mongo DB by importing the dump files from `lib/dump/prod`
-   `mongoimport --uri mongodb+srv://admin:<PASSWORD>@cluster0.<URI>.mongodb.net/<DATABASE> --collection <COLLECTION> --type <FILETYPE> --file <FILENAME>`
+4. Initialize the Mongo DB by importing the dump files from `lib/dump/prod`:
+
+   4.1 For the <COLLECTION>.metadata.json, you'll have to do this :
+
+   `mongoimport --uri mongodb+srv://<USERNAME>:<PASSWORD>@<CLUSTER_NUMBER>.<URI>.mongodb.net/<DATABASE> --collection <COLLECTION> --type json --file <FILEPATH>`
+
+   4.2 For the <COLLECTION>.bson, you'll have to do this : 
+   `mongorestore --uri mongodb+srv://<USERNAME>:<PASSWORD>@<CLUSTER_NUMBER>.<URI>.mongodb.net/<DATABASE> --collection <COLLECTION> <FILEPATH>`
+   
 5. copy the `.env.dist` file to `.env` and set environment variables as described in the file<br>
 6. Start the local development server <br>
    `npm run dev`

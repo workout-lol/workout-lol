@@ -74,6 +74,8 @@ const HomeScreen = ({ user, setUser }) => {
     latestWorkout.exercises[index].completed = true
     latestWorkout.exercises[index].sets = sets
 
+    console.log('CALLED', allWorkouts)
+
     setUser({ ...user, workouts: allWorkouts })
   }
 

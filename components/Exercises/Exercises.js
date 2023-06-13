@@ -217,7 +217,7 @@ const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
                                 sx={{
                                   flex: 1,
                                   ...draggingStyle(snapshot.isDragging),
-                                  paddingLeft: 10
+                                  paddingLeft: 10,
                                 }}
                                 align={{ base: "flex-start", xs: "center" }}
                                 direction={{ base: "column", xs: "row" }}
@@ -237,7 +237,7 @@ const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
                                   </Flex>
                                   <Tooltip label={exercise.mainMuscle}>
                                     <ThemeIcon
-                                        sx={{ cursor: "pointer" }}
+                                      sx={{ cursor: "pointer" }}
                                       size={22}
                                       variant="light"
                                       color={muscleToColor[exercise.mainMuscle]}
@@ -246,21 +246,26 @@ const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
                                       {exercise.mainMuscle.slice(0, 1)}
                                     </ThemeIcon>
                                   </Tooltip>
-                                  <Flex sx={{cursor: 'default'}} align="center">
-                                  <Text ml={5} mr="xs" fw={500}>
-                                    {exercise.title}
-                                  </Text>
-                                  <VideoIcon url={exercise.videos[0]} />
+                                  <Flex
+                                    sx={{ cursor: "default" }}
+                                    align="center"
+                                  >
+                                    <Text ml={5} mr="xs" fw={500}>
+                                      {exercise.title}
+                                    </Text>
+                                    <VideoIcon url={exercise.videos[0]} />
                                   </Flex>
                                 </Flex>
 
-                                <Flex justify="flex-end" pb={{
+                                <Flex
+                                  justify="flex-end"
+                                  pb={{
                                     base: 15,
-                                    sm: 0
-                                }}
-                                    sx={{
-                                        flex: 1,
-                                    }}
+                                    sm: 0,
+                                  }}
+                                  sx={{
+                                    flex: 1,
+                                  }}
                                 >
                                   <Button
                                     compact

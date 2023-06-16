@@ -24,7 +24,7 @@ export default function Home() {
       const data = {
         email: email.value,
         password: password.value,
-        session_data: user,
+        session_data: user ? user.data : {},
       }
       fetch('/api/sign-up', {
         method: 'POST',

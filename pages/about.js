@@ -1,13 +1,8 @@
 import { Text } from '@mantine/core'
 import Layout from '../components/Layout/Layout'
-import useLocalStorage from '../utils/localStorage'
 
 export default function Home() {
-  const [user, setUser] = useLocalStorage('user');
-
-  if (!user) return <></>
-
-  return <Layout user={user}>
+  return <Layout>
     <Text fw="bold">About</Text>
     <Text>
       <p>Welcome to Workout.lol! I&apos;m <a href="https://vincentwill.com">Vincent</a>, the creator of this small side project.</p>

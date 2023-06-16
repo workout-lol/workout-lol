@@ -1,9 +1,10 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import { SessionProvider } from "next-auth/react"
 import { MantineProvider } from '@mantine/core'
 
 export default function App(props) {
-  const { Component, pageProps } = props
+  const { Component, pageProps: { session, ...pageProps }, } = props
   const description = "A small web application to create workouts based on your available equipment and the muscles you want to train."
   const link = "https://workout.lol"
   const title = "Workout.lol | The easiest way to create a workout routine"
@@ -34,16 +35,18 @@ export default function App(props) {
         <script async defer data-website-id="8a475643-d28f-48c6-bed0-c4bd0833f87f" src="https://analytics.vincentwill.com/umami.js"></script>
       </Head>
 
-      <MantineProvider
-        withGlobalStyles
-        withNormalizeCSS
-        theme={{
-          /** Put your mantine theme override here */
-          colorScheme: 'light',
-        }}
-      >
-        <Component {...pageProps} />
-      </MantineProvider>
+      <SessionProvider session={session}>
+        <MantineProvider
+          withGlobalStyles
+          withNormalizeCSS
+          theme={{
+            /** Put your mantine theme override here */
+            colorScheme: 'light',
+          }}
+        >
+          <Component {...pageProps} />
+        </MantineProvider>
+      </SessionProvider>
     </>
   );
 }

@@ -85,7 +85,6 @@ const Workout = ({ workout, updateProgress, user }) => {
     setSets([])
 
     if (active === workout.length - 1) {
-      console.log('done')
       party.confetti(confettiDom.current, { count: 40 })
     }
   }

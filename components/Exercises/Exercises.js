@@ -192,7 +192,7 @@ const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
                 </ThemeIcon>
               }
             >
-              <Button compact variant="light" color="blue" mr="xs" disabled>
+              <Button compact variant="light" color="blue" mr="xs" mt="sm" disabled>
                 Add
               </Button>
             </Timeline.Item>

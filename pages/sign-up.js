@@ -5,7 +5,6 @@ import { IconAt, IconLock } from '@tabler/icons-react';
 import Layout from '../components/Layout/Layout'
 
 export default function Home() {
-  // todo redirect to profile if logged in
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
 
@@ -33,7 +32,6 @@ export default function Home() {
         .then(r =>  r.json().then(data => ({ status: r.status, body: data })))
         .then(res => {
           if (res.status === 201) {
-            // todo clean local storage
             signIn('credentials', {
               username: email.value,
               password: password.value,

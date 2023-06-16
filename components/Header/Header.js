@@ -19,7 +19,6 @@ const Header = () => {
   const [account = {}] = useAccount()
   const { data: user = {} } = account
   const hasWorkouts = user && user.workouts && Object.keys(user.workouts).length > 0
-  const profileDisabled = !hasWorkouts && !session
 
   return <Group position="apart">
     <Group>
@@ -43,8 +42,7 @@ const Header = () => {
         </Menu.Target>
         <Menu.Dropdown>
           <Menu.Item disabled={profileDisabled}>
-            { profileDisabled && "Profile" }
-            { !profileDisabled && <Link href="/profile" className={styles.link}>Profile</Link> }
+            <Link href="/profile" className={styles.link}>Profile</Link>
           </Menu.Item>
           <Menu.Divider />
           { !session && <>

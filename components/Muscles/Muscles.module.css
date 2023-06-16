@@ -8,16 +8,27 @@
   height: auto;
 }
 
-.enabled.hover {
+.illustration path {
+  position: relative;
+  z-index: 0;
+}
+
+.muscle { }
+.muscleContainer {
+  z-index: 1;
+  cursor: pointer;
+}
+
+.muscle.enabled.hover {
   fill: #69b0ee;
   cursor: pointer;
 }
 
-.enabled.active {
+.muscle.enabled.active {
   fill: #228be6;
 }
 
-.enabled {
+.muscle.enabled {
   fill: #bdbdbd;
 }
 

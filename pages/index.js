@@ -8,13 +8,17 @@ import Muscles from '../components/Muscles/Muscles'
 import Exercises from '../components/Exercises/Exercises'
 import Workout from '../components/Workout'
 import Layout from '../components/Layout/Layout'
-import useLocalStorage from '../utils/localStorage'
+import useAccount from '../utils/useAccount'
 
-const HomeScreen = ({ user, setUser }) => {
+export default function Home() {
   const router = useRouter()
+  const [account = {}, setAccount] = useAccount()
+  const { data: user = {} } = account
+
+  const equipment = user.equipment || []
   const repeatWorkoutId = router.query && router.query.w_id
   const repeatWorkout = (user.workouts || []).find(w => w.id === repeatWorkoutId)
-  const [active, setActive] = useState(user.equipment ? 1 : 0);
+  const [active, setActive] = useState(0);
   const nextStep = () => {
     if (active === 2) {
       saveWorkout()
@@ -33,7 +37,6 @@ const HomeScreen = ({ user, setUser }) => {
       setActive(step)
     }
   };
-  const [equipment, setEquipment] = useState(user.equipment || [])
   const [muscles, setMuscles] = useState([])
   const [workout, setWorkout] = useState([])
 
@@ -50,8 +53,7 @@ const HomeScreen = ({ user, setUser }) => {
   }, [repeatWorkout, workout, router])
 
   const updateEquipment = update => {
-    setEquipment(update)
-    setUser({ ...user, equipment: update })
+    setAccount({ ...user, equipment: update })
   }
 
   const saveWorkout = () => {
@@ -60,7 +62,7 @@ const HomeScreen = ({ user, setUser }) => {
 
     const newWorkouts = [...allWorkouts, { id: uuidv4(), created_at: today, exercises: workout }]
 
-    setUser({ ...user, workouts: newWorkouts })
+    setAccount({ ...user, workouts: newWorkouts })
   }
 
   const saveForLater = () => {
@@ -74,7 +76,7 @@ const HomeScreen = ({ user, setUser }) => {
     latestWorkout.exercises[index].completed = true
     latestWorkout.exercises[index].sets = sets
 
-    setUser({ ...user, workouts: allWorkouts })
+    setAccount({ ...user, workouts: allWorkouts })
   }
 
   const nextDisabled = (active === 0 && equipment.length === 0)
@@ -82,7 +84,7 @@ const HomeScreen = ({ user, setUser }) => {
     || (active === 2 && workout.length === 0)
 
   return (
-    <Layout user={user}>
+    <Layout>
       <Stepper active={active} onStepClick={jumpToStep} breakpoint="sm">
         <Stepper.Step label="Equipment" description="Select your equipment">
           <Equipment {...{ equipment, updateEquipment }} />
@@ -108,13 +110,4 @@ const HomeScreen = ({ user, setUser }) => {
       </Group> }
     </Layout>
   )
-}
-
-export default function Home() {
-  const [user, setUser] = useLocalStorage('user');
-
-  if (!user) return <></>
-
-  // only render once the user is fetched from local storage to set initial state
-  return <HomeScreen {...{ user, setUser }} />
 }

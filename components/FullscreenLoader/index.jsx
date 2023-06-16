@@ -2,10 +2,12 @@ import { Box } from "@mantine/core";
 import { useState, useEffect } from "react";
 import { Text, LoadingOverlay} from "@mantine/core";
 
-const LOADER_HEIGHT = 36;
-const MAX_TEXT_WIDTH = 500;
 import QUOTES from "constants/quotes.json";
 import useWindowSize from "../../utils/useWindowSize";
+import { getRandomNumberBetween } from "../../utils/random";
+
+const LOADER_HEIGHT = 36;
+const MAX_TEXT_WIDTH = 500;
 
 function FullscreenLoader({ isVisible }) {
   const size = useWindowSize();
@@ -20,7 +22,7 @@ function FullscreenLoader({ isVisible }) {
         // avoid 2 times the same quote
         let newIndex;
         do {
-          newIndex = Math.floor(Math.random() * QUOTES.length);
+          newIndex = getRandomNumberBetween(0, QUOTES.length - 1)
         } while (newIndex === quoteIndex);
         setQuoteIndex(newIndex);
         setFade(false);

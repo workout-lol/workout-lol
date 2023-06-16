@@ -1,0 +1,8 @@
+{
+  "appId": "com.example.app",
+  "appName": "workout-lol",
+  "webDir": "out",
+  "server": {
+    "androidScheme": "https"
+  }
+}

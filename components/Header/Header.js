@@ -41,7 +41,7 @@ const Header = () => {
           <Avatar radius="xl" />
         </Menu.Target>
         <Menu.Dropdown>
-          <Menu.Item disabled={profileDisabled}>
+          <Menu.Item>
             <Link href="/profile" className={styles.link}>Profile</Link>
           </Menu.Item>
           <Menu.Divider />

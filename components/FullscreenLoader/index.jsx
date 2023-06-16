@@ -35,7 +35,7 @@ function FullscreenLoader({ isVisible }) {
   return (
     <>
       <LoadingOverlay visible={isVisible} overlayBlur={2.5} />
-      {isVisible && <Box
+      <Box
         style={{
           ...textStyle(textWidth),
           opacity: fade ? 0 : 1,
@@ -64,7 +64,7 @@ function FullscreenLoader({ isVisible }) {
         >
           {QUOTES[quoteIndex].author}
         </Text>
-      </Box>}
+      </Box>
     </>
   );
 }

@@ -24,7 +24,7 @@ const Muscles = ({ muscles, setMuscles, workout, setWorkout, equipment = [] }) =
     }
   }
   return <div className={styles.svgContainer}>
-    <FullscreenLoader isVisible={true} />
+    <FullscreenLoader isVisible={isLoading} />
     <Text fs="italic" ta="center" mb="lg">
       Select the muscles you would like to train. (2-3 recommended)
     </Text>

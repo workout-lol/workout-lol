@@ -3,8 +3,10 @@ import { useSession, signIn } from "next-auth/react"
 import { Text, TextInput, PasswordInput, Button } from '@mantine/core'
 import { IconAt, IconLock } from '@tabler/icons-react';
 import Layout from '../components/Layout/Layout'
+import useLocalStorage from '../utils/useAccount'
 
 export default function Home() {
+  const [user] = useLocalStorage('user');
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
 
@@ -32,6 +34,7 @@ export default function Home() {
         .then(r =>  r.json().then(data => ({ status: r.status, body: data })))
         .then(res => {
           if (res.status === 201) {
+            // todo clean local storage
             signIn('credentials', {
               username: email.value,
               password: password.value,
@@ -47,7 +50,7 @@ export default function Home() {
     }
   }
 
-  return <Layout>
+  return <Layout user={user}>
     <Text fw="bold" mb="sm">Create an account</Text>
     <form onSubmit={submitForm}>
       <TextInput

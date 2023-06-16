@@ -2,7 +2,7 @@ import { useState, useEffect } from'react'
 import useSWR, { useSWRConfig } from "swr";
 import { useSession } from "next-auth/react"
 
-const useLocalStorage = (key) => {
+export const useLocalStorage = (key) => {
   const [value, setValue] = useState();
 
   // Initial fetch from storage

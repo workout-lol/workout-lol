@@ -41,7 +41,7 @@ const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
   const {
     data = [],
     error,
-    isLoadingg,
+    isLoading,
   } = useSWR(`/exercises${query}`, () => fetcher(query));
   const [opened, { open, close }] = useDisclosure(false);
   const [defaultSelected, setDefaultSelected] = useState();
@@ -120,7 +120,6 @@ const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
     setWorkout(updatedList);
   };
 
-  let isLoading = true
   return (
     <div>
       <Paper shadow="none" p="xs" bg="#f1f3f5">
@@ -158,7 +157,7 @@ const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
           ))}
         </Box>
         )}
-        {!isLoadingg && !!workout.length && (
+        {!isLoading && !!workout.length && (
           <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId="exercises">
               {(provided) => (

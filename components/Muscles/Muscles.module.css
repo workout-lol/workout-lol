@@ -1,6 +1,7 @@
 .svgContainer {
   text-align: center;
   margin: 2em 0;
+  position: relative;
 }
 
 .illustration {

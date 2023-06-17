@@ -11,6 +11,7 @@ import {
   Tooltip,
   ThemeIcon,
   Modal,
+  Box,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
@@ -40,7 +41,7 @@ const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
   const {
     data = [],
     error,
-    isLoading,
+    isLoadingg,
   } = useSWR(`/exercises${query}`, () => fetcher(query));
   const [opened, { open, close }] = useDisclosure(false);
   const [defaultSelected, setDefaultSelected] = useState();
@@ -119,6 +120,7 @@ const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
     setWorkout(updatedList);
   };
 
+  let isLoading = true
   return (
     <div>
       <Paper shadow="none" p="xs" bg="#f1f3f5">
@@ -135,70 +137,28 @@ const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
       </Paper>
       <Flex justify="space-between" mt="xl" direction="column">
         {(isLoading || !workout.length) && (
-          <Timeline bulletSize={24} lineWidth={2} style={{ width: "100% " }}>
-            {[...Array(6)].map((_, i) => (
-              <Timeline.Item key={`loading-${i}`}>
-                <Flex
-                  direction={{ base: "column", xs: "row" }}
-                  align={{ base: "flex-start", xs: "center" }}
-                  justify="space-between"
-                >
-                  <Flex mr="xl" mb={{ base: "sm", xs: 0 }}>
-                    <Skeleton height={16} width={160} radius="sm" mr="xs" />
-                    <Skeleton height={16} width={16} radius="sm" />
-                  </Flex>
-
-                  <Flex>
-                    <Button
-                      disabled
-                      compact
-                      variant="light"
-                      color="blue"
-                      mr="xs"
-                      leftIcon={<IconArrowsShuffle size="1rem" />}
-                    >
-                      Shuffle
-                    </Button>
-                    <Button
-                      disabled
-                      compact
-                      variant="light"
-                      color="blue"
-                      mr="xs"
-                      leftIcon={<IconClick size="1rem" />}
-                    >
-                      Pick
-                    </Button>
-                    <ActionIcon
-                      variant="outline"
-                      color="red"
-                      size="sm"
-                      disabled
-                    >
-                      <IconTrash size="1rem" />
-                    </ActionIcon>
-                  </Flex>
-                </Flex>
-              </Timeline.Item>
-            ))}
-            <Timeline.Item
-              bullet={
-                <ThemeIcon
-                  color="grey"
-                  radius="xl"
-                  style={{ cursor: "pointer" }}
-                >
-                  <IconPlus size="0.8rem" />
-                </ThemeIcon>
-              }
+          <Box sx={{ paddingLeft: 10, width: "100%", display: 'flex', flexDirection: 'column', justifyContent: 'center', justifyItems: "center", borderLeft: '2px solid lightgrey' }}>
+          {[...Array(6)].map((_, i) => (
+            <Flex key={i}
+            mb={20}
+            align={{ base: "flex-start", xs: "center" }}
+            direction={{ base: "column", xs: "row" }}
             >
-              <Button compact variant="light" color="blue" mr="xs" disabled>
-                Add
-              </Button>
-            </Timeline.Item>
-          </Timeline>
+                <Flex sx={{width: '100%'}} align="center" mb={{ base: 10, sm: 0}}>
+                    <Skeleton height={27} width={35} mr={5} />
+                    <Skeleton height={20} width={i % 2 === 0 ? "50%" : "60%"} mr={10} />
+                    <Skeleton height={20} width={20} mr={5} />
+                </Flex>
+              <Flex justify="">
+                <Skeleton height={20} width={80} mr="xs" />
+                <Skeleton height={20} width={80} mr="xs" />
+                <Skeleton height={22} width={22} />
+              </Flex>
+            </Flex>
+          ))}
+        </Box>
         )}
-        {!isLoading && !!workout.length && (
+        {!isLoadingg && !!workout.length && (
           <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId="exercises">
               {(provided) => (

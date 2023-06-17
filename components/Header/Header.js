@@ -41,15 +41,19 @@ const Header = () => {
           <Avatar radius="xl" />
         </Menu.Target>
         <Menu.Dropdown>
-          <Menu.Item>
-            <Link href="/profile" className={styles.link}>Profile</Link>
+        <Link href="/profile" className={styles.link}>
+          <Menu.Item >
+            Profile
           </Menu.Item>
+        </Link>
           <Menu.Divider />
           { !session && <>
             <Menu.Item onClick={() => signIn()} icon={<IconLogin size={14} />}>Login</Menu.Item>
-            <Menu.Item icon={<IconUserPlus size={14} />}>
-              <Link href="/sign-up" className={styles.link}>Sign-Up</Link>
-            </Menu.Item>
+            <Link href="/sign-up" className={styles.link}>
+                <Menu.Item icon={<IconUserPlus size={14} />}>
+                Sign-Up
+                </Menu.Item>
+            </Link>
           </> }
           { session && <>
             <Menu.Item onClick={() => signOut()} icon={<IconLogout size={14} />}>Logout</Menu.Item>

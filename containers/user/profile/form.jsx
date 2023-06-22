@@ -78,7 +78,7 @@ const Form = ({ user }) => {
           defaultValue={user.slug}
           name="slug"
           placeholder="i-love-workout"
-          label="Slug"
+          label="Username"
           disabled={isLoading}
           withAsterisk
           onChange={(event) => {

@@ -77,7 +77,7 @@ const Form = ({ user }) => {
         <TextInput
           defaultValue={user.slug}
           name="slug"
-          placeholder="you@example.com"
+          placeholder="i-love-workout"
           label="Slug"
           disabled={isLoading}
           withAsterisk

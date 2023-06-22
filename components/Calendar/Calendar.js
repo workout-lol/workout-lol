@@ -3,13 +3,13 @@ import { Checkbox, Flex, Tooltip, Text } from '@mantine/core';
 import useWindowSize from '../../utils/useWindowSize'
 import styles from './Calendar.module.css'
 
-const Calendar = ({ user = {}, variant = "small" }) => {
+const Calendar = ({ workouts = [], variant = "small" }) => {
   const size = useWindowSize()
   const rows = variant === "small"? 6 : 7;
   const columns = variant === "small"
     ? 1
     : size.width >= 520 ? 20: 10;
-  const allWorkouts = user.workouts || []
+  const allWorkouts = workouts
 
   return <>
     {variant !== 'small' && <Flex justify="center">

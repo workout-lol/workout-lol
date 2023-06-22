@@ -5,6 +5,7 @@ import Layout from '../components/Layout/Layout'
 import Calendar from '../components/Calendar/Calendar'
 import WorkoutTable from '../components/WorkoutTable/WorkoutTable'
 import useAccount from '../utils/useAccount'
+import Form from "../containers/user/profile/form"
 
 // show success if query param "created === true"
 export default function Home() {
@@ -19,18 +20,38 @@ export default function Home() {
     setAccount({ ...user, workouts })
   }
 
-  return <Layout>
-    { !session && <Paper shadow="none" p="xs" mb="xl" bg="lightblue">
-      <Text fs="italic">
-        Your progress is stored in your browser.<br/>
-        <Link href="/sign-up">Create an account</Link> or <a href="#login" onClick={() => signIn()}>Log-in</a> to ensure it is not getting lost
-      </Text>
-    </Paper> }
+  return (
+    <Layout>
+      {!session && (
+        <Paper shadow="none" p="xs" mb="xl" bg="lightblue">
+          <Text fs="italic">
+            Your progress is stored in your browser.
+            <br />
+            <Link href="/sign-up">Create an account</Link> or{" "}
+            <a href="#login" onClick={() => signIn()}>
+              Log-in
+            </a>{" "}
+            to ensure it is not getting lost
+          </Text>
+        </Paper>
+      )}
 
-    <Calendar variant="full" user={user} />
+      {session && <Form />}
+      <Calendar variant="full" workouts={workouts} />
 
-    {workouts.length === 0 && <Text mt="lg" mb="md" fw="bold">No workouts yet...</Text> }
-    {workouts.length > 0 && <Text mt="lg" mb="md" fw="bold">Workout History [{workouts.length}]</Text>}
-    {workouts.length > 0 && <WorkoutTable workouts={workouts} deleteWorkout={deleteWorkout} /> }
-  </Layout>
+      {workouts.length === 0 && (
+        <Text mt="lg" mb="md" fw="bold">
+          No workouts yet...
+        </Text>
+      )}
+      {workouts.length > 0 && (
+        <Text mt="lg" mb="md" fw="bold">
+          Workout History [{workouts.length}]
+        </Text>
+      )}
+      {workouts.length > 0 && (
+        <WorkoutTable workouts={workouts} deleteWorkout={deleteWorkout} />
+      )}
+    </Layout>
+  )
 }

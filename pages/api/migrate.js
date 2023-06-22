@@ -78,3 +78,22 @@
 // // }
 
 // // export default handler
+
+import { getAllUsers, updateUserByQuery } from "../../lib/db-helper";
+import { generateSlug } from "random-word-slugs";
+
+const handler = async (_, res) => {
+  const users = await getAllUsers();
+
+  for (let i = 0; i < users.length; i++) {
+    const slug = generateSlug();
+    const user = users[i];
+    const update = { slug };
+
+    await updateUserByQuery({ _id: user._id }, update);
+  }
+
+  res.status(200).json(users);
+};
+
+export default handler;

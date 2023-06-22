@@ -2,6 +2,7 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { SessionProvider } from "next-auth/react"
 import { MantineProvider } from '@mantine/core'
+import { Toaster } from 'react-hot-toast';
 
 export default function App(props) {
   const { Component, pageProps: { session, ...pageProps }, } = props
@@ -45,6 +46,7 @@ export default function App(props) {
           }}
         >
           <Component {...pageProps} />
+          <Toaster />
         </MantineProvider>
       </SessionProvider>
     </>

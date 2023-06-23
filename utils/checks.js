@@ -1,4 +1,4 @@
-export const isEmpty = () => {
+export const isEmpty = (subject) => {
   switch (typeof subject) {
     case "object":
       return Object.keys(subject).length === 0

@@ -2,6 +2,7 @@ import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google"
 import CryptoJS from 'crypto-js'
+import { generateSlug } from "random-word-slugs"
 import { getUserByQuery, createUser } from '../../../lib/db-helper'
 
 const PASSWORD_HASH_SECRET = process.env.PASSWORD_HASH_SECRET
@@ -18,8 +19,17 @@ export const authOptions = {
             : '/sign-up?error=exists'
         }
 
+        let slug = generateSlug()
+        let [slugAlreadyExists] = await getUserByQuery({ slug })
+
+        while (slugAlreadyExists) {
+          slug = generateSlug()
+          const existingUsers = await getUserByQuery({ slug })
+          slugAlreadyExists = existingUsers.length > 0
+        }
+
         // create user
-        await createUser({ email: profile.email, provider: 'google' })
+        await createUser({ email: profile.email, provider: 'google', slug })
         const [newUser] = await getUserByQuery({ email: profile.email })
         return newUser
       }

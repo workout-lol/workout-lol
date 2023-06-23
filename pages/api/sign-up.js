@@ -9,19 +9,20 @@ const handler = async (req, res) => {
     const { email, password } = req.body
     const [existingUser] = await getUserByQuery({ email })
     let slug = generateSlug()
-    const [slugAlreadyExists] = await getUserByQuery({ slug })
+    let [slugAlreadyExists] = await getUserByQuery({ slug })
 
     while (slugAlreadyExists) {
       slug = generateSlug()
+      const existingUsers = await getUserByQuery({ slug })
+      slugAlreadyExists = existingUsers.length > 0
     }
-    
+
     if (existingUser) {
       res.status(409).json({ email: 'Email already exists' })
     } else {
       const passHash = CryptoJS.SHA256(password, PASSWORD_HASH_SECRET).toString(CryptoJS.enc.Hex);
-      const sessionData = parseSessionData(session_data)
 
-      await createUser({ email, password: passHash, slug, ...sessionData })
+      await createUser({ email, password: passHash, slug })
 
       res.status(201).json({})
     }

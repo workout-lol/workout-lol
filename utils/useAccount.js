@@ -36,12 +36,6 @@ const updateUser = user => fetch('/api/user', {
 
 const useUserStorage = session => {
   const email = session && session.user && session.user.email
-  // clean local storage?
-  // useEffect(() => {
-  //   if (email) {
-  //     localStorage.setItem('user', JSON.stringify(value))
-  //   }
-  // }, [email])
   const {
     data = {},
     error,

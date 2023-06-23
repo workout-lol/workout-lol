@@ -2,11 +2,34 @@ import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google"
 import CryptoJS from 'crypto-js'
-import { getUserByQuery } from '../../../lib/db-helper'
+import { getUserByQuery, createUser } from '../../../lib/db-helper'
 
 const PASSWORD_HASH_SECRET = process.env.PASSWORD_HASH_SECRET
 
 export const authOptions = {
+  callbacks: {
+    async signIn({ account, profile }) {
+      if (account.provider === "google") {
+        const [user] = await getUserByQuery({ email: profile.email })
+
+        if (user) { // user exists
+          return user.provider === 'google'
+            ? user
+            : '/sign-up?error=exists'
+        }
+
+        // create user
+        await createUser({ email: profile.email, provider: 'google' })
+        const [newUser] = await getUserByQuery({ email: profile.email })
+        return newUser
+      }
+
+      return true // Do different verification for other providers
+    },
+    async redirect({ url, baseUrl }) {
+      return `${baseUrl}/profile`
+    },
+  },
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -25,13 +48,13 @@ export const authOptions = {
         // Return null if user data could not be retrieved
         return null
       }
+    }),
+    process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET && GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET
     })
-    // GoogleProvider({
-    //   clientId: process.env.GOOGLE_CLIENT_ID,
-    //   clientSecret: process.env.GOOGLE_CLIENT_SECRET
-    // })
     // ...add more providers here
-  ],
+  ].filter(Boolean),
 }
 
 export default NextAuth(authOptions)

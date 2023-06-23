@@ -41,8 +41,8 @@
 7. Open your browser to http://localhost:3000
 
 ## Contributers
-<a href="https://twitter.com/wweb_dev" target="_blank"><img width="70px" height="70px" src="https://github.com/Vincenius/workout-lol/assets/43953403/11e27858-b45b-4bf9-b7c6-282d441ac2a4"></a>
-<a href="https://twitter.com/BradiceanuM" target="_blank"><img width="70px" height="70px" src="https://github.com/Vincenius/workout-lol/assets/43953403/914e9a35-88bc-4035-bd1e-43a8ca28e1c6"></a>
+[![@wweb_dev](https://github.com/Vincenius/workout-lol/assets/43953403/f81b0cf6-1394-4ab8-8ddf-4352bd8dbe7d)](https://twitter.com/wweb_dev)
+[![@BradiceanuM](https://github.com/Vincenius/workout-lol/assets/43953403/4d5ae3c3-b83b-4a2c-b7e2-0e38705f5487)](https://twitter.com/BradiceanuM)
 
 ## Supporter
 

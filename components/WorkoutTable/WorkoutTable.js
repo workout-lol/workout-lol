@@ -4,14 +4,14 @@ import { IconTrash, IconRepeat } from '@tabler/icons-react'
 import { muscleToColor } from '../Exercises/utils'
 import styles from './WorkoutTable.module.css'
 
-const WorkoutTable = ({ workouts, deleteWorkout }) => {
+const WorkoutTable = ({ workouts, deleteWorkout, viewOnly = false}) => {
     return <>
       <Table striped className={styles.mobileHide}>
         <thead>
           <tr>
             <th style={{ width: '130px' }}>Date</th>
             <th>Exercises</th>
-            <th></th>
+            {!viewOnly && <th />}
           </tr>
         </thead>
         <tbody>
@@ -26,7 +26,8 @@ const WorkoutTable = ({ workouts, deleteWorkout }) => {
                 </Tooltip>
               )}
             </td>
-            <td>
+            {!viewOnly && (
+            <><td>
               <Link href={`/?w_id=${w.id}`}>
                 <Tooltip label="Repeat workout">
                   <ActionIcon color="blue" variant="subtle">
@@ -41,7 +42,7 @@ const WorkoutTable = ({ workouts, deleteWorkout }) => {
                   <IconTrash />
                 </ActionIcon>
               </Tooltip>
-            </td>
+            </td></>)}
           </tr> )}
         </tbody>
       </Table>
@@ -50,20 +51,22 @@ const WorkoutTable = ({ workouts, deleteWorkout }) => {
           <Flex justify="space-between">
             <Text fw="bold" mb="sm">{ w.exercises.every(e => e.completed) && '✅ ' }{w.created_at.slice(0,10)}</Text>
 
-            <Flex>
-              <Link href={`/?w_id=${w.id}`} style={{ marginRight: '1em' }}>
-                <Tooltip label="Repeat workout">
-                  <ActionIcon color="blue" variant="subtle">
-                    <IconRepeat />
+            {!viewOnly && (
+              <Flex>
+                <Link href={`/?w_id=${w.id}`} style={{ marginRight: '1em' }}>
+                  <Tooltip label="Repeat workout">
+                    <ActionIcon color="blue" variant="subtle">
+                      <IconRepeat />
+                    </ActionIcon>
+                  </Tooltip>
+                </Link>
+                <Tooltip label="Delete workout">
+                  <ActionIcon color="red" variant="subtle" onClick={() => deleteWorkout(w.id)}>
+                    <IconTrash />
                   </ActionIcon>
                 </Tooltip>
-              </Link>
-              <Tooltip label="Delete workout">
-                <ActionIcon color="red" variant="subtle" onClick={() => deleteWorkout(w.id)}>
-                  <IconTrash />
-                </ActionIcon>
-              </Tooltip>
-            </Flex>
+              </Flex>
+            )}
           </Flex>
           { w.exercises.map((e, j) =>
             <Tooltip key={`history-${i}-${j}`} label={e.mainMuscle}>

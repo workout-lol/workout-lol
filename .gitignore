@@ -38,3 +38,5 @@ next-env.d.ts
 
 scripts/videos
 scripts/logs
+
+.vscode/

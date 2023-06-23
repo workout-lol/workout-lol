@@ -1,11 +1,12 @@
 import { getServerSession } from "next-auth/next"
-import { authOptions } from "./auth/[...nextauth]"
-import { getUserByQuery, updateUserByQuery } from '../../lib/db-helper'
+import { authOptions } from "../auth/[...nextauth]"
+import { getUserByQuery, updateUserByQuery } from '../../../lib/db-helper'
 
 const parseUser = user => ({
   equipment: user.equipment,
   workouts: user.workouts,
-  email: user.email,
+  slug: user.slug,
+  email: user.email
 })
 
 const handler = async (req, res) => {

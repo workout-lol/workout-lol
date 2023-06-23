@@ -51,7 +51,7 @@ const useUserStorage = session => {
     )
   }
 
-  return [{ isLoading, data: data }, setUser]
+  return [{ isLoading, data }, setUser]
 }
 
 export default function useAccount(key) {

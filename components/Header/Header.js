@@ -19,6 +19,7 @@ const Header = () => {
   const [account = {}] = useAccount()
   const { data: user = {} } = account
   const hasWorkouts = user && user.workouts && Object.keys(user.workouts).length > 0
+  const userAvatar = session && session.user.email && session.user.email.substring(0, 2).toUpperCase()
 
   return <Group position="apart">
     <Group>
@@ -38,7 +39,9 @@ const Header = () => {
       <Calendar user={user} />
       <Menu shadow="md" width={200} style={{ cursor: 'pointer' }}>
         <Menu.Target>
-          <Avatar radius="xl" />
+          <Avatar radius="xl" color={!!userAvatar ? 'blue' : undefined }>
+            { userAvatar ? userAvatar : '' }
+          </Avatar>
         </Menu.Target>
         <Menu.Dropdown>
         <Link href="/profile" className={styles.link}>

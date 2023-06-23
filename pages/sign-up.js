@@ -1,14 +1,22 @@
-import { useState } from 'react'
-import { useSession, signIn } from "next-auth/react"
-import { Text, TextInput, PasswordInput, Button } from '@mantine/core'
-import { IconAt, IconLock } from '@tabler/icons-react';
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { signIn } from "next-auth/react"
+import { Text, TextInput, PasswordInput, Button, Divider } from '@mantine/core'
+import { IconAt, IconLock, IconBrandGoogle } from '@tabler/icons-react';
 import Layout from '../components/Layout/Layout'
 import useLocalStorage from '../utils/useAccount'
 
 export default function Home() {
+  const router = useRouter()
   const [user] = useLocalStorage('user');
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
+
+  useEffect(() => {
+    if (router.query && router.query.error && router.query.error === 'exists') {
+      setError({ social: 'Error: You already signed-up with a different method using this email address.' })
+    }
+  }, [router.query])
 
   const submitForm = (e) => {
     e.preventDefault();
@@ -24,7 +32,6 @@ export default function Home() {
       const data = {
         email: email.value,
         password: password.value,
-        session_data: user ? user.data : {},
       }
       fetch('/api/sign-up', {
         method: 'POST',
@@ -34,11 +41,9 @@ export default function Home() {
         .then(r =>  r.json().then(data => ({ status: r.status, body: data })))
         .then(res => {
           if (res.status === 201) {
-            // todo clean local storage
             signIn('credentials', {
               username: email.value,
               password: password.value,
-              callbackUrl: '/profile?created=true',
             })
           } else {
             setError(res.body)
@@ -46,7 +51,6 @@ export default function Home() {
         }).catch(err => {
           setError(err)
         }).finally(() => setIsLoading(false))
-
     }
   }
 
@@ -74,7 +78,7 @@ export default function Home() {
         error={error && error.password}
       />
 
-      { error && !error.email && !error.password &&
+      { error && !error.email && !error.password && !error.social &&
         <Text color="red" mt="sm" mb="sm">An unexpected Error occured. Please try again or contact support.</Text>
       }
 
@@ -82,5 +86,21 @@ export default function Home() {
         Create account
       </Button>
     </form>
+
+    <Divider my="md" label="or" labelPosition="center" />
+
+    { error && error.social &&
+        <Text color="red" mt="sm" mb="sm">{error.social}</Text>
+    }
+
+    <Button
+      variant="outline"
+      fullWidth
+      leftIcon={<IconBrandGoogle size="1rem" />}
+      onClick={() => signIn('google')}
+    >
+      Sign-up with Google
+    </Button>
+
   </Layout>
 }

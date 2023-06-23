@@ -224,7 +224,7 @@ export default function Home() {
           please contact me:
         </p>
         <ul>
-          <li>By email: info@wweb.dev</li>
+          <li>By email: info@workout.lol</li>
         </ul>
       </Text>
   </Layout>

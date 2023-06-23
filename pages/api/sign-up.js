@@ -2,17 +2,11 @@ import CryptoJS from 'crypto-js'
 import { createUser, getUserByQuery } from '../../lib/db-helper'
 import { generateSlug } from "random-word-slugs"
 
-// todo validate data
-const parseSessionData = (sessionData = {}) => ({
-  equipment: sessionData.equipment || [],
-  workouts: sessionData.workouts || [],
-})
-
 const PASSWORD_HASH_SECRET = process.env.PASSWORD_HASH_SECRET
 
 const handler = async (req, res) => {
   if (req.method === 'POST') {
-    const { email, password, session_data } = req.body
+    const { email, password } = req.body
     const [existingUser] = await getUserByQuery({ email })
     let slug = generateSlug()
     const [slugAlreadyExists] = await getUserByQuery({ slug })

@@ -16,7 +16,6 @@ export default function Home() {
   const workouts = (user.workouts || []).sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
 
   useEffect(() => {
-    console.log({ session, user })
     // after registering, initialize data
     if (session && user.email && !user.workouts && !user.equipment && !localStorageUser.isLoading) {
       const { workouts = [], equipment = [] } = localStorageUser.data

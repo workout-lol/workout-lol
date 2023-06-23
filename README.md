@@ -44,7 +44,7 @@
 <a href="https://twitter.com/wweb_dev" target="_blank"><img width="70px" height="70px" src="https://github.com/Vincenius/workout-lol/assets/43953403/11e27858-b45b-4bf9-b7c6-282d441ac2a4"></a>
 <a href="https://twitter.com/BradiceanuM" target="_blank"><img width="70px" height="70px" src="https://github.com/Vincenius/workout-lol/assets/43953403/914e9a35-88bc-4035-bd1e-43a8ca28e1c6"></a>
 
-### Vincent Will : ![Twitter Follow](https://img.shields.io/twitter/follow/wweb_dev?style=social)
+
 ## License
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 

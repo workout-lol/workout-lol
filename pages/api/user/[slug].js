@@ -1,3 +1,6 @@
+import { getServerSession } from "next-auth/next"
+import { authOptions } from "../auth/[...nextauth]"
+
 import { getUserByQuery, updateUserByQuery } from "../../../lib/db-helper"
 import { isEmpty, isDefined } from "../../../utils/checks"
 
@@ -54,11 +57,13 @@ const handler = async (req, res) => {
       })
     }
 
+    const session = await getServerSession(req, res, authOptions)
+
     const update = {
       slug: req.body.slug,
     }
 
-    await updateUserByQuery({ _id: user._id }, update)
+    await updateUserByQuery({ email: session.user.email }, update)
     return res.status(200).json(user)
   } else {
     res.status(404).json({

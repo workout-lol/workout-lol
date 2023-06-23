@@ -5,6 +5,7 @@ import { getUserByQuery, updateUserByQuery } from '../../lib/db-helper'
 const parseUser = user => ({
   equipment: user.equipment,
   workouts: user.workouts,
+  email: user.email,
 })
 
 const handler = async (req, res) => {

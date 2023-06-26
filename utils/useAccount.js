@@ -26,6 +26,16 @@ const fetcher = email => email
   ? fetch('/api/user').then((res) => res.json())
   : Promise.resolve();
 
+const fetchExercises = ids => ids && ids.length
+  ? fetch('/api/exercises', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ ids }),
+  }).then((res) => res.json())
+  : Promise.resolve()
+
 const updateUser = user => fetch('/api/user', {
   method: 'PUT',
   headers: {
@@ -54,18 +64,32 @@ const useUserStorage = session => {
   return [{ isLoading, data }, setUser]
 }
 
-export default function useAccount(key) {
+export default function useAccount() {
   const { data: session } = useSession()
   const [localStorageUser, setLocalStorage] = useLocalStorage('user')
-  const [user, setUser] = useUserStorage(session)
+  const [databaseUser, setDatabaseUser] = useUserStorage(session)
+  const user = session === null ? localStorageUser : databaseUser
+  const setUser = session === null ? setLocalStorage : setDatabaseUser
 
-  if (session === undefined) {
+  const exerciseIds = (user?.data?.workouts || []).map(w => w.exercises.map(e => e.id)).flat()
+  const uniqueIds = [...new Set(exerciseIds)]
+
+  const { data = {}, isLoading, } = useSWR(`/exercises-${uniqueIds}`, () => fetchExercises(uniqueIds))
+
+  // inject database exercises into user workouts
+  if (uniqueIds && uniqueIds.length && data && data.length) {
+      user.data.workouts = (user.data.workouts || []).map(w => ({
+        ...w,
+        exercises: w.exercises.map(e => ({
+          ...e,
+          ...data.find(ex => ex._id === e.id),
+        }))
+      }))
+  }
+
+  if (session === undefined || isLoading) {
     return [{ isLoading: true }, setUser]
   }
 
-  if (session === null) { // not logged in -> localstorage
-    return [localStorageUser, setLocalStorage]
-  } else { // logged in -> database storage
-    return [user, setUser]
-  }
+  return [user, setUser]
 }

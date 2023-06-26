@@ -60,7 +60,11 @@ export default function Home() {
     const today = new Date().toISOString()
     const allWorkouts = (user.workouts || [])
 
-    const newWorkouts = [...allWorkouts, { id: uuidv4(), created_at: today, exercises: workout }]
+    const newWorkouts = [...allWorkouts, {
+      id: uuidv4(),
+      created_at: today,
+      exercises: workout.map(e => ({ id: e._id, completed: false, sets: [] })),
+    }]
 
     setAccount({ ...user, workouts: newWorkouts })
   }
@@ -71,7 +75,7 @@ export default function Home() {
   }
 
   const updateProgress = ({ index, sets }) => {
-    const allWorkouts = (user.workouts || [])
+    const allWorkouts = (user.workouts || []).sort((a, b) => a.created_at.localeCompare(b.created_at))
     const latestWorkout = allWorkouts[allWorkouts.length - 1]
     latestWorkout.exercises[index].completed = true
     latestWorkout.exercises[index].sets = sets

@@ -36,7 +36,7 @@ const Header = () => {
     </Group>
 
     <Group>
-      <Calendar user={user} />
+      <Calendar workouts={user.workouts || []} />
       <Menu shadow="md" width={200} style={{ cursor: 'pointer' }}>
         <Menu.Target>
           <Avatar radius="xl" color={!!userAvatar ? 'blue' : undefined }>

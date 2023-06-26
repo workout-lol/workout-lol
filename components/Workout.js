@@ -22,7 +22,7 @@ const RepInput = ({ index, handleChange, sets, prevSet }) => <Input
   } />
 
 const ActiveExercise = ({ exercise, goNext, handleChange, sets, user }) => {
-  const workouts = user.workouts
+  const workouts = user && (user.workouts || [])
     .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
     .slice(1) // remove first (active) workout
 

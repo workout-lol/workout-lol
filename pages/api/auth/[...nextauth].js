@@ -24,7 +24,7 @@ export const authOptions = {
 
         while (slugAlreadyExists) {
           slug = generateSlug()
-          const existingUsers = await getUserByQuery({ slug })
+          const [existingUsers] = await getUserByQuery({ slug })
           slugAlreadyExists = existingUsers.length > 0
         }
 

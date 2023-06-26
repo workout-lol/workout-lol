@@ -1,5 +1,5 @@
 // import { ObjectId } from 'mongodb'
-import { getExercisesByQuery } from '../../lib/db-helper' // updateExercise
+import { getExercisesByAggregation } from '../../lib/db-helper' // updateExercise
 
 const handler = async (req, res) => {
   if (req.method === 'GET') {
@@ -54,7 +54,7 @@ const handler = async (req, res) => {
       }
     ]
 
-    const workouts = await getExercisesByQuery(query)
+    const workouts = await getExercisesByAggregation(query)
 
     res.status(200).json(workouts)
   }

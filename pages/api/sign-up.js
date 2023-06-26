@@ -7,14 +7,14 @@ const PASSWORD_HASH_SECRET = process.env.PASSWORD_HASH_SECRET
 const handler = async (req, res) => {
   if (req.method === 'POST') {
     const { email, password } = req.body
-    const [existingUser] = await getUserByQuery({ email })
+    let [existingUser] = await getUserByQuery({ email })
     let slug = generateSlug()
     let [slugAlreadyExists] = await getUserByQuery({ slug })
 
     while (slugAlreadyExists) {
       slug = generateSlug()
-      const existingUsers = await getUserByQuery({ slug })
-      slugAlreadyExists = existingUsers.length > 0
+      const [existingUsers] = await getUserByQuery({ slug })
+      slugAlreadyExists = !!existingUsers
     }
 
     if (existingUser) {

@@ -75,7 +75,6 @@ const Form = ({ user }) => {
     <form onSubmit={submitForm} style={{ marginBottom: 20 }}>
       <Flex align="center" mb="xs">
         <TextInput
-          defaultValue={user.slug}
           name="slug"
           placeholder="i-love-workout"
           label="Username"

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { signIn } from "next-auth/react"
 import { Text, TextInput, PasswordInput, Button, Divider } from '@mantine/core'
-import { IconAt, IconLock, IconBrandGoogle } from '@tabler/icons-react';
+import { IconAt, IconLock, IconBrandGoogle, IconBrandTwitter } from '@tabler/icons-react';
 import Layout from '../components/Layout/Layout'
 import useLocalStorage from '../utils/useAccount'
 
@@ -98,8 +98,18 @@ export default function Home() {
       fullWidth
       leftIcon={<IconBrandGoogle size="1rem" />}
       onClick={() => signIn('google')}
+      mb="md"
     >
       Sign-up with Google
+    </Button>
+
+    <Button
+      variant="outline"
+      fullWidth
+      leftIcon={<IconBrandTwitter size="1rem" />}
+      onClick={() => signIn('twitter')}
+    >
+      Sign-up with Twitter
     </Button>
 
   </Layout>

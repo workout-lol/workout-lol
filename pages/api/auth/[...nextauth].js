@@ -1,37 +1,47 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google"
+import TwitterProvider from "next-auth/providers/twitter"
 import CryptoJS from 'crypto-js'
 import { generateSlug } from "random-word-slugs"
 import { getUserByQuery, createUser } from '../../../lib/db-helper'
 
 const PASSWORD_HASH_SECRET = process.env.PASSWORD_HASH_SECRET
 
+const createOauthUser = async ({ email, provider, defaultSlug }) => {
+  const [user] = await getUserByQuery({ email })
+
+  if (user) { // user exists
+    return user.provider === provider
+      ? user
+      : '/sign-up?error=exists'
+  }
+
+  let slug = defaultSlug || generateSlug()
+  let [slugAlreadyExists] = await getUserByQuery({ slug })
+
+  while (slugAlreadyExists) {
+    slug = generateSlug()
+    const [existingUsers] = await getUserByQuery({ slug })
+    slugAlreadyExists = existingUsers.length > 0
+  }
+
+  // create user
+  await createUser({ email, provider, slug })
+  const [newUser] = await getUserByQuery({ email })
+  return newUser
+}
+
 export const authOptions = {
   callbacks: {
     async signIn({ account, profile }) {
+      console.log(account, profile)
       if (account.provider === "google") {
-        const [user] = await getUserByQuery({ email: profile.email })
-
-        if (user) { // user exists
-          return user.provider === 'google'
-            ? user
-            : '/sign-up?error=exists'
-        }
-
-        let slug = generateSlug()
-        let [slugAlreadyExists] = await getUserByQuery({ slug })
-
-        while (slugAlreadyExists) {
-          slug = generateSlug()
-          const [existingUsers] = await getUserByQuery({ slug })
-          slugAlreadyExists = existingUsers.length > 0
-        }
-
-        // create user
-        await createUser({ email: profile.email, provider: 'google', slug })
-        const [newUser] = await getUserByQuery({ email: profile.email })
-        return newUser
+        const user = await createOauthUser({ email: profile.email, provider: account.provider })
+        return user
+      } else if (account.provider === "twitter") {
+        const user = await createOauthUser({ email: profile.email, provider: account.provider, defaultSlug: profile.screen_name })
+        return user
       }
 
       return true // Do different verification for other providers
@@ -59,9 +69,13 @@ export const authOptions = {
         return null
       }
     }),
-    process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET && GoogleProvider({
+    GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET
+    }),
+    TwitterProvider({
+      clientId: process.env.TWITTER_CLIENT_ID,
+      clientSecret: process.env.TWITTER_CLIENT_SECRET,
     })
     // ...add more providers here
   ].filter(Boolean),

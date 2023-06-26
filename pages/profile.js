@@ -48,7 +48,7 @@ export default function Home() {
         </Paper>
       )}
 
-      {session && <Form />}
+      {session && session.user && <Form />}
       <Calendar variant="full" workouts={workouts} />
 
       {workouts.length === 0 && (

@@ -15,14 +15,14 @@ const Footer = () => {
           <a href="https://twitter.com/wweb_dev" target="_blank" rel="noopener noreferrer">
             <ActionIcon mr="md"><IconBrandTwitter/></ActionIcon>
           </a>
-          <a href="mailto:info@wweb.dev">
+          <a href="mailto:info@workout.lol">
             <ActionIcon><IconMail/></ActionIcon>
           </a>
         </Flex>
       </div>
       <Text className={styles.links}>
         <Flex gap={{ base: 0, xs: 'md' }} direction={{ base: 'column', xs: 'row' }}>
-          <Link href="https://ko-fi.com/wweb_dev">Donate</Link>
+          <Link href="https://ko-fi.com/workout_lol">Donate</Link>
           <Link href="/about">About</Link>
           <Link href="/privacy">Privacy Policy</Link>
         </Flex>

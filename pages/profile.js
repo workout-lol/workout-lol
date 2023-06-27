@@ -1,43 +1,69 @@
-import { useRouter } from 'next/router';
+import { useEffect } from 'react'
+import { useSession, signIn } from "next-auth/react"
+import Link from 'next/link';
 import { Paper, Text } from '@mantine/core'
 import Layout from '../components/Layout/Layout'
 import Calendar from '../components/Calendar/Calendar'
 import WorkoutTable from '../components/WorkoutTable/WorkoutTable'
-import useLocalStorage from '../utils/localStorage'
+import Form from "../containers/user/profile/form"
+import useAccount, { useLocalStorage } from '../utils/useAccount'
 
 export default function Home() {
-  const router = useRouter()
-  const [user, setUser] = useLocalStorage('user');
-
-  if (!user) return <></>
+  const { data: session } = useSession()
+  const [account = {}, setAccount] = useAccount()
+  const [localStorageUser, setLocalStorage] = useLocalStorage('user')
+  const { data: user = {} } = account
 
   const workouts = (user.workouts || []).sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
 
-  // todo empty profile state
-  if (workouts.length === 0) return <></>
+  useEffect(() => {
+    // after registering, initialize data
+    if (session && user.email && !user.workouts && !user.equipment && !localStorageUser.isLoading) {
+      const { workouts = [], equipment = [] } = localStorageUser.data
+      setAccount({ ...user, workouts, equipment })
+      setLocalStorage({ })
+      // show success message ?
+    }
+  }, [session, user, localStorageUser, setLocalStorage, setAccount])
+
 
   const deleteWorkout = (id) => {
     const workouts = user.workouts.filter(w => w.id!== id)
-    setUser({ ...user, workouts })
-
-    if (workouts.length === 0) {
-      router.push('/') // remove this if empty profile state done
-    }
+    setAccount({ ...user, workouts })
   }
 
-  return <Layout user={user}>
-    <Paper shadow="none" p="xs" mb="xl" bg="lightblue">
-      <Text fs="italic">
-        Your progress is stored in your browser.<br/>
-        Accounts are coming soon...
-      </Text>
-      {/* <Link href="/sign-up">Create an account</Link> to ensure it is not getting lost</Text> */}
-    </Paper>
+  return (
+    <Layout>
+      {!session && (
+        <Paper shadow="none" p="xs" mb="xl" bg="lightblue">
+          <Text fs="italic">
+            Your progress is stored in your browser.
+            <br />
+            <Link href="/sign-up">Create an account</Link> or{" "}
+            <a href="#login" onClick={() => signIn()}>
+              Log-in
+            </a>{" "}
+            to ensure it is not getting lost
+          </Text>
+        </Paper>
+      )}
 
-    <Calendar variant="full" user={user} />
+      {session && session.user && <Form />}
+      <Calendar variant="full" workouts={workouts} />
 
-
-    <Text mt="lg" mb="md" fw="bold">Workout History [{workouts.length}]</Text>
-    <WorkoutTable workouts={workouts} deleteWorkout={deleteWorkout} />
-  </Layout>
+      {workouts.length === 0 && (
+        <Text mt="lg" mb="md" fw="bold">
+          No workouts yet...
+        </Text>
+      )}
+      {workouts.length > 0 && (
+        <Text mt="lg" mb="md" fw="bold">
+          Workout History [{workouts.length}]
+        </Text>
+      )}
+      {workouts.length > 0 && (
+        <WorkoutTable workouts={workouts} deleteWorkout={deleteWorkout} />
+      )}
+    </Layout>
+  )
 }

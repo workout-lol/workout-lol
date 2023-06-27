@@ -1,69 +1,78 @@
-// import { ObjectId } from 'mongodb'
-import { getExercisesByQuery } from '../../lib/db-helper' // updateExercise
+import { ObjectId } from 'mongodb'
+import { getExercisesByAggregation } from '../../lib/db-helper'
 
-const handler = async (req, res) => {
-  if (req.method === 'GET') {
-    const { equipment = [], muscles = [] } = req.query
-    const mappedEquipment = equipment.split(',').filter(Boolean)
-    const mappedMuscles = muscles.split(',').filter(Boolean)
-
-    const query = [
-      {
-        '$addFields': {
-          'mainMuscle': {
-            '$arrayElemAt': [
-              '$targets', 0
+const getQuery = match => ([
+  {
+    '$addFields': {
+      'mainMuscle': {
+        '$arrayElemAt': [
+          '$targets', 0
+        ]
+      }
+    }
+  }, {
+    '$match': { '$and': [
+        ...match, {
+          'category': {
+            '$nin': [
+              'Yoga',
+              'TRX',
+              'Medicine Ball',
+              'Machine',
+              'Cables',
+              'Stretches' // todo re-add and sort
+            ]
+          }
+        }, {
+          'difficulty': {
+            '$nin': [
+              'Yoga'
             ]
           }
         }
-      }, {
-        '$match': {
-          '$and': [
-            {
-              'mainMuscle': {
-                '$in': mappedMuscles
-              }
-            }, {
-              'equipment': {
-                '$not': {
-                  '$elemMatch': {
-                    '$nin': mappedEquipment
-                  }
-                }
-              }
-            }, {
-              'category': {
-                '$nin': [
-                  'Yoga',
-                  'TRX',
-                  'Medicine Ball',
-                  'Machine',
-                  'Cables',
-                  'Stretches' // todo re-add and sort
-                ]
-              }
-            }, {
-              'difficulty': {
-                '$nin': [
-                  'Yoga'
-                ]
-              }
-            }
-          ]
+      ]
+    }
+  }
+])
+
+const handler = async (req, res) => {
+  if (req.method === 'POST') {
+    // get by ids via POST, bc it might get to long for header query param
+    const { ids } = req.body
+    const query = getQuery([
+      {
+        _id: {
+          $in: ids.map(e => new ObjectId(e))
         }
       }
-    ]
+    ])
+    const workouts = await getExercisesByAggregation(query)
 
-    const workouts = await getExercisesByQuery(query)
+    res.status(200).json(workouts)
+  } else if (req.method === 'GET') {
+    const { equipment = '', muscles = '' } = req.query
+    const mappedEquipment = equipment.split(',').filter(Boolean)
+    const mappedMuscles = muscles.split(',').filter(Boolean)
+    const query = getQuery([
+      {
+        'mainMuscle': {
+          '$in': mappedMuscles
+        }
+      }, {
+        'equipment': {
+          '$not': {
+            '$elemMatch': {
+              '$nin': mappedEquipment
+            }
+          }
+        }
+      }
+    ])
+
+    const workouts = await getExercisesByAggregation(query)
 
     res.status(200).json(workouts)
   }
-  // else if (req.method === 'PUT') { // only for temp admin stuff
-  //   const { update, _id } = req.body
-  //   const result = await updateExercise({ _id: new ObjectId(_id), update })
-
-  //   res.status(200).json(result)
-  // }
   else {
     res.status(404).send()
   }

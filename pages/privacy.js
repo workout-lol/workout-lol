@@ -1,13 +1,8 @@
 import { Text, Paper } from '@mantine/core'
 import Layout from '../components/Layout/Layout'
-import useLocalStorage from '../utils/localStorage'
 
 export default function Home() {
-  const [user, setUser] = useLocalStorage('user');
-
-  if (!user) return <></>
-
-  return <Layout user={user}>
+  return <Layout>
     <Text fw="bold">Privacy Policy</Text>
     <Paper shadow="none" p="xs" mb="xl" bg="#f1f3f5">
       <Text fs="italic">
@@ -229,7 +224,7 @@ export default function Home() {
           please contact me:
         </p>
         <ul>
-          <li>By email: info@wweb.dev</li>
+          <li>By email: info@workout.lol</li>
         </ul>
       </Text>
   </Layout>

@@ -40,10 +40,17 @@
    `npm run dev`
 7. Open your browser to http://localhost:3000
 
-## Created By
-<!-- [Vincent Will](https://twitter.com/wweb_dev) -->
+## Contributers
+[![wweb_dev](https://github-production-user-asset-6210df.s3.amazonaws.com/43953403/248202602-f81b0cf6-1394-4ab8-8ddf-4352bd8dbe7d.jpg)](https://twitter.com/wweb_dev)
+[![BradiceanuM](https://github-production-user-asset-6210df.s3.amazonaws.com/43953403/248202501-4d5ae3c3-b83b-4a2c-b7e2-0e38705f5487.jpg)](https://twitter.com/BradiceanuM)
 
-### Vincent Will : ![Twitter Follow](https://img.shields.io/twitter/follow/wweb_dev?style=social)
+## Supporter
+
+Appear in the README and on the website as supporter by donating on Ko-Fi:
+
+[https://ko-fi.com/workout_lol](https://ko-fi.com/workout_lol)
+
+
 ## License
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 

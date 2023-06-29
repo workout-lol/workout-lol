@@ -1,4 +1,5 @@
 import { getServerSession } from "next-auth/next"
+import NextCors from 'nextjs-cors'
 import { authOptions } from "../auth/[...nextauth]"
 import { getUserByQuery, updateUserByQuery } from '../../../lib/db-helper'
 
@@ -10,6 +11,13 @@ const parseUser = user => ({
 })
 
 const handler = async (req, res) => {
+  await NextCors(req, res, {
+    // Options
+    methods: ['GET', 'PUT'],
+    origin: '*',
+    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  });
+
   const session = await getServerSession(req, res, authOptions)
   if (!session || !session.user || !session.user.email) {
     res.status(401).json({})

@@ -2,7 +2,7 @@ import { ObjectId } from 'mongodb'
 import NextCors from 'nextjs-cors'
 import { getExercisesByAggregation } from '../../lib/db-helper'
 
-const getQuery = match => ([
+export const getQuery = match => ([
   {
     '$addFields': {
       'mainMuscle': {

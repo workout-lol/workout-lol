@@ -11,13 +11,13 @@ export default function Page() {
   const { slug } = router.query
 
   const request = useGetUserBySlug(slug)
-  const { user, isLoading, workouts } = request
+  const { isLoading, workouts } = request
 
   return (
     <Layout>
       <Header slug={slug} />
       <FullscreenLoader isVisible={isLoading} />
-      <ProfileBySlug user={user} workouts={workouts} />
+      <ProfileBySlug workouts={workouts} />
     </Layout>
   )
 }

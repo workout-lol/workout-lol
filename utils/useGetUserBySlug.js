@@ -15,6 +15,6 @@ export default function useGetUserBySlug(slug) {
   return {
     isLoading,
     isError: error,
-    workouts: data ? data.workouts : [],
+    workouts: data ? Object.values(data.workouts) : [],
   }
 }

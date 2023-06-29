@@ -1,8 +1,13 @@
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "../auth/[...nextauth]"
+import { ObjectId } from 'mongodb'
+import { getExercisesByAggregation } from '../../../lib/db-helper'
 
 import { getUserByQuery, updateUserByQuery } from "../../../lib/db-helper"
 import { isEmpty, isDefined } from "../../../utils/checks"
+
+
+import { getQuery } from "../../api/exercises"
 
 const handler = async (req, res) => {
   if (req.method === "GET") {
@@ -27,7 +32,32 @@ const handler = async (req, res) => {
       })
     }
 
-    return res.status(200).json(user)
+    const ids = user.workouts.map(w => w.exercises.map(e => e.id)).flat()
+
+  
+    const query = getQuery([
+      {
+        _id: {
+          $in: ids.map(e => new ObjectId(e))
+        }
+      }
+    ])
+
+    const workouts = await getExercisesByAggregation(query)
+
+
+    return res.status(200).json({
+      ...user,
+      workouts: {
+        ...user.workouts.map(w => ({
+          ...w,
+          exercises: w.exercises.map(e => ({
+            ...e,
+            ...workouts.find(w => w._id.toString() === e.id.toString())
+          }))
+        })),
+      }
+    })
   }
 
   if (req.method === "PATCH") {

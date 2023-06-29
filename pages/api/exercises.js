@@ -1,4 +1,5 @@
 import { ObjectId } from 'mongodb'
+import NextCors from 'nextjs-cors'
 import { getExercisesByAggregation } from '../../lib/db-helper'
 
 const getQuery = match => ([
@@ -36,6 +37,12 @@ const getQuery = match => ([
 ])
 
 const handler = async (req, res) => {
+  await NextCors(req, res, {
+    // Options
+    methods: ['POST'],
+    origin: '*',
+    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  });
   if (req.method === 'POST') {
     // get by ids via POST, bc it might get to long for header query param
     const { ids } = req.body

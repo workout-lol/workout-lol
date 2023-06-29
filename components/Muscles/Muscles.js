@@ -6,7 +6,7 @@ import FullscreenLoader from '../../components/FullscreenLoader'
 import styles from './Muscles.module.css'
 
 
-const fetcher = query => fetch(`/api/muscles${query}`)
+const fetcher = query => fetch(`${process.env.NEXT_PUBLIC_API}/api/muscles${query}`)
   .then(res => res.json())
 
 const Muscles = ({ muscles, setMuscles, workout, setWorkout, equipment = [] }) => {

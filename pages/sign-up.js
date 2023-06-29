@@ -33,7 +33,7 @@ export default function Home() {
         email: email.value,
         password: password.value,
       }
-      fetch('/api/sign-up', {
+      fetch(`${process.env.NEXT_PUBLIC_API}/api/sign-up`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),

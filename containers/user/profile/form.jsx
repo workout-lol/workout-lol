@@ -40,7 +40,7 @@ const Form = ({ user }) => {
 
       const data = { slug }
 
-      fetch(`/api/user/${originalSlug}`, {
+      fetch(`${process.env.NEXT_PUBLIC_API}/api/user/${originalSlug}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),

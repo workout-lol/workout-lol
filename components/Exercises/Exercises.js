@@ -31,7 +31,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { IconArrowsMoveVertical } from "@tabler/icons-react";
 
 const fetcher = (query) =>
-  fetch(`/api/exercises${query}`).then((res) => res.json());
+  fetch(`${process.env.NEXT_PUBLIC_API}/api/exercises${query}`).then((res) => res.json());
 
 const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
   const defaultCount = Math.round(6 / muscles.length) || 1; // default around 6 exercises

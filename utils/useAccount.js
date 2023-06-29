@@ -23,11 +23,11 @@ export const useLocalStorage = (key) => {
 }
 
 const fetcher = email => email
-  ? fetch('/api/user').then((res) => res.json())
+  ? fetch(`${process.env.NEXT_PUBLIC_API}/api/user`).then((res) => res.json())
   : Promise.resolve();
 
 const fetchExercises = ids => ids && ids.length
-  ? fetch('/api/exercises', {
+  ? fetch(`${process.env.NEXT_PUBLIC_API}/api/exercises`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ const fetchExercises = ids => ids && ids.length
   }).then((res) => res.json())
   : Promise.resolve()
 
-const updateUser = user => fetch('/api/user', {
+const updateUser = user => fetch(`${process.env.NEXT_PUBLIC_API}/api/user`, {
   method: 'PUT',
   headers: {
     'Content-Type': 'application/json',

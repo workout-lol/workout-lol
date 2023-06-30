@@ -1,17 +1,18 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Text, Badge, Group, Menu } from '@mantine/core'
+import { Text, Group, Menu } from '@mantine/core'
 import { Avatar } from '@mantine/core'
 import {
   IconLogin,
   IconUserPlus,
-  IconLogout
+  IconLogout,
 } from "@tabler/icons-react";
 import { useSession, signIn, signOut } from "next-auth/react"
 
 import useAccount from '../../utils/useAccount'
 import Calendar from '../Calendar/Calendar'
+import ReleaseNotes from './ReleaseNotes'
 import styles from './Header.module.css'
 
 const Header = () => {
@@ -29,14 +30,10 @@ const Header = () => {
           <Text weight={500} className={styles.title}>Workout.lol</Text>
         </Group>
       </Link>
-
-      <Badge color="pink" variant="light">
-        Beta
-      </Badge>
     </Group>
-
     <Group>
       <Calendar workouts={user.workouts || []} />
+      <ReleaseNotes />
       <Menu shadow="md" width={200} style={{ cursor: 'pointer' }}>
         <Menu.Target>
           <Avatar radius="xl" color={!!userAvatar ? 'blue' : undefined }>

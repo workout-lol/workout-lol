@@ -120,6 +120,8 @@ const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
     setWorkout(updatedList);
   };
 
+  console.log(workout, data)
+
   return (
     <div>
       <Paper shadow="none" p="xs" bg="#f1f3f5">
@@ -233,6 +235,7 @@ const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
                                     mr="xs"
                                     onClick={() => shuffleExercise(exercise)}
                                     leftIcon={<IconArrowsShuffle size="1rem" />}
+                                    disabled={workout.filter(e => e.mainMuscle === exercise.mainMuscle).length === data.filter(e => e.mainMuscle === exercise.mainMuscle).length}
                                   >
                                     Shuffle
                                   </Button>

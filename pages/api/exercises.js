@@ -57,9 +57,10 @@ const handler = async (req, res) => {
 
     res.status(200).json(workouts)
   } else if (req.method === 'GET') {
-    const { equipment = '', muscles = '' } = req.query
+    const { equipment = '', muscles = '', difficulty = '' } = req.query
     const mappedEquipment = equipment.split(',').filter(Boolean)
     const mappedMuscles = muscles.split(',').filter(Boolean)
+    const mappedDifficulties = difficulty.split(',').filter(Boolean)
     const query = getQuery([
       {
         'mainMuscle': {
@@ -73,7 +74,16 @@ const handler = async (req, res) => {
             }
           }
         }
-      }
+      },
+			...(mappedDifficulties.length
+				? [
+						{
+							"difficulty": {
+								"$in": mappedDifficulties,
+							},
+						},
+				  ]
+				: []),
     ])
 
     const workouts = await getExercisesByAggregation(query)

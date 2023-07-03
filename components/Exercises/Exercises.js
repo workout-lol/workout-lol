@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import useSWR from "swr";
 import {
   Text,
@@ -12,6 +12,7 @@ import {
   ThemeIcon,
   Modal,
   Box,
+	MultiSelect,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
@@ -33,11 +34,17 @@ import { IconArrowsMoveVertical } from "@tabler/icons-react";
 const fetcher = (query) =>
   fetch(`/api/exercises${query}`).then((res) => res.json());
 
+const difficultyData = [
+	'Beginner',
+	'Intermediate',
+	'Advanced'
+];
 const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
   const defaultCount = Math.round(6 / muscles.length) || 1; // default around 6 exercises
   const sortedEquipments = equipment.sort().join(",");
   const sortedMuscles = muscles.sort().join(",");
-  const query = `?equipment=${sortedEquipments}&muscles=${sortedMuscles}`;
+	const [difficulties, setDifficulties] = useState([])
+  const query = useMemo(() => `?equipment=${sortedEquipments}&muscles=${sortedMuscles}&difficulty=${difficulties.toString()}`, [difficulties])
   const {
     data = [],
     error,
@@ -120,8 +127,6 @@ const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
     setWorkout(updatedList);
   };
 
-  console.log(workout, data)
-
   return (
     <div>
       <Paper shadow="none" p="xs" bg="#f1f3f5">
@@ -136,6 +141,13 @@ const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
           </a>
         </Text>
       </Paper>
+			<MultiSelect
+				my="sm"
+				data={difficultyData}
+				label="Difficulty"
+				placeholder="Pick all that you like"
+				onChange={setDifficulties}
+			/>
       <Flex justify="space-between" mt="xl" direction="column">
         {(isLoading || !workout.length) && (
           <Box sx={{ paddingLeft: 10, width: "100%", display: 'flex', flexDirection: 'column', justifyContent: 'center', justifyItems: "center", borderLeft: '2px solid lightgrey' }}>

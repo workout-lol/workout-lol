@@ -1,10 +1,19 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { SessionProvider } from "next-auth/react"
-import { MantineProvider } from '@mantine/core'
+import { MantineProvider, ColorSchemeProvider } from '@mantine/core'
+import { useLocalStorage } from '@mantine/hooks';
 import { Toaster } from 'react-hot-toast';
 
 export default function App(props) {
+  const [colorScheme, setColorScheme] = useLocalStorage({
+    key: 'mantine-color-scheme',
+    defaultValue: 'light',
+    getInitialValueInEffect: true,
+  });
+  const toggleColorScheme = (value) =>
+    setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+
   const { Component, pageProps: { session, ...pageProps }, } = props
   const description = "A small web application to create workouts based on your available equipment and the muscles you want to train."
   const link = "https://workout.lol"
@@ -37,17 +46,16 @@ export default function App(props) {
       </Head>
 
       <SessionProvider session={session}>
-        <MantineProvider
-          withGlobalStyles
-          withNormalizeCSS
-          theme={{
-            /** Put your mantine theme override here */
-            colorScheme: 'light',
-          }}
-        >
-          <Component {...pageProps} />
-          <Toaster />
-        </MantineProvider>
+        <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
+          <MantineProvider
+            withGlobalStyles
+            withNormalizeCSS
+            theme={{ colorScheme }}
+          >
+            <Component {...pageProps} />
+            <Toaster />
+          </MantineProvider>
+        </ColorSchemeProvider>
       </SessionProvider>
     </>
   );

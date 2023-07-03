@@ -1,12 +1,14 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Text, Group, Menu } from '@mantine/core'
+import { Text, Group, Menu, useMantineColorScheme, ActionIcon } from '@mantine/core'
 import { Avatar } from '@mantine/core'
 import {
   IconLogin,
   IconUserPlus,
   IconLogout,
+  IconSun,
+  IconMoonStars,
 } from "@tabler/icons-react";
 import { useSession, signIn, signOut } from "next-auth/react"
 
@@ -18,6 +20,8 @@ import styles from './Header.module.css'
 const Header = () => {
   const { data: session } = useSession()
   const [account = {}] = useAccount()
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme()
+  const dark = colorScheme === 'dark'
   const { data: user = {} } = account
   const hasWorkouts = user && user.workouts && Object.keys(user.workouts).length > 0
   const userAvatar = session && session.user.email && session.user.email.substring(0, 2).toUpperCase()
@@ -34,6 +38,14 @@ const Header = () => {
     <Group>
       <Calendar workouts={user.workouts || []} />
       <ReleaseNotes />
+      <ActionIcon
+        variant="outline"
+        color={dark ? 'yellow' : 'blue'}
+        onClick={() => toggleColorScheme()}
+        title="Toggle color scheme"
+      >
+        {dark ? <IconSun size="1.1rem" /> : <IconMoonStars size="1.1rem" />}
+      </ActionIcon>
       <Menu shadow="md" width={200} style={{ cursor: 'pointer' }}>
         <Menu.Target>
           <Avatar radius="xl" color={!!userAvatar ? 'blue' : undefined }>

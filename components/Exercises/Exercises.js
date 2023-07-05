@@ -54,13 +54,10 @@ const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
   const [defaultSelected, setDefaultSelected] = useState();
   const [exerciseIndex, setExerciseIndex] = useState();
 
-  useEffect(() => {
+  useEffect(() => { // first load
     if (data.length && !workout.length) {
       const exercises = shuffle(data).reduce((acc, curr) => {
-        if (
-          acc.filter((e) => e.mainMuscle === curr.mainMuscle).length <
-          defaultCount
-        ) {
+        if (acc.filter((e) => e.mainMuscle === curr.mainMuscle).length < defaultCount) {
           return [...acc, curr];
         } else {
           return acc;
@@ -73,7 +70,26 @@ const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
 
       setWorkout(sortedArray);
     }
-  }, [data, defaultCount, workout, setWorkout]);
+  }, [data, defaultCount, workout, setWorkout, difficulties]);
+
+  useEffect(() => { // if difficulties change
+    const exercises = shuffle(data).reduce((acc, curr) => {
+      if (
+        acc.filter((e) => e.mainMuscle === curr.mainMuscle).length <
+        defaultCount
+      ) {
+        return [...acc, curr];
+      } else {
+        return acc;
+      }
+    }, []);
+    const sortedArray = sortByPropertyWithHighDistribution(
+      exercises,
+      "mainMuscle"
+    );
+
+      setWorkout(sortedArray);
+  }, [difficulties, data, defaultCount, setWorkout]);
 
   const shuffleExercise = (exercise) => {
     const newExercise = shuffle(data)

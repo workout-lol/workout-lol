@@ -23,7 +23,8 @@ const handler = async (req, res) => {
             ]
           }
         }
-      }, {
+      },
+      {
         '$match': {
           '$and': [
             {
@@ -56,8 +57,27 @@ const handler = async (req, res) => {
         }
       },
       {
+        $project: {
+          item: 1,
+          mainMuscle: 1,
+          'isBeginner': {
+            $cond: [ { $eq: ["$difficulty", 'Beginner' ] }, 1, 0]
+          },
+          'isIntermediate': {
+            $cond: [ { $eq: ["$difficulty", 'Intermediate' ] }, 1, 0]
+          },
+          'isAdvanced': {
+            $cond: [ { $eq: ["$difficulty", 'Advanced' ] }, 1, 0]
+          }
+        }
+      },
+      {
         $group: {
-          '_id' : '$mainMuscle', count:{ $sum:1 }
+          '_id' : '$mainMuscle',
+          count:{ $sum: 1 },
+          beginner: { $sum: '$isBeginner' },
+          intermediate: { $sum: '$isIntermediate' },
+          advanced: { $sum: '$isAdvanced' },
         }
       }
     ]

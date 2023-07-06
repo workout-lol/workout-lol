@@ -43,6 +43,11 @@
 ## Contributers
 [![wweb_dev](https://github-production-user-asset-6210df.s3.amazonaws.com/43953403/248202602-f81b0cf6-1394-4ab8-8ddf-4352bd8dbe7d.jpg)](https://twitter.com/wweb_dev)
 [![BradiceanuM](https://github-production-user-asset-6210df.s3.amazonaws.com/43953403/248202501-4d5ae3c3-b83b-4a2c-b7e2-0e38705f5487.jpg)](https://twitter.com/BradiceanuM)
+[![ngthuongdoan](https://github-production-user-asset-6210df.s3.amazonaws.com/43953403/251365548-f713917f-93f9-416b-af75-24bfed8dd2f5.jpg)](https://github.com/ngthuongdoan)
+
+
+![45509523]([https://github.com/Vincenius/workout-lol/assets/43953403/f713917f-93f9-416b-af75-24bfed8dd2f5](https://github-production-user-asset-6210df.s3.amazonaws.com/43953403/251365548-f713917f-93f9-416b-af75-24bfed8dd2f5.jpg))
+
 
 ## Supporter
 

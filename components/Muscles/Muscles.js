@@ -1,18 +1,26 @@
 import React from 'react'
 import useSWR from 'swr'
-import { Text } from '@mantine/core'
+import { Text, MultiSelect } from '@mantine/core'
 import Illustration from './Illustration'
 import FullscreenLoader from '../../components/FullscreenLoader'
 import styles from './Muscles.module.css'
 
+const difficultyData = [
+	'Beginner',
+	'Intermediate',
+	'Advanced'
+];
 
 const fetcher = query => fetch(`/api/muscles${query}`)
   .then(res => res.json())
 
-const Muscles = ({ muscles, setMuscles, workout, setWorkout, equipment = [] }) => {
+const Muscles = ({ muscles, setMuscles, workout, setWorkout, equipment = [], setDifficulties, difficulties = [] }) => {
   const sortedEquipments = equipment.sort().join(',')
   const query = `?equipment=${sortedEquipments}`
   const { data = [], error, isLoading } = useSWR(`/muscles${query}`, () => fetcher(query))
+  const muscleData = (difficulties.length
+    ? data.map(d => ({ ...d, count: difficulties.reduce((acc, curr) => acc + (d[curr.toLowerCase()] || 0), 0) }))
+    : data).filter(d => d.count > 0)
 
   const toggleMuscle = id => {
     muscles.includes(id)
@@ -28,7 +36,14 @@ const Muscles = ({ muscles, setMuscles, workout, setWorkout, equipment = [] }) =
     <Text fs="italic" ta="center" mb="lg">
       Select the muscles you would like to train. (2-3 recommended)
     </Text>
-    <Illustration toggleMuscle={toggleMuscle} muscles={muscles} exerciseCount={data} isLoading={isLoading} />
+    <MultiSelect
+      my="md"
+      data={difficultyData}
+      label="Difficulty"
+      placeholder="Pick all that you like (optional)"
+      onChange={setDifficulties}
+    />
+    <Illustration toggleMuscle={toggleMuscle} muscles={muscles} exerciseCount={muscleData} isLoading={isLoading} />
     {/* list muscles ?? */}
   </div>
 }

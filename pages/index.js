@@ -19,6 +19,7 @@ export default function Home() {
   const repeatWorkoutId = router.query && router.query.w_id
   const repeatWorkout = (user.workouts || []).find(w => w.id === repeatWorkoutId)
   const [active, setActive] = useState(0);
+  const [difficulties, setDifficulties] = useState([])
   const nextStep = () => {
     if (active === 2) {
       saveWorkout()
@@ -94,10 +95,10 @@ export default function Home() {
           <Equipment {...{ equipment, updateEquipment }} />
         </Stepper.Step>
         <Stepper.Step label="Muscles" description="Choose your training">
-          <Muscles {...{ muscles, setMuscles, workout, setWorkout, equipment }} />
+          <Muscles {...{ muscles, setMuscles, workout, setWorkout, equipment, setDifficulties, difficulties }} />
         </Stepper.Step>
         <Stepper.Step label="Exercises" description="Customize your workout">
-          <Exercises {...{ equipment, muscles, workout, setWorkout }} />
+          <Exercises {...{ equipment, muscles, workout, setWorkout, difficulties }} />
         </Stepper.Step>
         <Stepper.Completed>
           <Workout {...{ workout, updateProgress, user }} />

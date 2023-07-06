@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import useSWR from "swr";
 import {
   Text,
-  Timeline,
   Flex,
   Paper,
   Skeleton,
@@ -33,11 +32,11 @@ import { IconArrowsMoveVertical } from "@tabler/icons-react";
 const fetcher = (query) =>
   fetch(`/api/exercises${query}`).then((res) => res.json());
 
-const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
+const Exercises = ({ equipment, muscles, workout, setWorkout, difficulties }) => {
   const defaultCount = Math.round(6 / muscles.length) || 1; // default around 6 exercises
   const sortedEquipments = equipment.sort().join(",");
   const sortedMuscles = muscles.sort().join(",");
-  const query = `?equipment=${sortedEquipments}&muscles=${sortedMuscles}`;
+  const query = `?equipment=${sortedEquipments}&muscles=${sortedMuscles}`
   const {
     data = [],
     error,
@@ -46,14 +45,12 @@ const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
   const [opened, { open, close }] = useDisclosure(false);
   const [defaultSelected, setDefaultSelected] = useState();
   const [exerciseIndex, setExerciseIndex] = useState();
+  const exerciseData = data.filter(d => difficulties.includes(d.difficulty))
 
-  useEffect(() => {
-    if (data.length && !workout.length) {
-      const exercises = shuffle(data).reduce((acc, curr) => {
-        if (
-          acc.filter((e) => e.mainMuscle === curr.mainMuscle).length <
-          defaultCount
-        ) {
+  useEffect(() => { // first load
+    if (exerciseData.length && !workout.length) {
+      const exercises = shuffle(exerciseData).reduce((acc, curr) => {
+        if (acc.filter((e) => e.mainMuscle === curr.mainMuscle).length < defaultCount) {
           return [...acc, curr];
         } else {
           return acc;
@@ -66,10 +63,10 @@ const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
 
       setWorkout(sortedArray);
     }
-  }, [data, defaultCount, workout, setWorkout]);
+  }, [exerciseData, defaultCount, workout, setWorkout]);
 
   const shuffleExercise = (exercise) => {
-    const newExercise = shuffle(data)
+    const newExercise = shuffle(exerciseData)
       .filter((e) => e.mainMuscle === exercise.mainMuscle)
       .find((e) => !workout.find((w) => w._id === e._id));
 
@@ -119,8 +116,6 @@ const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
 
     setWorkout(updatedList);
   };
-
-  console.log(workout, data)
 
   return (
     <div>
@@ -235,7 +230,7 @@ const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
                                     mr="xs"
                                     onClick={() => shuffleExercise(exercise)}
                                     leftIcon={<IconArrowsShuffle size="1rem" />}
-                                    disabled={workout.filter(e => e.mainMuscle === exercise.mainMuscle).length === data.filter(e => e.mainMuscle === exercise.mainMuscle).length}
+                                    disabled={workout.filter(e => e.mainMuscle === exercise.mainMuscle).length === exerciseData.filter(e => e.mainMuscle === exercise.mainMuscle).length}
                                   >
                                     Shuffle
                                   </Button>
@@ -296,7 +291,7 @@ const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
       </Flex>
       <Modal opened={opened} onClose={close} title="Choose Exercise">
         <SelectModal
-          exercises={data}
+          exercises={exerciseData}
           workout={workout}
           setWorkout={setWorkout}
           close={close}

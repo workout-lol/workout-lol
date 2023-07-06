@@ -46,9 +46,6 @@
 [![ngthuongdoan](https://github-production-user-asset-6210df.s3.amazonaws.com/43953403/251365548-f713917f-93f9-416b-af75-24bfed8dd2f5.jpg)](https://github.com/ngthuongdoan)
 
 
-![45509523]([https://github.com/Vincenius/workout-lol/assets/43953403/f713917f-93f9-416b-af75-24bfed8dd2f5](https://github-production-user-asset-6210df.s3.amazonaws.com/43953403/251365548-f713917f-93f9-416b-af75-24bfed8dd2f5.jpg))
-
-
 ## Supporter
 
 Appear in the README and on the website as supporter by donating on Ko-Fi:

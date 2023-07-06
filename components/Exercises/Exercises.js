@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useState } from "react";
 import useSWR from "swr";
 import {
   Text,
-  Timeline,
   Flex,
   Paper,
   Skeleton,
@@ -12,7 +11,6 @@ import {
   ThemeIcon,
   Modal,
   Box,
-	MultiSelect,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
@@ -34,17 +32,11 @@ import { IconArrowsMoveVertical } from "@tabler/icons-react";
 const fetcher = (query) =>
   fetch(`/api/exercises${query}`).then((res) => res.json());
 
-const difficultyData = [
-	'Beginner',
-	'Intermediate',
-	'Advanced'
-];
-const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
+const Exercises = ({ equipment, muscles, workout, setWorkout, difficulties }) => {
   const defaultCount = Math.round(6 / muscles.length) || 1; // default around 6 exercises
   const sortedEquipments = equipment.sort().join(",");
   const sortedMuscles = muscles.sort().join(",");
-	const [difficulties, setDifficulties] = useState([])
-  const query = useMemo(() => `?equipment=${sortedEquipments}&muscles=${sortedMuscles}&difficulty=${difficulties.toString()}`, [difficulties])
+  const query = `?equipment=${sortedEquipments}&muscles=${sortedMuscles}`
   const {
     data = [],
     error,
@@ -53,10 +45,11 @@ const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
   const [opened, { open, close }] = useDisclosure(false);
   const [defaultSelected, setDefaultSelected] = useState();
   const [exerciseIndex, setExerciseIndex] = useState();
+  const exerciseData = data.filter(d => difficulties.includes(d.difficulty))
 
   useEffect(() => { // first load
-    if (data.length && !workout.length) {
-      const exercises = shuffle(data).reduce((acc, curr) => {
+    if (exerciseData.length && !workout.length) {
+      const exercises = shuffle(exerciseData).reduce((acc, curr) => {
         if (acc.filter((e) => e.mainMuscle === curr.mainMuscle).length < defaultCount) {
           return [...acc, curr];
         } else {
@@ -70,29 +63,10 @@ const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
 
       setWorkout(sortedArray);
     }
-  }, [data, defaultCount, workout, setWorkout, difficulties]);
-
-  useEffect(() => { // if difficulties change
-    const exercises = shuffle(data).reduce((acc, curr) => {
-      if (
-        acc.filter((e) => e.mainMuscle === curr.mainMuscle).length <
-        defaultCount
-      ) {
-        return [...acc, curr];
-      } else {
-        return acc;
-      }
-    }, []);
-    const sortedArray = sortByPropertyWithHighDistribution(
-      exercises,
-      "mainMuscle"
-    );
-
-      setWorkout(sortedArray);
-  }, [difficulties, data, defaultCount, setWorkout]);
+  }, [exerciseData, defaultCount, workout, setWorkout]);
 
   const shuffleExercise = (exercise) => {
-    const newExercise = shuffle(data)
+    const newExercise = shuffle(exerciseData)
       .filter((e) => e.mainMuscle === exercise.mainMuscle)
       .find((e) => !workout.find((w) => w._id === e._id));
 
@@ -157,13 +131,6 @@ const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
           </a>
         </Text>
       </Paper>
-			<MultiSelect
-				my="sm"
-				data={difficultyData}
-				label="Difficulty"
-				placeholder="Pick all that you like"
-				onChange={setDifficulties}
-			/>
       <Flex justify="space-between" mt="xl" direction="column">
         {(isLoading || !workout.length) && (
           <Box sx={{ paddingLeft: 10, width: "100%", display: 'flex', flexDirection: 'column', justifyContent: 'center', justifyItems: "center", borderLeft: '2px solid lightgrey' }}>
@@ -263,7 +230,7 @@ const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
                                     mr="xs"
                                     onClick={() => shuffleExercise(exercise)}
                                     leftIcon={<IconArrowsShuffle size="1rem" />}
-                                    disabled={workout.filter(e => e.mainMuscle === exercise.mainMuscle).length === data.filter(e => e.mainMuscle === exercise.mainMuscle).length}
+                                    disabled={workout.filter(e => e.mainMuscle === exercise.mainMuscle).length === exerciseData.filter(e => e.mainMuscle === exercise.mainMuscle).length}
                                   >
                                     Shuffle
                                   </Button>
@@ -324,7 +291,7 @@ const Exercises = ({ equipment, muscles, workout, setWorkout }) => {
       </Flex>
       <Modal opened={opened} onClose={close} title="Choose Exercise">
         <SelectModal
-          exercises={data}
+          exercises={exerciseData}
           workout={workout}
           setWorkout={setWorkout}
           close={close}

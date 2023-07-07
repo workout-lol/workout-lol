@@ -93,7 +93,6 @@ const Form = ({ user }) => {
         />
         <Button
           ml="sm"
-          variant="filled"
           type="submit"
           loading={isLoading}
           disabled={isLoading || slug === originalSlug}

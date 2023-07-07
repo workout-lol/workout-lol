@@ -82,7 +82,7 @@ export default function Home() {
         <Text color="red" mt="sm" mb="sm">An unexpected Error occured. Please try again or contact support.</Text>
       }
 
-      <Button variant="filled" type="submit" loading={isLoading}>
+      <Button type="submit" loading={isLoading}>
         Create account
       </Button>
     </form>

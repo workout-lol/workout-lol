@@ -1,10 +1,11 @@
 import Link from 'next/link'
-import { Text, Badge, Tooltip, Table, ActionIcon, Box, Flex } from '@mantine/core'
+import { useMantineColorScheme, Text, Badge, Tooltip, Table, ActionIcon, Box, Flex } from '@mantine/core'
 import { IconTrash, IconRepeat } from '@tabler/icons-react'
 import { muscleToColor } from '../Exercises/utils'
 import styles from './WorkoutTable.module.css'
 
 const WorkoutTable = ({ workouts, deleteWorkout, viewOnly = false}) => {
+  const { colorScheme } = useMantineColorScheme()
     return <>
       <Table striped className={styles.mobileHide}>
         <thead>
@@ -47,7 +48,11 @@ const WorkoutTable = ({ workouts, deleteWorkout, viewOnly = false}) => {
         </tbody>
       </Table>
       <Box className={styles.mobileShow}>
-        {workouts.map((w, i) => <Box key={`workout-history-${i}`} p="sm" mb="sm" bg={i%2 === 0 ? '#f8f9fa' : '#fff'}>
+        {/* TODO here */}
+        {workouts.map((w, i) => <Box
+          key={`workout-history-${i}`} p="sm" mb="sm"
+          bg={colorScheme === 'dark' ? i%2 === 0 ? '#1A1B1E' : 'transparent' : i%2 === 0 ? '#f8f9fa' : '#fff'}
+        >
           <Flex justify="space-between">
             <Text fw="bold" mb="sm">{ w.exercises.every(e => e.completed) && '✅ ' }{w.created_at.slice(0,10)}</Text>
 

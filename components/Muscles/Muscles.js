@@ -33,17 +33,17 @@ const Muscles = ({ muscles, setMuscles, workout, setWorkout, equipment = [], set
   }
   return <div className={styles.svgContainer}>
     <FullscreenLoader isVisible={isLoading} />
-    <Text fs="italic" ta="center" mb="lg">
-      Select the muscles you would like to train. (2-3 recommended)
-    </Text>
     <MultiSelect
-      my="md"
+      mb="md"
       data={difficultyData}
       label="Difficulty"
       placeholder="Pick all that you like (optional)"
       onChange={setDifficulties}
     />
-    <Illustration toggleMuscle={toggleMuscle} muscles={muscles} exerciseCount={muscleData} isLoading={isLoading} />
+    <Text fs="italic" ta="center" mb="lg">
+      Select the muscles you would like to train. (2-3 recommended)
+    </Text>
+    <Illustration toggleMuscle={toggleMuscle} muscles={muscles} exerciseCount={muscleData} />
     {/* list muscles ?? */}
   </div>
 }

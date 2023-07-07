@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
 import useSWR from "swr";
 import {
+  useMantineColorScheme,
   Text,
   Flex,
-  Paper,
   Skeleton,
   Button,
   ActionIcon,
@@ -18,7 +18,9 @@ import {
   IconClick,
   IconTrash,
   IconPlus,
+  IconArrowsMoveVertical
 } from "@tabler/icons-react";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import {
   sortByPropertyWithHighDistribution,
   muscleToColor,
@@ -26,13 +28,13 @@ import {
 } from "./utils";
 import SelectModal from "./SelectModal";
 import VideoIcon from "./VideoIcon";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { IconArrowsMoveVertical } from "@tabler/icons-react";
+import InfoCard from '../InfoCard'
 
 const fetcher = (query) =>
   fetch(`/api/exercises${query}`).then((res) => res.json());
 
 const Exercises = ({ equipment, muscles, workout, setWorkout, difficulties }) => {
+  const { colorScheme } = useMantineColorScheme()
   const defaultCount = Math.round(6 / muscles.length) || 1; // default around 6 exercises
   const sortedEquipments = equipment.sort().join(",");
   const sortedMuscles = muscles.sort().join(",");
@@ -121,18 +123,16 @@ const Exercises = ({ equipment, muscles, workout, setWorkout, difficulties }) =>
 
   return (
     <div>
-      <Paper shadow="none" p="xs" bg="#f1f3f5">
-        <Text fs="italic">
-          Disclaimer: All exercises and videos are taken from{" "}
-          <a
-            href="https://musclewiki.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            musclewiki.com
-          </a>
-        </Text>
-      </Paper>
+      <InfoCard>
+        Disclaimer: All exercises and videos are taken from{" "}
+        <a
+          href="https://musclewiki.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          musclewiki.com
+        </a>
+      </InfoCard>
       <Flex justify="space-between" mt="xl" direction="column">
         {(isLoading || !workout.length) && (
           <Box sx={{ paddingLeft: 10, width: "100%", display: 'flex', flexDirection: 'column', justifyContent: 'center', justifyItems: "center", borderLeft: '2px solid lightgrey' }}>
@@ -174,7 +174,7 @@ const Exercises = ({ equipment, muscles, workout, setWorkout, difficulties }) =>
                               <Flex
                                 sx={{
                                   flex: 1,
-                                  ...draggingStyle(snapshot.isDragging),
+                                  ...draggingStyle(snapshot.isDragging, colorScheme === 'dark'),
                                   paddingLeft: 10,
                                 }}
                                 align={{ base: "flex-start", xs: "center" }}
@@ -305,14 +305,17 @@ const Exercises = ({ equipment, muscles, workout, setWorkout, difficulties }) =>
   );
 };
 
-const draggingStyle = (isDragging) => ({
-  background: isDragging ? "#f8f8f8" : "white",
+// todo
+const draggingStyle = (isDragging, isDarkMode) => ({
+  background: isDragging
+    ? isDarkMode ? '#1A1B1E' : '#f1f3f5'
+    : "transparent",
   border: isDragging ? "1px dashed #ddd" : "none",
   boxShadow: isDragging ? "0px 4px 8px rgba(0, 0, 0, 0.1)" : "none",
   transition:
     "background-color 0.2s ease, border 0.2s ease, box-shadow 0.2s ease",
   borderLeft: isDragging
-    ? "2px solid rgb(205, 220, 240)"
-    : "2px solid rgba(230, 245, 255, 1)",
+    ? isDarkMode ? "2px solid #373A40" : "2px solid #d0ebff"
+    : isDarkMode ? "2px solid #1A1B1E" : "2px solid #e7f5ff"
 });
 export default Exercises;

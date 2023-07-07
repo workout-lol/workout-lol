@@ -2,9 +2,10 @@ import React, { useState, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { Text, Timeline, Flex, Paper, Button, List, Input, Tooltip, Title } from '@mantine/core'
+import { useMantineColorScheme, Text, Timeline, Flex, Button, List, Input, Tooltip, Title } from '@mantine/core'
 import { IconCheck, IconAlertCircle } from '@tabler/icons-react'
 import party from "party-js"
+import InfoCard from './InfoCard'
 
 const RepInput = ({ index, handleChange, sets, prevSet }) => <Input
   placeholder={`${index + 1}. Set`}
@@ -66,6 +67,7 @@ const ActiveExercise = ({ exercise, goNext, handleChange, sets, user }) => {
 }
 
 const Workout = ({ workout, updateProgress, user }) => {
+  const { colorScheme } = useMantineColorScheme()
   const confettiDom = useRef(null)
   const [active, setActive] = useState(0)
   const [sets, setSets] = useState([])
@@ -90,12 +92,12 @@ const Workout = ({ workout, updateProgress, user }) => {
   }
 
   return <div>
-    <Paper shadow="none" p="xs" mb="xl" bg="#f1f3f5">
-      <Text fs="italic">Disclaimer: All exercises and videos are taken from <a href="https://musclewiki.com/" target="_blank" rel="noopener noreferrer">musclewiki.com</a></Text>
-    </Paper>
+    <InfoCard>
+      Disclaimer: All exercises and videos are taken from <a href="https://musclewiki.com/" target="_blank" rel="noopener noreferrer">musclewiki.com</a>
+    </InfoCard>
     { active < workout.length && <Timeline bulletSize={24} lineWidth={2} active={active}>
       { workout.map((exercise, index) => index === active
-        ? <Timeline.Item key={exercise._id}>
+        ? <Timeline.Item key={exercise._id} bullet={colorScheme === 'dark' && <div style={{ background: '#1A1B1E', width: '20px', height: '20px', borderRadius:' 50%' }}></div>}>
           <ActiveExercise exercise={exercise} handleChange={handleChange} sets={sets} goNext={goNext} user={user}/>
         </Timeline.Item>
         : <Timeline.Item key={exercise._id} bullet={active > index && <IconCheck />}>

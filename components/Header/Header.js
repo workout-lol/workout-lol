@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Text, Group, Menu, useMantineColorScheme, ActionIcon } from '@mantine/core'
+import { useMantineColorScheme, Text, Group, Menu, ActionIcon } from '@mantine/core'
 import { Avatar } from '@mantine/core'
 import {
   IconLogin,
@@ -23,7 +23,6 @@ const Header = () => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme()
   const dark = colorScheme === 'dark'
   const { data: user = {} } = account
-  const hasWorkouts = user && user.workouts && Object.keys(user.workouts).length > 0
   const userAvatar = session && session.user.email && session.user.email.substring(0, 2).toUpperCase()
 
   return <Group position="apart">
@@ -31,7 +30,7 @@ const Header = () => {
       <Link href="/" className={styles.link}>
         <Group>
           <Image width={30} height={30} alt="happy dumbbell logo" src="/logo-small.png" />
-          <Text weight={500} className={styles.title}>Workout.lol</Text>
+          <Text weight={500} className={!dark ? styles.title : styles.titleDark}>Workout.lol</Text>
         </Group>
       </Link>
     </Group>

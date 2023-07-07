@@ -1,16 +1,12 @@
-import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { SessionProvider } from "next-auth/react"
 import { MantineProvider, ColorSchemeProvider } from '@mantine/core'
-import { useLocalStorage } from '@mantine/hooks';
+import { useLocalStorage } from '../utils/useAccount'
 import { Toaster } from 'react-hot-toast';
 
 export default function App(props) {
-  const [colorScheme, setColorScheme] = useLocalStorage({
-    key: 'mantine-color-scheme',
-    defaultValue: 'light',
-    getInitialValueInEffect: true,
-  });
+  const [{ isLoading, data: colorScheme = 'light' }, setColorScheme] = useLocalStorage('theme')
+  // const colorScheme = colorSchemeStorage.data || 'light'
   const toggleColorScheme = (value) =>
     setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
 
@@ -52,7 +48,8 @@ export default function App(props) {
             withNormalizeCSS
             theme={{ colorScheme }}
           >
-            <Component {...pageProps} />
+            { isLoading && <></> }
+            { !isLoading && <Component {...pageProps} /> }
             <Toaster />
           </MantineProvider>
         </ColorSchemeProvider>

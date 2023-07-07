@@ -1,10 +1,16 @@
 .link {
   text-decoration: none;
+}
+
+.title {
   color: #000;
+}
+.titleDark {
+  color: #fff;
 }
 
 @media screen and (max-width: 560px) {
-  .title {
+  .title, .titleDark {
     display: none;
   }
 }

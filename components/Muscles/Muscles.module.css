@@ -1,23 +1,38 @@
-.svgContainer {
-  text-align: center;
+.svgContainer, .svgContainerDark {
   margin: 2em 0;
   position: relative;
 }
 
-.illustration {
+.illustration, .illustrationDark {
   width: 100%;
   height: auto;
 }
 
-.illustration path {
+.illustration path,
+.illustrationDark path {
   position: relative;
   z-index: 0;
 }
 
-.muscle { }
+.illustration .empty,
+.illustration .muscle {
+  fill: #757575;
+}
+.illustrationDark .empty,
+.illustrationDark .muscle {
+  fill: #25262b;
+}
 .muscleContainer {
   z-index: 1;
   cursor: pointer;
+}
+
+.illustration .muscle.enabled {
+  fill: #bdbdbd;
+}
+
+.illustrationDark .muscle.enabled {
+  fill: #5c5f66;
 }
 
 .muscle.enabled.hover {
@@ -27,25 +42,4 @@
 
 .muscle.enabled.active {
   fill: #228be6;
-}
-
-.muscle.enabled {
-  fill: #bdbdbd;
-}
-
-.loading {
-  fill: #757575;
-  animation: pulse 2s linear infinite;
-}
-
-@keyframes pulse {
-  0% {
-    opacity: 0.5;
-  }
-  50% {
-    opacity: 0.8;
-  }
-  100% {
-    opacity: 0.5;
-  }
 }

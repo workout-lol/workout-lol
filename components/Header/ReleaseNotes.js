@@ -3,7 +3,7 @@ import { Indicator, ActionIcon, Modal, Text } from '@mantine/core'
 import { IconBell } from "@tabler/icons-react"
 import { useLocalStorage } from '../../utils/useAccount'
 
-const releaseNotesDate = "2023-07-06T06:32:47.260Z"
+const releaseNotesDate = "2023-07-07T07:22:47.260Z"
 const dateString = new Date(releaseNotesDate).toLocaleDateString()
 
 const IconContainer = ({ children, lastVisit }) => !lastVisit || (releaseNotesDate > lastVisit)
@@ -26,8 +26,12 @@ const ReleaseNotes = () => {
       <ActionIcon variant="subtle" onClick={showNotes}><IconBell size="1rem" /></ActionIcon>
     </IconContainer>
     <Modal opened={opened} onClose={() => setOpened(false)} title={`What's New: ${dateString}`}>
-      <Text fw={700}>Difficulty Selection</Text>
-      <Text mb="sm">You can now select the difficulty of the exercises for your workout on the muscle selecetion screen.</Text>
+      <Text fw={700}>1. Dark Mode</Text>
+      <Text mb="sm">As every good web app - workout.lol now has a dark mode. Just press the small moon icon in the header to enable it 🌘.</Text>
+
+      <Text fw={700}>2. Difficulty Bug fix</Text>
+      <Text mb="sm">There was a small bug when no difficulties were selected. It is fixed now 🛠️.</Text>
+
 
       {/* <Text mb="sm">
         Is there anything you would like to see on workout.lol that would improve your experience?

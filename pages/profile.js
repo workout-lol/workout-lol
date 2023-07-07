@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useSession, signIn } from "next-auth/react"
 import Link from 'next/link';
-import { Paper, Text } from '@mantine/core'
+import { useMantineColorScheme, Paper, Text } from '@mantine/core'
 import Layout from '../components/Layout/Layout'
 import Calendar from '../components/Calendar/Calendar'
 import WorkoutTable from '../components/WorkoutTable/WorkoutTable'
@@ -9,6 +9,7 @@ import Form from "../containers/user/profile/form"
 import useAccount, { useLocalStorage } from '../utils/useAccount'
 
 export default function Home() {
+  const { colorScheme } = useMantineColorScheme()
   const { data: session } = useSession()
   const [account = {}, setAccount] = useAccount()
   const [localStorageUser, setLocalStorage] = useLocalStorage('user')
@@ -35,7 +36,7 @@ export default function Home() {
   return (
     <Layout>
       {!session && (
-        <Paper shadow="none" p="xs" mb="xl" bg="lightblue">
+        <Paper shadow="none" p="xs" mb="xl" bg={colorScheme === 'dark' ? '#0a2a48' : 'lightblue'}>
           <Text fs="italic">
             Your progress is stored in your browser.
             <br />

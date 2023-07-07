@@ -1,14 +1,13 @@
 import { Text, Paper } from '@mantine/core'
 import Layout from '../components/Layout/Layout'
+import InfoCard from '../components/InfoCard'
 
 export default function Home() {
   return <Layout>
     <Text fw="bold">Privacy Policy</Text>
-    <Paper shadow="none" p="xs" mb="xl" bg="#f1f3f5">
-      <Text fs="italic">
-        TLDR: I use a self-hosted version of <a href="https://umami.is/">umami</a> for anonymised usage tracking and nothing more. No cookies, no user data stored.
-      </Text>
-    </Paper>
+    <InfoCard>
+      TLDR: I use a self-hosted version of <a href="https://umami.is/">umami</a> for anonymised usage tracking and nothing more. No cookies, no user data stored.
+    </InfoCard>
     <Text>
       <p>Effective date: January 15, 2020</p>
         <p>Updated date: May 07 2020</p>

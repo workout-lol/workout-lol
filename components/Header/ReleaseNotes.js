@@ -3,7 +3,7 @@ import { Indicator, ActionIcon, Modal, Text } from '@mantine/core'
 import { IconBell } from "@tabler/icons-react"
 import { useLocalStorage } from '../../utils/useAccount'
 
-const releaseNotesDate = "2023-06-30T05:53:47.260Z"
+const releaseNotesDate = "2023-07-06T06:32:47.260Z"
 const dateString = new Date(releaseNotesDate).toLocaleDateString()
 
 const IconContainer = ({ children, lastVisit }) => !lastVisit || (releaseNotesDate > lastVisit)
@@ -26,13 +26,13 @@ const ReleaseNotes = () => {
       <ActionIcon variant="subtle" onClick={showNotes}><IconBell size="1rem" /></ActionIcon>
     </IconContainer>
     <Modal opened={opened} onClose={() => setOpened(false)} title={`What's New: ${dateString}`}>
-      <Text fw={700}>Communicate new features</Text>
-      <Text mb="sm">The newest addition to workout.lol is this pop-up. Here we will display the latest additions to the website.</Text>
-      <Text mb="sm">We have a lot of <a href="https://github.com/Vincenius/workout-lol/issues" target="_blank" rel="noopener noreferrer">things planned</a> and are open for contributions.</Text>
-      <Text mb="sm">
+      <Text fw={700}>Difficulty Selection</Text>
+      <Text mb="sm">You can now select the difficulty of the exercises for your workout on the muscle selecetion screen.</Text>
+
+      {/* <Text mb="sm">
         Is there anything you would like to see on workout.lol that would improve your experience?
         Let me know via <a href="mailto:info@workout.lol">Email</a>, <a href="https://twitter.com/wweb_dev" target="_blank" rel="noopener noreferrer">Twitter</a> or <a href="https://github.com/Vincenius/workout-lol/issues" target="_blank" rel="noopener noreferrer">GitHub</a>.
-      </Text>
+      </Text> */}
       <Text mb="sm">Enjoy your workout 💪!</Text>
       <Text>Cheers,</Text>
       <Text>Vincent</Text>

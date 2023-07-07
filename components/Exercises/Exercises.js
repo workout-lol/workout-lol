@@ -45,7 +45,9 @@ const Exercises = ({ equipment, muscles, workout, setWorkout, difficulties }) =>
   const [opened, { open, close }] = useDisclosure(false);
   const [defaultSelected, setDefaultSelected] = useState();
   const [exerciseIndex, setExerciseIndex] = useState();
-  const exerciseData = data.filter(d => difficulties.includes(d.difficulty))
+  const exerciseData = difficulties.length
+    ? data.filter(d => difficulties.includes(d.difficulty))
+    : data
 
   useEffect(() => { // first load
     if (exerciseData.length && !workout.length) {

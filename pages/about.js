@@ -6,7 +6,7 @@ export default function Home() {
     <Text fw="bold">About</Text>
     <Text>
       <p>Welcome to Workout.lol! I&apos;m <a href="https://vincentwill.com">Vincent</a>, the creator of this small side project.</p>
-      <p>Workout.lol is a free and open-source platform designed to help you achieve your fitness goals. I stole the exercises and videos from the greate <a href="https://musclewiki.com/">MuscleWiki</a> website.</p>
+      <p>Workout.lol is a free and open-source platform designed to help you achieve your fitness goals. I used the exercises and videos from the awesome <a href="https://musclewiki.com/">MuscleWiki</a> website (with their consent).</p>
       <p>
         Workout.lol is still in beta. Your feedback is highly valued, so please don&apos;t hesitate to reach out to me on <a href="https://twitter.com/wweb_dev">Twitter</a> or via <a href="mailto:info@workout.lol">E-Mail</a> if you encounter any bugs or have specific requests.
       </p>

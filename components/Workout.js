@@ -102,7 +102,7 @@ const Workout = ({ workout, updateProgress, user }) => {
 
   return <div>
     <InfoCard>
-      Disclaimer: All exercises and videos are taken from <a href="https://musclewiki.com/" target="_blank" rel="noopener noreferrer">musclewiki.com</a>
+      Disclaimer: All exercises and videos are provided by <a href="https://musclewiki.com/" target="_blank" rel="noopener noreferrer">musclewiki.com</a>
     </InfoCard>
     { active < workout.length && <Timeline bulletSize={24} lineWidth={2} active={active}>
       { workout.map((exercise, index) => index === active

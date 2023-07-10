@@ -124,7 +124,7 @@ const Exercises = ({ equipment, muscles, workout, setWorkout, difficulties }) =>
   return (
     <div>
       <InfoCard>
-        Disclaimer: All exercises and videos are taken from{" "}
+        Disclaimer: All exercises and videos are provided by{" "}
         <a
           href="https://musclewiki.com/"
           target="_blank"

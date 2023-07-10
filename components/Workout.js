@@ -12,6 +12,7 @@ const RepInput = ({ index, handleChange, sets, prevSet }) => <Input
   maxLength={6}
   w={prevSet ? 90 : 70} mr="sm"
   onChange={e => handleChange(e.target.value, index)}
+  value={sets[index] || ''}
   disabled={index !== 0 && !sets[index - 1]} // enable if prev was filled
   rightSection={prevSet
     ? <Tooltip label={`Last time you did ${prevSet}`} position="top-end" withArrow>
@@ -22,7 +23,7 @@ const RepInput = ({ index, handleChange, sets, prevSet }) => <Input
     : null
   } />
 
-const ActiveExercise = ({ exercise, goNext, handleChange, sets, user }) => {
+const ActiveExercise = ({ exercise, changeStep, handleChange, sets, user, active }) => {
   const workouts = user && (user.workouts || [])
     .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
     .slice(1) // remove first (active) workout
@@ -37,6 +38,10 @@ const ActiveExercise = ({ exercise, goNext, handleChange, sets, user }) => {
   return <>
       <Text mr="xs" fw={500}>{exercise.title}</Text>
       {/* idea - display clock button which triggers eine stop clock */}
+
+      { active !== 0 &&
+        <Button onClick={() => changeStep(-1)} variant="outline" size="xs" my="xs">Prev Exercise</Button>
+      }
 
       <Flex direction={{ base: 'column', xs: 'row' }}>
         { exercise.videos.map(video => <video
@@ -61,7 +66,7 @@ const ActiveExercise = ({ exercise, goNext, handleChange, sets, user }) => {
           <RepInput index={1} handleChange={handleChange} sets={sets} prevSet={prevSets[1]} />
           <RepInput index={2} handleChange={handleChange} sets={sets} prevSet={prevSets[2]} />
         </Flex>
-        <Button onClick={goNext}>Next Exercise</Button>
+        <Button onClick={() => changeStep(1)}>Next Exercise</Button>
       </Flex>
     </>
 }
@@ -81,12 +86,16 @@ const Workout = ({ workout, updateProgress, user }) => {
     setSets(newSets)
   }
 
-  const goNext = () => {
-    updateProgress({ index: active, sets })
-    setActive(active + 1)
-    setSets([])
+  const changeStep = (update) => {
+    const userWorkout = (user.workouts || [])
+      .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))[0]
+    const newIndex = active + update
 
-    if (active === workout.length - 1) {
+    updateProgress({ index: active, sets })
+    setSets((userWorkout.exercises[newIndex] || {}).sets || [])
+    setActive(newIndex)
+
+    if (active === workout.length - 1 && update > 0) {
       party.confetti(confettiDom.current, { count: 40 })
     }
   }
@@ -98,7 +107,7 @@ const Workout = ({ workout, updateProgress, user }) => {
     { active < workout.length && <Timeline bulletSize={24} lineWidth={2} active={active}>
       { workout.map((exercise, index) => index === active
         ? <Timeline.Item key={exercise._id} bullet={colorScheme === 'dark' && <div style={{ background: '#1A1B1E', width: '20px', height: '20px', borderRadius:' 50%' }}></div>}>
-          <ActiveExercise exercise={exercise} handleChange={handleChange} sets={sets} goNext={goNext} user={user}/>
+          <ActiveExercise exercise={exercise} handleChange={handleChange} sets={sets} changeStep={changeStep} user={user} active={active}/>
         </Timeline.Item>
         : <Timeline.Item key={exercise._id} bullet={active > index && <IconCheck />}>
           <Text mr="xs" fw={500}>{exercise.title}</Text>

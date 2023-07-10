@@ -29,7 +29,7 @@ export default function Home() {
 
 
   const deleteWorkout = (id) => {
-    const workouts = user.workouts.filter(w => w.id!== id)
+    const workouts = user.workouts.filter(w => w.id !== id)
     setAccount({ ...user, workouts })
   }
 

@@ -30,7 +30,7 @@ const Equipment = ({ caption, id, equipment, updateEquipment }) => <Button
 const BaseConfigure = ({ equipment, updateEquipment }) => {
   return <>
     <Text fs="italic" ta="center" mt={16} mb={8}>
-      Select everything you want to use in your workout.
+      Select the equipment you have available.
     </Text>
     <Flex
       direction="row"

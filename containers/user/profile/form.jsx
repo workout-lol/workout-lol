@@ -100,6 +100,7 @@ const Form = ({ user }) => {
             alignSelf: "end",
           }}
           color="blue"
+          variant="filled"
         >
           Save
         </Button>

@@ -5,8 +5,10 @@ import { useLocalStorage } from '../utils/useAccount'
 import { Toaster } from 'react-hot-toast';
 
 export default function App(props) {
-  const [{ isLoading, data: colorScheme = 'light' }, setColorScheme] = useLocalStorage('theme')
-  // const colorScheme = colorSchemeStorage.data || 'light'
+  const [{ isLoading, data }, setColorScheme] = useLocalStorage('theme')
+  const colorScheme = typeof data === 'object' // initial local storage value = {}
+    ? 'light'
+    : (data || 'light')
   const toggleColorScheme = (value) =>
     setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
 

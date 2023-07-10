@@ -99,6 +99,7 @@ const Form = ({ user }) => {
           sx={{
             alignSelf: "end",
           }}
+          color="blue"
         >
           Save
         </Button>

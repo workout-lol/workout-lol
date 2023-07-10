@@ -109,7 +109,7 @@ export default function Home() {
         { active === 2 && <Button variant="outline" onClick={saveForLater} disabled={nextDisabled}>
           Save for later
         </Button>}
-        <Button onClick={nextStep} disabled={nextDisabled}>
+        <Button onClick={nextStep} disabled={nextDisabled} color="blue">
           {active === 2 ? 'Start Workout' : 'Continue'}
         </Button>
       </Group> }

@@ -66,7 +66,7 @@ const ActiveExercise = ({ exercise, changeStep, handleChange, sets, user, active
           <RepInput index={1} handleChange={handleChange} sets={sets} prevSet={prevSets[1]} />
           <RepInput index={2} handleChange={handleChange} sets={sets} prevSet={prevSets[2]} />
         </Flex>
-        <Button onClick={() => changeStep(1)} variant="light">Next Exercise</Button>
+        <Button onClick={() => changeStep(1)}>Next Exercise</Button>
       </Flex>
     </>
 }

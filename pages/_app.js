@@ -3,13 +3,11 @@ import Head from 'next/head';
 import { SessionProvider } from "next-auth/react"
 import { MantineProvider } from '@mantine/core'
 import { Toaster } from 'react-hot-toast';
+import { SEO } from '@/constants/seo';
 
 export default function App(props) {
   const { Component, pageProps: { session, ...pageProps }, } = props
-  const description = "A small web application to create workouts based on your available equipment and the muscles you want to train."
-  const link = "https://workout.lol"
-  const title = "Workout.lol | The easiest way to create a workout routine"
-  const imageLink = "https://workout.lol/og.png"
+  const { description, imageLink, link, title } = SEO
   return (
     <>
       <Head>

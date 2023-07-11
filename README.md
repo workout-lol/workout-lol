@@ -55,6 +55,12 @@ Become a supporter by donating on Ko-Fi:
 
 [https://ko-fi.com/workout_lol](https://ko-fi.com/workout_lol)
 
+## Public Metrics
+
+💸 [Cost Breakdown](https://docs.google.com/spreadsheets/d/1BeSvsyMg2c1Fz7RAyO2AC3g_12JAGNLaepGFbN_aYOo/edit#gid=0)
+
+📈 [Analytics](https://analytics.vincentwill.com/share/js1wXvxU/Workout.lol)
+
 ## License
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 

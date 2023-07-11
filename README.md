@@ -47,9 +47,9 @@
 
 ## Supporters
 
-[![medecau](https://github-production-user-asset-6210df.s3.amazonaws.com/43953403/252555917-a6ef8d46-c9ec-46c9-9fff-bdbf3653ddaa.png)](https://ko-fi.com/C1C7RPVB) | [![EL](https://github-production-user-asset-6210df.s3.amazonaws.com/43953403/252555938-e0cd7e03-27da-4b10-8e68-e1060dd05e02.jpg)](https://ko-fi.com/S6S3169OG) | ![alvaro](https://github.com/Vincenius/workout-lol/assets/43953403/f476691e-3739-4a22-8692-a9b33a92a94a)
----|---|---
-medecau | EL | alvaro
+[![medecau](https://github-production-user-asset-6210df.s3.amazonaws.com/43953403/252555917-a6ef8d46-c9ec-46c9-9fff-bdbf3653ddaa.png)](https://ko-fi.com/C1C7RPVB) | [![EL](https://github-production-user-asset-6210df.s3.amazonaws.com/43953403/252555938-e0cd7e03-27da-4b10-8e68-e1060dd05e02.jpg)](https://ko-fi.com/S6S3169OG) | ![alvaro](https://github.com/Vincenius/workout-lol/assets/43953403/f476691e-3739-4a22-8692-a9b33a92a94a | [![devjev](https://github.com/Vincenius/workout-lol/assets/43953403/455dc7f8-e5c7-448d-835e-f87c27f0423c)](https://github.com/devjev)
+---|---|---|---
+medecau | EL | alvaro | devjev
 
 Become a supporter by donating on Ko-Fi:
 

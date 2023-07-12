@@ -17,7 +17,7 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=secret
       - MONGO_INITDB_DATABASE=db
     volumes:
-      - docker/mongo-data:/data/db
+      - ./mongo-data:/data/db
     healthcheck:
       test: echo 'db.stats().ok' | mongosh localhost:27017/test --quiet
       interval: 30s

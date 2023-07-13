@@ -1,13 +1,13 @@
-import { getServerSession } from "next-auth/next"
+import { getServerSession } from 'next-auth/next'
 import NextCors from 'nextjs-cors'
-import { authOptions } from "../auth/[...nextauth]"
+import { authOptions } from '../auth/[...nextauth]'
 import { getUserByQuery, updateUserByQuery } from '../../../lib/db-helper'
 
-const parseUser = user => ({
+const parseUser = (user) => ({
   equipment: user.equipment,
   workouts: user.workouts,
   slug: user.slug,
-  email: user.email
+  email: user.email,
 })
 
 const handler = async (req, res) => {
@@ -16,7 +16,7 @@ const handler = async (req, res) => {
     methods: ['GET', 'PUT'],
     origin: '*',
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-  });
+  })
 
   const session = await getServerSession(req, res, authOptions)
   if (!session || !session.user || !session.user.email) {
@@ -38,7 +38,6 @@ const handler = async (req, res) => {
         res.status(404).json({})
       }
     }
-
   }
 }
 

@@ -14,12 +14,15 @@
 </div>
 
 ## About
-+ A small web application to create workouts based on your available equipment and the muscles you want to train.
+
+- A small web application to create workouts based on your available equipment and the muscles you want to train.
 
 ## Link
-+ You can self-host the project or use the web app on [workout.lol](https://workout.lol).
+
+- You can self-host the project or use the web app on [workout.lol](https://workout.lol).
 
 ## Steps to run it locally
+
 1. Clone the repository to your local machine <br>
    `git clone https://github.com/Vincenius/workout-lol.git`
 2. Navigate to the app directory <br>
@@ -32,24 +35,25 @@
 
    `mongoimport --uri mongodb+srv://<USERNAME>:<PASSWORD>@<CLUSTER_NUMBER>.<URI>.mongodb.net/<DATABASE> --collection <COLLECTION> --type json --file <FILEPATH>`
 
-   4.2 For the <COLLECTION>.bson, you'll have to do this : 
+   4.2 For the <COLLECTION>.bson, you'll have to do this :
    `mongorestore --uri mongodb+srv://<USERNAME>:<PASSWORD>@<CLUSTER_NUMBER>.<URI>.mongodb.net/<DATABASE> --collection <COLLECTION> <FILEPATH>`
-   
+
 5. copy the `.env.dist` file to `.env` and set environment variables as described in the file<br>
 6. Start the local development server <br>
    `npm run dev`
 7. Open your browser to http://localhost:3000
 
 ## Contributors
+
 [![wweb_dev](https://github-production-user-asset-6210df.s3.amazonaws.com/43953403/248202602-f81b0cf6-1394-4ab8-8ddf-4352bd8dbe7d.jpg)](https://twitter.com/wweb_dev)
 [![BradiceanuM](https://github-production-user-asset-6210df.s3.amazonaws.com/43953403/248202501-4d5ae3c3-b83b-4a2c-b7e2-0e38705f5487.jpg)](https://twitter.com/BradiceanuM)
 [![ngthuongdoan](https://github-production-user-asset-6210df.s3.amazonaws.com/43953403/251365548-f713917f-93f9-416b-af75-24bfed8dd2f5.jpg)](https://github.com/ngthuongdoan)
 
 ## Supporters
 
-[![medecau](https://github-production-user-asset-6210df.s3.amazonaws.com/43953403/252555917-a6ef8d46-c9ec-46c9-9fff-bdbf3653ddaa.png)](https://ko-fi.com/C1C7RPVB) | [![EL](https://github-production-user-asset-6210df.s3.amazonaws.com/43953403/252555938-e0cd7e03-27da-4b10-8e68-e1060dd05e02.jpg)](https://ko-fi.com/S6S3169OG) | ![alvaro](https://github.com/Vincenius/workout-lol/assets/43953403/f476691e-3739-4a22-8692-a9b33a92a94a) | [![devjev](https://github-production-user-asset-6210df.s3.amazonaws.com/43953403/252653717-455dc7f8-e5c7-448d-835e-f87c27f0423c.png)](https://github.com/devjev)
----|---|---|---
-medecau | EL | alvaro | devjev
+| [![medecau](https://github-production-user-asset-6210df.s3.amazonaws.com/43953403/252555917-a6ef8d46-c9ec-46c9-9fff-bdbf3653ddaa.png)](https://ko-fi.com/C1C7RPVB) | [![EL](https://github-production-user-asset-6210df.s3.amazonaws.com/43953403/252555938-e0cd7e03-27da-4b10-8e68-e1060dd05e02.jpg)](https://ko-fi.com/S6S3169OG) | ![alvaro](https://github.com/Vincenius/workout-lol/assets/43953403/f476691e-3739-4a22-8692-a9b33a92a94a) | [![devjev](https://github-production-user-asset-6210df.s3.amazonaws.com/43953403/252653717-455dc7f8-e5c7-448d-835e-f87c27f0423c.png)](https://github.com/devjev) |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| medecau                                                                                                                                                            | EL                                                                                                                                                             | alvaro                                                                                                   | devjev                                                                                                                                                           |
 
 Become a supporter by donating on Ko-Fi:
 
@@ -62,5 +66,5 @@ Become a supporter by donating on Ko-Fi:
 📈 [Analytics](https://analytics.vincentwill.com/share/js1wXvxU/Workout.lol)
 
 ## License
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)

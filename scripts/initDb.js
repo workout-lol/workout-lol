@@ -8,7 +8,7 @@ const run = async () => {
 
   let i = 0
   for (let exercise of data) {
-    i++;
+    i++
     try {
       await database.createExercise(exercise)
       console.log('ok', i)
@@ -18,6 +18,6 @@ const run = async () => {
   }
 
   await database.disconnectDb()
-};
+}
 
 run()

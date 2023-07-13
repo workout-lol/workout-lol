@@ -1,4 +1,4 @@
-import useSWR from "swr"
+import useSWR from 'swr'
 
 const fetcher = (slug) =>
   slug

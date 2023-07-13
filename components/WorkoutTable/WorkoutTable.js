@@ -17,12 +17,12 @@ import { muscleToColor } from '../Exercises/utils'
 import styles from './WorkoutTable.module.css'
 
 const ShareIcon = ({ workout = {}, mobile }) => (
-  <Tooltip label='Share workout'>
-    <CopyButton value={`https://workout.lol/?share_id=${workout.id}`}>
-      {({ copied, copy }) => (
-        <>
-          <Popover opened={copied}>
-            <Popover.Target>
+  <CopyButton value={`https://workout.lol/?share_id=${workout.id}`}>
+    {({ copied, copy }) => (
+      <>
+        <Popover opened={copied}>
+          <Popover.Target>
+            <Tooltip label='Share workout'>
               <ActionIcon
                 color='green'
                 variant='subtle'
@@ -31,14 +31,14 @@ const ShareIcon = ({ workout = {}, mobile }) => (
               >
                 <IconShare />
               </ActionIcon>
-            </Popover.Target>
+            </Tooltip>
+          </Popover.Target>
 
-            <Popover.Dropdown>Copied workout link!</Popover.Dropdown>
-          </Popover>
-        </>
-      )}
-    </CopyButton>
-  </Tooltip>
+          <Popover.Dropdown>Copied workout link!</Popover.Dropdown>
+        </Popover>
+      </>
+    )}
+  </CopyButton>
 )
 
 const WorkoutTable = ({ workouts, deleteWorkout, viewOnly = false }) => {

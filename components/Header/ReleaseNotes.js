@@ -3,7 +3,7 @@ import { Indicator, ActionIcon, Modal, Text } from '@mantine/core'
 import { IconBell } from '@tabler/icons-react'
 import { useLocalStorage } from '../../utils/useAccount'
 
-const releaseNotesDate = '2023-07-07T07:22:47.260Z'
+const releaseNotesDate = '2023-07-13T07:24:20.623Z'
 const dateString = new Date(releaseNotesDate).toLocaleDateString()
 
 const IconContainer = ({ children, lastVisit }) =>
@@ -36,16 +36,11 @@ const ReleaseNotes = () => {
         onClose={() => setOpened(false)}
         title={`What's New: ${dateString}`}
       >
-        <Text fw={700}>1. Dark Mode</Text>
+        <Text fw={700}>Share workouts</Text>
         <Text mb='sm'>
-          As every good web app - workout.lol now has a dark mode. Just press
-          the small moon icon in the header to enable it 🌘.
-        </Text>
-
-        <Text fw={700}>2. Difficulty Bug fix</Text>
-        <Text mb='sm'>
-          There was a small bug when no difficulties were selected. It is fixed
-          now 🛠️.
+          All registered users are now able to share their workouts. Use the
+          share button next to each workouts on your profile. This will copy a
+          link to your workout, which you can then share with your friends.
         </Text>
 
         {/* <Text mb="sm">

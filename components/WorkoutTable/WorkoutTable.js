@@ -12,17 +12,23 @@ import {
   CopyButton,
 } from '@mantine/core'
 import { IconTrash, IconRepeat, IconShare } from '@tabler/icons-react'
+import { useSession } from 'next-auth/react'
 import { muscleToColor } from '../Exercises/utils'
 import styles from './WorkoutTable.module.css'
 
-const ShareIcon = ({ workout = {} }) => (
+const ShareIcon = ({ workout = {}, mobile }) => (
   <Tooltip label='Share workout'>
     <CopyButton value={`https://workout.lol/?share_id=${workout.id}`}>
       {({ copied, copy }) => (
         <>
           <Popover opened={copied}>
             <Popover.Target>
-              <ActionIcon color='green' variant='subtle' onClick={copy}>
+              <ActionIcon
+                color='green'
+                variant='subtle'
+                onClick={copy}
+                mr={mobile ? 'md' : 0}
+              >
                 <IconShare />
               </ActionIcon>
             </Popover.Target>
@@ -37,6 +43,9 @@ const ShareIcon = ({ workout = {} }) => (
 
 const WorkoutTable = ({ workouts, deleteWorkout, viewOnly = false }) => {
   const { colorScheme } = useMantineColorScheme()
+  const { data: session } = useSession()
+  const isLoggedIn = session && session.user && session.user.email
+
   return (
     <>
       <Table striped className={styles.mobileHide}>
@@ -73,9 +82,11 @@ const WorkoutTable = ({ workouts, deleteWorkout, viewOnly = false }) => {
               </td>
               {!viewOnly && (
                 <>
-                  <td>
-                    <ShareIcon workout={w} />
-                  </td>
+                  {isLoggedIn && (
+                    <td>
+                      <ShareIcon workout={w} />
+                    </td>
+                  )}
                   <td>
                     <Link href={`/?repeat_id=${w.id}`}>
                       <Tooltip label='Repeat workout'>
@@ -126,13 +137,10 @@ const WorkoutTable = ({ workouts, deleteWorkout, viewOnly = false }) => {
 
               {!viewOnly && (
                 <Flex>
-                  <ShareIcon workout={w} />
-                  <Link
-                    href={`/?repeat_id=${w.id}`}
-                    style={{ marginRight: '1em' }}
-                  >
+                  {isLoggedIn && <ShareIcon workout={w} mobile={true} />}
+                  <Link href={`/?repeat_id=${w.id}`}>
                     <Tooltip label='Repeat workout'>
-                      <ActionIcon color='blue' variant='subtle'>
+                      <ActionIcon color='blue' variant='subtle' mr='sm'>
                         <IconRepeat />
                       </ActionIcon>
                     </Tooltip>

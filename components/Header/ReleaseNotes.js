@@ -39,7 +39,7 @@ const ReleaseNotes = () => {
         <Text fw={700}>Share workouts</Text>
         <Text mb='sm'>
           All registered users are now able to share their workouts. Use the
-          share button next to each workouts on your profile. This will copy a
+          share button next to each workout on your profile. This will copy a
           link to your workout, which you can then share with your friends.
         </Text>
 

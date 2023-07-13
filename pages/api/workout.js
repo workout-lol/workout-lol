@@ -1,61 +1,23 @@
-import { ObjectId } from 'mongodb'
-import NextCors from 'nextjs-cors'
-import { getExercisesByAggregation } from '../../lib/db-helper'
-
-export const getQuery = match => ([
-  {
-    '$addFields': {
-      'mainMuscle': {
-        '$arrayElemAt': [
-          '$targets', 0
-        ]
-      }
-    }
-  }, {
-    '$match': { '$and': [
-        ...match, {
-          'category': {
-            '$nin': [
-              'Yoga',
-              'TRX',
-              'Medicine Ball',
-              'Machine',
-              'Cables',
-              'Stretches' // todo re-add and sort
-            ]
-          }
-        }, {
-          'difficulty': {
-            '$nin': [
-              'Yoga'
-            ]
-          }
-        }
-      ]
-    }
-  }
-])
+import { getUserByQuery } from '../../lib/db-helper'
 
 const handler = async (req, res) => {
-  if (req.method === 'GET') {
-    // get by ids via POST, bc it might get to long for header query param
-    // const { id } = req.query
-    // const query = getQuery([
-    //   {
-    //     _id: {
-    //       $in: ids.map(e => new ObjectId(e))
-    //     }
-    //   }
-    // ])
-    // const workouts = await getExercisesByAggregation(query)
-    console.log( req.query)
+  if (req.method === 'GET' && req.query.id) {
+    const [user] = await getUserByQuery({ 'workouts.id': req.query.id })
 
-    res.status(200).json({})
-  }
-  else {
+    if (!user) {
+      res.status(404).json({
+        error: {
+          message: 'Workout not found',
+          details: `The requested workout could not be found. This may occur if the workout does not exist or has been deleted by its creator.`,
+        },
+      })
+    } else {
+      const workout = user.workouts.find((w) => w.id === req.query.id)
+      res.status(200).json(workout)
+    }
+  } else {
     res.status(404).send()
   }
 }
 
 export default handler
-

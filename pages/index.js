@@ -24,10 +24,9 @@ export default function Home() {
   const shareWorkoutId = router.query && router.query.share_id
   const { data: shareWorkout, isLoading } = useWorkout(shareWorkoutId)
 
-  console.log(repeatWorkout, shareWorkout)
-
   const [active, setActive] = useState(0)
   const [difficulties, setDifficulties] = useState([])
+  const [error, setError] = useState()
   const nextStep = () => {
     if (active === 2) {
       saveWorkout()
@@ -49,24 +48,37 @@ export default function Home() {
   const [muscles, setMuscles] = useState([])
   const [workout, setWorkout] = useState([])
 
+  const initializeWorkout = (prevWorkout) => {
+    setWorkout(
+      prevWorkout.exercises.map((e) => ({
+        ...e,
+        completed: false,
+        sets: [],
+      }))
+    )
+    setMuscles([...new Set(prevWorkout.exercises.map((e) => e.mainMuscle))])
+    setActive(2)
+  }
+
+  const clearUrl = () => {
+    const { pathname, query } = router
+    delete router.query.repeat_id
+    delete router.query.share_id
+    router.replace({ pathname, query }, undefined, { shallow: true })
+  }
+
   useEffect(() => {
     if (repeatWorkout && !workout.length) {
-      setWorkout(
-        repeatWorkout.exercises.map((e) => ({
-          ...e,
-          completed: false,
-          sets: [],
-        }))
-      )
-      setMuscles([...new Set(repeatWorkout.exercises.map((e) => e.mainMuscle))])
-      setActive(2)
-
-      // const { pathname, query } = router
-      // delete router.query.repeat_id
-      // delete router.query.share_id ?
-      // router.replace({ pathname, query }, undefined, { shallow: true })
+      initializeWorkout(repeatWorkout)
+      clearUrl()
+    } else if (shareWorkout && !shareWorkout.error && !workout.length) {
+      initializeWorkout(shareWorkout)
+      clearUrl()
+    } else if (shareWorkout && shareWorkout.error) {
+      setError(shareWorkout.error)
+      clearUrl()
     }
-  }, [repeatWorkout, workout, router])
+  }, [repeatWorkout, shareWorkout, workout, router])
 
   const updateEquipment = (update) => {
     setAccount({ ...user, equipment: update })
@@ -114,7 +126,7 @@ export default function Home() {
     (active === 2 && workout.length === 0)
 
   return (
-    <Layout>
+    <Layout isFetching={isLoading} error={error} setError={setError}>
       <Stepper active={active} onStepClick={jumpToStep} breakpoint='sm'>
         <Stepper.Step label='Equipment' description='Select your equipment'>
           <Equipment {...{ equipment, updateEquipment }} />

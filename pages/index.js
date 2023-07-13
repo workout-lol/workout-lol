@@ -9,6 +9,7 @@ import Exercises from '../components/Exercises/Exercises'
 import Workout from '../components/Workout'
 import Layout from '../components/Layout/Layout'
 import useAccount from '../utils/useAccount'
+import useWorkout from '../utils/useWorkout'
 
 export default function Home() {
   const router = useRouter()
@@ -16,8 +17,14 @@ export default function Home() {
   const { data: user = {} } = account
 
   const equipment = user.equipment || []
-  const repeatWorkoutId = router.query && router.query.w_id
+  const repeatWorkoutId = router.query && router.query.repeat_id
   const repeatWorkout = (user.workouts || []).find(w => w.id === repeatWorkoutId)
+
+  const shareWorkoutId = router.query && router.query.share_id
+  const { data: shareWorkout, isLoading } = useWorkout(shareWorkoutId)
+
+  console.log(repeatWorkout, shareWorkout)
+
   const [active, setActive] = useState(0);
   const [difficulties, setDifficulties] = useState([])
   const nextStep = () => {
@@ -47,9 +54,10 @@ export default function Home() {
       setMuscles([...new Set(repeatWorkout.exercises.map(e => e.mainMuscle))])
       setActive(2)
 
-      const { pathname, query } = router
-      delete router.query.w_id
-      router.replace({ pathname, query }, undefined, { shallow: true })
+      // const { pathname, query } = router
+      // delete router.query.repeat_id
+      // delete router.query.share_id ?
+      // router.replace({ pathname, query }, undefined, { shallow: true })
     }
   }, [repeatWorkout, workout, router])
 

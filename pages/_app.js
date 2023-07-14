@@ -43,7 +43,35 @@ export default function App(props) {
         <meta property='og:site_name' content='workout.lol' />
         <meta property='og:description' content={description} />
         <meta property='og:url' content={link} />
-        <meta property='og:type' content='article' />
+
+        <meta name='application-name' content={title}></meta>
+        <meta name='apple-mobile-web-app-capable' content='yes'></meta>
+        <meta
+          name='apple-mobile-web-app-status-bar-style'
+          content='default'
+        ></meta>
+        <meta name='apple-mobile-web-app-title' content={title} />
+        <meta name='format-detection' content='telephone=no' />
+        <meta name='mobile-web-app-capable' content='yes' />
+        <meta name='msapplication-config' content='/icons/browserconfig.xml' />
+        <meta name='msapplication-TileColor' content='#efd36c' />
+        <meta name='msapplication-tap-highlight' content='no' />
+        <meta name='theme-color' content='#efd36c' />
+
+        <link rel='apple-touch-icon' href='/icons/logo.png' />
+        <link
+          rel='apple-touch-icon'
+          sizes='384x384'
+          href='/icons/logo-384x384.png'
+        />
+        <link
+          rel='apple-touch-icon'
+          sizes='192x192'
+          href='/icons/logo-192x192.png'
+        />
+        <link rel='manifest' href='/manifest.json' />
+        <link rel='mask-icon' href='/icons/logo.png' color='#efd36c' />
+        <link rel='shortcut icon' href='/favicon.ico' />
 
         <script
           async

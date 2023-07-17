@@ -15,4 +15,7 @@ const nextConfig = withPWA({
   },
 })
 
-module.exports = nextConfig
+module.exports = {
+  nextConfig,
+  output: 'standalone',
+}

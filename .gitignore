@@ -42,6 +42,9 @@ scripts/logs
 .vscode/
 android/
 
+
+docker/mongo-data
+
 # pwa generated files
 public/sw.js
 public/workbox-*.js

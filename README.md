@@ -43,6 +43,15 @@
    `npm run dev`
 7. Open your browser to http://localhost:3000
 
+## Steps to run it with docker
+1. Clone the repository to your local machine <br>
+   `git clone https://github.com/Vincenius/workout-lol.git`
+2. Copy the `.env.docker` file to `.env` and set environment variables as described in the file (do not modify the `MONGODB_URI` if you wish to use the mongodb container) <br>
+3. Run the docker compose file at the root of the project <br>
+   `docker compose -f docker/docker-compose.yml up -d --build`
+4. Wait for the applications to be up (`docker ps` to get the status) <br>
+5. Open your browser to http://localhost:3000
+
 ## Contributors
 
 [![wweb_dev](https://github-production-user-asset-6210df.s3.amazonaws.com/43953403/248202602-f81b0cf6-1394-4ab8-8ddf-4352bd8dbe7d.jpg)](https://twitter.com/wweb_dev)

@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from "react"
-import { Text, TextInput, Button, Flex } from "@mantine/core"
-import { IconUser } from "@tabler/icons-react"
-import useAccount from "../../../utils/useAccount"
-import slugify from "slugify"
-import Link from "next/link"
-import toast from "react-hot-toast"
+import React, { useEffect, useState } from 'react'
+import { Text, TextInput, Button, Flex } from '@mantine/core'
+import { IconUser } from '@tabler/icons-react'
+import useAccount from '../../../utils/useAccount'
+import slugify from 'slugify'
+import Link from 'next/link'
+import toast from 'react-hot-toast'
 
 const SLUG_MIN_LENGTH = 3
 const SLUG_MAX_LENGTH = 64
 const slugifyOptions = {
-  replacement: "-",
+  replacement: '-',
   lower: true,
   strict: true,
   trim: true,
-  locale: "en",
+  locale: 'en',
 }
 const Form = ({ user }) => {
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
-  const [slug, setSlug] = useState(user.slug || "")
-  const [originalSlug, setOriginalSlug] = useState(user.slug || "")
+  const [slug, setSlug] = useState(user.slug || '')
+  const [originalSlug, setOriginalSlug] = useState(user.slug || '')
   const slugified = slugify(slug, slugifyOptions)
 
   useEffect(() => {
@@ -41,8 +41,8 @@ const Form = ({ user }) => {
       const data = { slug }
 
       fetch(`/api/user/${originalSlug}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       })
         .then((r) =>
@@ -50,14 +50,14 @@ const Form = ({ user }) => {
         )
         .then((res) => {
           if (res.status === 200) {
-            toast.success("The username has been updated.")
+            toast.success('The username has been updated.')
             setIsLoading(false)
             setError(null)
             setOriginalSlug(slug)
             return
           }
           if (res.status === 409) {
-            toast.error("Oops ! The username is already taken.")
+            toast.error('Oops ! The username is already taken.')
             setError({
               slug: `The username ${slug} is already taken.`,
             })
@@ -73,11 +73,11 @@ const Form = ({ user }) => {
   }
   return (
     <form onSubmit={submitForm} style={{ marginBottom: 20 }}>
-      <Flex align="center" mb="xs">
+      <Flex align='center' mb='xs'>
         <TextInput
-          name="slug"
-          placeholder="i-love-workout"
-          label="Username"
+          name='slug'
+          placeholder='i-love-workout'
+          label='Username'
           disabled={isLoading}
           withAsterisk
           onChange={(event) => {
@@ -86,18 +86,18 @@ const Form = ({ user }) => {
           }}
           value={slug}
           required
-          icon={<IconUser size="0.8rem" />}
+          icon={<IconUser size='0.8rem' />}
           minLength={SLUG_MIN_LENGTH}
           maxLength={SLUG_MAX_LENGTH}
           error={error && error.slug}
         />
         <Button
-          ml="sm"
-          type="submit"
+          ml='sm'
+          type='submit'
           loading={isLoading}
           disabled={isLoading || slug === originalSlug}
           sx={{
-            alignSelf: "end",
+            alignSelf: 'end',
           }}
         >
           Save
@@ -105,21 +105,21 @@ const Form = ({ user }) => {
         <Link
           href={`/u/${originalSlug}`}
           style={{
-            alignSelf: "end",
-            cursor: "pointer",
+            alignSelf: 'end',
+            cursor: 'pointer',
 
-            "&:hover": {
-              textDecoration: "underline",
-              cursor: "pointer",
+            '&:hover': {
+              textDecoration: 'underline',
+              cursor: 'pointer',
             },
           }}
         >
           <Button
-            ml="sm"
-            variant="outline"
+            ml='sm'
+            variant='outline'
             sx={{
-              alignSelf: "end",
-              cursor: "pointer",
+              alignSelf: 'end',
+              cursor: 'pointer',
             }}
           >
             View my profile
@@ -129,13 +129,13 @@ const Form = ({ user }) => {
 
       {slug !== originalSlug && (
         <Flex>
-          <Text size="sm" color="gray">
+          <Text size='sm' color='gray'>
             Your username will be <strong>{slugified}</strong>
           </Text>
         </Flex>
       )}
       {error && !error.slug && (
-        <Text color="red" mb="lg">
+        <Text color='red' mb='lg'>
           An unexpected Error occured. Please try again or contact support.
         </Text>
       )}

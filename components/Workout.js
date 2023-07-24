@@ -61,11 +61,13 @@ const ExerciseVideo = ({ video, sx, ...rest }) => {
     <>
       <AspectRatio
         ratio={16 / 9}
-        w={250}
+        // w={250}
         sx={{
           margin: '.5em 2em 1em 0',
           borderRadius: '0.25rem',
           overflow: 'hidden',
+          cursor: 'pointer',
+          width: '100%',
           ...sx,
         }}
         {...rest}

@@ -1,27 +1,57 @@
-import React from 'react'
-import { ActionIcon, Popover } from '@mantine/core'
+import React, { useState } from 'react'
+import {
+  ActionIcon,
+  AspectRatio,
+  LoadingOverlay,
+  Modal,
+  Popover,
+} from '@mantine/core'
 import { IconVideo } from '@tabler/icons-react'
 
 const VideoIcon = ({ url }) => {
-  return <Popover position="bottom" shadow="md">
-    <Popover.Target>
-      <ActionIcon variant="outline" color="blue" size="sm">
-        <IconVideo size="1rem" />
+  const [opened, setOpened] = useState(false)
+  const [isReady, setIsReady] = useState(false)
+
+  function handleVideoReady() {
+    setIsReady(true)
+  }
+
+  return (
+    <>
+      <ActionIcon
+        variant='outline'
+        color='blue'
+        size='sm'
+        onClick={() => setOpened(true)}
+      >
+        <IconVideo size='1rem' />
       </ActionIcon>
-    </Popover.Target>
-    <Popover.Dropdown p={0}>
-      <video
-        playsInline
-        muted
-        autoPlay
-        loop
-        width="auto"
-        height="130px"
-        style={{ margin: '0', borderRadius: '0.25rem', marginBottom: '-5px' }}
-        src={url}>
-      </video>
-    </Popover.Dropdown>
-  </Popover>
+      <Modal
+        opened={opened}
+        onClose={() => setOpened(false)}
+        centered
+        withCloseButton={false}
+        size='lg'
+        styles={{
+          body: {
+            padding: 0,
+          },
+        }}
+      >
+        <LoadingOverlay visible={!isReady} />
+        <AspectRatio ratio={16 / 9}>
+          <video
+            playsInline
+            muted
+            autoPlay
+            loop
+            src={url}
+            onLoadedData={handleVideoReady}
+          ></video>
+        </AspectRatio>
+      </Modal>
+    </>
+  )
 }
 
 export default VideoIcon

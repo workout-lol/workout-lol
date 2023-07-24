@@ -7,78 +7,86 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
   const dark = colorScheme === 'dark'
 
   useEffect(() => {
-    const parentElement = document.getElementById('muscle-illustration');
+    const parentElement = document.getElementById('muscle-illustration')
 
-    const activeElements = parentElement.querySelectorAll(`.${styles.active}`);
+    const activeElements = parentElement.querySelectorAll(`.${styles.active}`)
     activeElements.forEach((element) => {
-      element.classList.remove(styles.active);
+      element.classList.remove(styles.active)
     })
 
     muscles.forEach((muscle) => {
-      const elements = parentElement.querySelectorAll(`[data-elem="${muscle}"]`);
+      const elements = parentElement.querySelectorAll(`[data-elem="${muscle}"]`)
 
       elements.forEach((element) => {
-        element.classList.add(styles.active);
-      });
-    });
+        element.classList.add(styles.active)
+      })
+    })
   }, [muscles])
 
   useEffect(() => {
-    const parentElement = document.getElementById('muscle-illustration');
-    const enabledElements = parentElement.querySelectorAll(`.${styles.enabled}`);
+    const parentElement = document.getElementById('muscle-illustration')
+    const enabledElements = parentElement.querySelectorAll(`.${styles.enabled}`)
     enabledElements.forEach((element) => {
-      element.classList.remove(styles.enabled);
+      element.classList.remove(styles.enabled)
     })
 
     exerciseCount.forEach(({ _id: muscle }) => {
-      const elements = parentElement.querySelectorAll(`[data-elem="${muscle}"]`);
+      const elements = parentElement.querySelectorAll(`[data-elem="${muscle}"]`)
 
       elements.forEach((element) => {
-        element.classList.add(styles.enabled);
-      });
-    });
+        element.classList.add(styles.enabled)
+      })
+    })
   }, [exerciseCount])
 
   useEffect(() => {
-    const parentElement = document.getElementById('muscle-illustration');
+    const parentElement = document.getElementById('muscle-illustration')
 
     const handleHover = (event) => {
-      const dataElemValue = event.target.dataset.elem;
-      const elements = parentElement.querySelectorAll(`.${styles.muscle}[data-elem="${dataElemValue}"]`);
+      const dataElemValue = event.target.dataset.elem
+      const elements = parentElement.querySelectorAll(
+        `.${styles.muscle}[data-elem="${dataElemValue}"]`
+      )
 
       elements.forEach((element) => {
-        element.classList.toggle(styles.hover);
-      });
-    };
+        element.classList.toggle(styles.hover)
+      })
+    }
 
     const handleClick = (event) => {
-      const dataElemValue = event.target.dataset.elem;
+      const dataElemValue = event.target.dataset.elem
       const isEnabled = event.target.classList.contains(styles.enabled)
       if (dataElemValue && isEnabled) {
         toggleMuscle(dataElemValue)
       }
     }
 
-    parentElement.addEventListener('mouseover', handleHover);
-    parentElement.addEventListener('mouseout', handleHover);
-    parentElement.addEventListener('click', handleClick);
+    parentElement.addEventListener('mouseover', handleHover)
+    parentElement.addEventListener('mouseout', handleHover)
+    parentElement.addEventListener('click', handleClick)
     // // Clean up the event listeners when the component unmounts
     return () => {
-      parentElement.removeEventListener('mouseover', handleHover);
-      parentElement.removeEventListener('mouseout', handleHover);
-      parentElement.removeEventListener('click', handleClick);
-    };
-  });
+      parentElement.removeEventListener('mouseover', handleHover)
+      parentElement.removeEventListener('mouseout', handleHover)
+      parentElement.removeEventListener('click', handleClick)
+    }
+  })
 
-  return <svg
-    id="muscle-illustration"
-    xmlns="http://www.w3.org/2000/svg"
-    width="5.94444in" height="5.13333in"
-    viewBox="0 0 535 462"
-    className={!dark ? styles.illustration : styles.illustrationDark}>
-  <path id="path14"
-        fill="#f5f5f5" stroke="black" strokeWidth="1"
-        d="M 440.43,458.85
+  return (
+    <svg
+      id='muscle-illustration'
+      xmlns='http://www.w3.org/2000/svg'
+      width='5.94444in'
+      height='5.13333in'
+      viewBox='0 0 535 462'
+      className={!dark ? styles.illustration : styles.illustrationDark}
+    >
+      <path
+        id='path14'
+        fill='#f5f5f5'
+        stroke='black'
+        strokeWidth='1'
+        d='M 440.43,458.85
            C 437.78,458.84 435.54,458.42 433.79,457.57
              433.79,457.57 432.77,457.08 432.77,457.08
              432.77,457.08 432.29,456.06 432.29,456.06
@@ -449,11 +457,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              453.53,453.95 453.01,454.66 452.38,455.35
              450.03,457.91 443.94,458.85 440.43,458.85
              440.43,458.85 440.43,458.85 440.43,458.85
-             440.43,458.85 440.43,458.85 440.43,458.85 Z" />
-  <path id="path16"
-      className={styles.muscle} data-elem="Traps"
-        stroke="black" strokeWidth="0"
-        d="M 406.94,81.88
+             440.43,458.85 440.43,458.85 440.43,458.85 Z'
+      />
+      <path
+        id='path16'
+        className={styles.muscle}
+        data-elem='Traps'
+        stroke='black'
+        strokeWidth='0'
+        d='M 406.94,81.88
            C 405.66,78.80 403.68,76.45 400.04,75.90
              395.59,75.23 391.12,74.84 386.69,75.63
              383.08,76.27 379.54,77.36 375.97,78.25
@@ -466,11 +478,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              409.90,138.27 410.14,139.50 410.51,140.99
              410.61,139.02 410.79,137.33 410.77,135.65
              410.67,122.97 410.48,110.28 410.41,97.59
-             410.37,92.08 409.03,86.89 406.94,81.88" />
-  <path id="path18"
-   className={styles.muscle} data-elem="Traps"
-        stroke="black" strokeWidth="0"
-        d="M 424.86,75.58
+             410.37,92.08 409.03,86.89 406.94,81.88'
+      />
+      <path
+        id='path18'
+        className={styles.muscle}
+        data-elem='Traps'
+        stroke='black'
+        strokeWidth='0'
+        d='M 424.86,75.58
            C 421.55,75.92 418.66,76.93 416.95,80.04
              414.97,83.62 413.60,87.52 413.16,91.51
              412.49,97.59 412.33,103.74 412.23,109.87
@@ -484,11 +500,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              445.13,79.45 446.07,79.11 446.96,78.68
              446.97,78.57 446.98,78.46 446.98,78.35
              444.21,77.57 441.46,76.69 438.66,76.03
-             434.10,74.96 429.48,75.11 424.86,75.58" />
-  <path id="path20"
-      className={styles.muscle} data-elem="Lower back"
-        stroke="black" strokeWidth="0"
-        d="M 412.34,201.13
+             434.10,74.96 429.48,75.11 424.86,75.58'
+      />
+      <path
+        id='path20'
+        className={styles.muscle}
+        data-elem='Lower back'
+        stroke='black'
+        strokeWidth='0'
+        d='M 412.34,201.13
            C 412.33,204.02 412.23,206.91 412.21,209.80
              412.20,210.15 412.41,210.50 412.52,210.85
              412.85,210.64 413.29,210.51 413.49,210.21
@@ -505,11 +525,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              412.28,150.18 412.47,154.26 412.45,158.31
              412.42,165.95 412.44,173.58 412.44,181.22
              412.41,181.22 412.38,181.22 412.35,181.22
-             412.35,187.86 412.36,194.49 412.34,201.13" />
-  <path id="path22"
-      className={styles.muscle} data-elem="Lower back"
-        stroke="black" strokeWidth="0"
-        d="M 410.63,151.32
+             412.35,187.86 412.36,194.49 412.34,201.13'
+      />
+      <path
+        id='path22'
+        className={styles.muscle}
+        data-elem='Lower back'
+        stroke='black'
+        strokeWidth='0'
+        d='M 410.63,151.32
            C 410.49,151.32 410.49,146.96 410.13,144.87
              409.76,142.69 408.79,140.61 408.02,138.52
              407.56,137.28 406.89,137.09 405.79,137.79
@@ -526,11 +550,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              409.68,210.53 410.06,210.67 410.37,210.86
              410.50,210.53 410.75,210.20 410.76,209.86
              410.78,209.06 410.64,208.25 410.64,207.44
-             410.63,188.73 410.63,170.03 410.63,151.32" />
-  <path id="path24"
-        className={styles.muscle} data-elem="Lats"
-        stroke="black" strokeWidth="0"
-        d="M 452.92,116.24
+             410.63,188.73 410.63,170.03 410.63,151.32'
+      />
+      <path
+        id='path24'
+        className={styles.muscle}
+        data-elem='Lats'
+        stroke='black'
+        strokeWidth='0'
+        d='M 452.92,116.24
            C 452.92,116.24 452.75,111.80 452.75,111.80
              452.75,111.80 452.74,111.80 452.74,111.80
              452.71,111.52 452.65,111.21 452.55,110.84
@@ -546,11 +574,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              434.04,149.56 437.71,149.46 441.37,147.65
              445.32,145.70 447.79,142.32 449.73,138.50
              452.39,133.25 453.16,127.59 453.20,120.88
-             453.14,119.93 453.06,118.08 452.92,116.24" />
-  <path id="path26"
-        className={styles.muscle} data-elem="Lats"
-        stroke="black" strokeWidth="0"
-        d="M 403.69,137.15
+             453.14,119.93 453.06,118.08 452.92,116.24'
+      />
+      <path
+        id='path26'
+        className={styles.muscle}
+        data-elem='Lats'
+        stroke='black'
+        strokeWidth='0'
+        d='M 403.69,137.15
            C 405.75,134.61 405.91,133.56 404.16,130.82
              401.53,126.69 398.77,122.65 396.09,118.55
              396.09,118.55 394.01,115.00 394.01,115.00
@@ -569,11 +601,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              370.53,132.63 372.41,138.07 375.97,142.87
              378.15,145.81 381.03,147.83 384.60,148.72
              388.07,149.59 391.14,148.39 393.98,146.49
-             397.77,143.96 400.84,140.67 403.69,137.15" />
-  <path id="path28"
-        className={styles.muscle} data-elem="Lats"
-        stroke="black" strokeWidth="0"
-        d="M 451.05,138.61
+             397.77,143.96 400.84,140.67 403.69,137.15'
+      />
+      <path
+        id='path28'
+        className={styles.muscle}
+        data-elem='Lats'
+        stroke='black'
+        strokeWidth='0'
+        d='M 451.05,138.61
            C 450.93,138.58 450.82,138.55 450.71,138.52
              450.53,138.88 450.38,139.24 450.18,139.59
              449.02,141.63 447.96,143.74 446.65,145.68
@@ -584,11 +620,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              438.40,171.16 439.01,170.83 439.51,170.39
              441.99,168.16 443.69,165.37 445.13,162.40
              448.22,156.01 449.70,149.17 450.64,142.19
-             450.80,141.00 450.91,139.80 451.05,138.61" />
-  <path id="path30"
-        className={styles.muscle} data-elem="Lats"
-        stroke="black" strokeWidth="0"
-        d="M 392.64,149.10
+             450.80,141.00 450.91,139.80 451.05,138.61'
+      />
+      <path
+        id='path30'
+        className={styles.muscle}
+        data-elem='Lats'
+        stroke='black'
+        strokeWidth='0'
+        d='M 392.64,149.10
            C 392.27,149.18 392.12,149.19 391.99,149.25
              389.72,150.24 387.35,150.69 384.89,150.56
              382.22,150.41 379.57,149.93 377.87,147.62
@@ -602,11 +642,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              385.11,171.81 385.47,171.64 385.74,170.20
              385.76,170.09 385.77,169.97 385.79,169.86
              386.85,164.12 388.32,158.50 390.74,153.17
-             391.33,151.86 391.95,150.56 392.64,149.10" />
-  <path id="path32"
-        className={styles.muscle} data-elem="Traps"
-        stroke="black" strokeWidth="0"
-        d="M 419.29,75.38
+             391.33,151.86 391.95,150.56 392.64,149.10'
+      />
+      <path
+        id='path32'
+        className={styles.muscle}
+        data-elem='Traps'
+        stroke='black'
+        strokeWidth='0'
+        d='M 419.29,75.38
            C 419.29,75.38 424.79,74.06 424.79,74.06
              424.79,74.06 424.79,74.06 424.79,74.06
              428.21,74.17 431.63,74.14 435.05,74.19
@@ -639,10 +683,14 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              399.33,74.00 404.10,75.42 404.10,75.42
              408.96,79.25 410.94,84.36 411.51,90.45
              412.37,87.37 412.94,84.65 413.89,82.08
-             414.88,79.39 416.88,77.35 419.29,75.38" />
-  <path id="path34" className={styles.empty}
-        stroke="black" strokeWidth="0"
-        d="M 389.54,40.30
+             414.88,79.39 416.88,77.35 419.29,75.38'
+      />
+      <path
+        id='path34'
+        className={styles.empty}
+        stroke='black'
+        strokeWidth='0'
+        d='M 389.54,40.30
            C 389.99,41.24 390.42,42.20 391.03,43.03
              391.30,43.39 392.00,43.57 392.50,43.55
              392.50,43.55 394.11,43.55 394.11,43.55
@@ -674,11 +722,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              391.78,27.17 391.85,28.85 392.01,30.52
              392.01,30.52 389.55,31.22 389.55,31.22
              388.06,31.26 386.60,33.77 387.21,35.14
-             387.98,36.86 388.74,38.59 389.54,40.30" />
-  <path id="path36"
-        className={styles.muscle} data-elem="Lats"
-        stroke="black" strokeWidth="0"
-        d="M 388.14,174.91
+             387.98,36.86 388.74,38.59 389.54,40.30'
+      />
+      <path
+        id='path36'
+        className={styles.muscle}
+        data-elem='Lats'
+        stroke='black'
+        strokeWidth='0'
+        d='M 388.14,174.91
            C 388.01,174.75 387.84,174.60 387.64,174.46
              387.64,174.46 387.63,174.45 387.63,174.45
              387.63,174.45 387.62,174.45 387.62,174.45
@@ -699,11 +751,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              392.56,182.18 391.85,180.15 391.09,178.14
              390.88,177.57 390.63,177.19 390.32,176.99
              390.32,176.99 390.35,176.89 390.35,176.89
-             390.35,176.89 388.14,174.91 388.14,174.91" />
-  <path id="path38"
-        className={styles.muscle} data-elem="Hamstrings"
-        stroke="black" strokeWidth="0"
-        d="M 377.55,225.66
+             390.35,176.89 388.14,174.91 388.14,174.91'
+      />
+      <path
+        id='path38'
+        className={styles.muscle}
+        data-elem='Hamstrings'
+        stroke='black'
+        strokeWidth='0'
+        d='M 377.55,225.66
            C 377.43,221.86 376.90,218.14 374.63,214.79
              373.56,213.23 372.20,211.95 370.22,211.34
              367.86,210.62 366.46,211.20 366.12,213.38
@@ -728,11 +784,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              386.61,240.55 385.99,240.18 384.40,240.64
              383.39,240.94 382.38,241.28 381.39,241.64
              379.65,242.21 375.47,243.31 375.42,240.71
-             376.68,235.77 377.72,230.79 377.55,225.66" />
-  <path id="path40"
-        className={styles.muscle} data-elem="Hamstrings"
-        stroke="black" strokeWidth="0"
-        d="M 383.65,325.91
+             376.68,235.77 377.72,230.79 377.55,225.66'
+      />
+      <path
+        id='path40'
+        className={styles.muscle}
+        data-elem='Hamstrings'
+        stroke='black'
+        strokeWidth='0'
+        d='M 383.65,325.91
            C 384.19,325.50 384.56,325.24 384.91,324.95
              385.95,324.09 386.91,323.13 388.02,322.36
              389.10,321.62 389.30,321.21 388.58,320.11
@@ -741,11 +801,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              382.58,312.11 381.51,314.11 380.44,316.12
              380.01,316.93 380.25,317.62 380.67,318.41
              381.50,319.99 382.19,321.65 382.87,323.29
-             383.19,324.07 383.36,324.90 383.65,325.91" />
-  <path id="path42"
-        className={styles.muscle} data-elem="Glutes"
-        stroke="black" strokeWidth="0"
-        d="M 395.62,188.85
+             383.19,324.07 383.36,324.90 383.65,325.91'
+      />
+      <path
+        id='path42'
+        className={styles.muscle}
+        data-elem='Glutes'
+        stroke='black'
+        strokeWidth='0'
+        d='M 395.62,188.85
            C 395.10,186.99 394.11,186.43 391.89,186.71
              387.21,187.30 383.33,189.20 380.03,191.94
              375.10,196.03 372.10,201.11 369.89,206.57
@@ -757,22 +821,30 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              387.38,237.94 393.17,235.69 398.44,232.59
              403.26,229.74 407.38,226.35 409.86,221.68
              411.17,219.22 411.12,217.20 409.24,214.80
-             403.02,206.79 398.22,198.20 395.62,188.85" />
-  <path id="path44"
-        className={styles.muscle} data-elem="Lats"
-        stroke="black" strokeWidth="0"
-        d="M 374.54,178.09
+             403.02,206.79 398.22,198.20 395.62,188.85'
+      />
+      <path
+        id='path44'
+        className={styles.muscle}
+        data-elem='Lats'
+        stroke='black'
+        strokeWidth='0'
+        d='M 374.54,178.09
            C 375.35,177.34 375.98,176.40 376.84,175.71
              378.25,174.58 379.79,173.60 381.34,172.50
              379.80,170.63 378.26,168.72 376.68,166.84
              376.02,166.06 375.31,166.08 375.12,166.88
              374.28,170.38 373.50,173.89 372.78,177.41
              372.70,177.76 373.02,178.40 373.33,178.53
-             373.63,178.65 374.24,178.37 374.54,178.09" />
-  <path id="path46"
-        className={styles.muscle} data-elem="Calves"
-        stroke="black" strokeWidth="0"
-        d="M 378.79,319.96
+             373.63,178.65 374.24,178.37 374.54,178.09'
+      />
+      <path
+        id='path46'
+        className={styles.muscle}
+        data-elem='Calves'
+        stroke='black'
+        strokeWidth='0'
+        d='M 378.79,319.96
            C 378.38,319.97 377.85,320.51 377.62,320.95
              376.44,323.18 374.52,325.61 373.42,327.88
              370.78,333.40 369.25,335.88 367.29,342.73
@@ -784,11 +856,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              378.36,349.86 379.04,343.93 379.85,338.03
              380.43,333.81 381.25,329.63 381.25,325.35
              381.25,323.72 380.80,322.28 380.00,320.91
-             379.75,320.49 379.19,319.95 378.79,319.96" />
-  <path id="path48"
-        className={styles.muscle} data-elem="Hamstrings"
-        stroke="black" strokeWidth="0"
-        d="M 406.39,232.13
+             379.75,320.49 379.19,319.95 378.79,319.96'
+      />
+      <path
+        id='path48'
+        className={styles.muscle}
+        data-elem='Hamstrings'
+        stroke='black'
+        strokeWidth='0'
+        d='M 406.39,232.13
            C 406.41,231.95 406.41,231.77 406.40,231.60
              406.29,230.62 405.13,230.16 404.41,230.88
              402.47,232.82 399.90,233.86 397.34,234.84
@@ -811,11 +887,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              404.45,304.42 406.08,295.71 406.40,290.10
              406.96,279.95 407.06,266.09 407.64,255.95
              407.73,254.53 406.41,236.96 406.38,235.53
-             406.38,235.53 406.39,232.13 406.39,232.13" />
-  <path id="path50"
-        className={styles.muscle} data-elem="Calves"
-        stroke="black" strokeWidth="0"
-        d="M 391.16,336.61
+             406.38,235.53 406.39,232.13 406.39,232.13'
+      />
+      <path
+        id='path50'
+        className={styles.muscle}
+        data-elem='Calves'
+        stroke='black'
+        strokeWidth='0'
+        d='M 391.16,336.61
            C 391.17,334.59 391.24,331.20 391.35,329.19
              391.44,327.76 391.43,326.32 391.37,324.89
              391.34,324.04 390.70,323.66 389.77,324.05
@@ -829,10 +909,14 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              391.19,380.01 392.88,377.89 393.25,377.24
              395.13,373.95 395.94,371.21 396.20,368.76
              396.77,363.45 396.19,358.46 394.59,353.24
-             392.50,346.48 391.13,344.21 391.16,336.61" />
-  <path id="path52" className={styles.empty}
-        stroke="black" strokeWidth="0"
-        d="M 386.48,416.75
+             392.50,346.48 391.13,344.21 391.16,336.61'
+      />
+      <path
+        id='path52'
+        className={styles.empty}
+        stroke='black'
+        strokeWidth='0'
+        d='M 386.48,416.75
            C 384.13,415.88 379.40,417.50 378.57,419.80
              378.09,421.14 377.53,422.44 376.94,423.74
              376.94,423.74 376.92,423.73 376.92,423.73
@@ -846,11 +930,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              390.42,448.85 390.02,445.04 389.33,439.21
              389.71,436.39 390.08,433.57 390.41,430.74
              390.74,427.81 391.09,424.87 390.37,421.93
-             389.82,419.70 388.93,417.66 386.48,416.75" />
-  <path id="path54"
-        className={styles.muscle} data-elem="Calves"
-        stroke="black" strokeWidth="0"
-        d="M 383.21,380.05
+             389.82,419.70 388.93,417.66 386.48,416.75'
+      />
+      <path
+        id='path54'
+        className={styles.muscle}
+        data-elem='Calves'
+        stroke='black'
+        strokeWidth='0'
+        d='M 383.21,380.05
            C 381.52,378.52 380.53,376.62 379.87,374.54
              379.70,374.02 379.56,373.70 378.79,373.77
              377.59,373.88 376.35,373.87 375.17,373.68
@@ -877,11 +965,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              387.16,408.43 387.04,403.90 387.68,400.96
              388.91,395.27 389.44,391.29 390.71,385.61
              391.09,383.91 391.48,382.20 391.92,380.26
-             388.46,383.07 386.45,382.97 383.21,380.05" />
-  <path id="path56"
-        className={styles.muscle} data-elem="Lats"
-        stroke="black" strokeWidth="0"
-        d="M 431.03,186.03
+             388.46,383.07 386.45,382.97 383.21,380.05'
+      />
+      <path
+        id='path56'
+        className={styles.muscle}
+        data-elem='Lats'
+        stroke='black'
+        strokeWidth='0'
+        d='M 431.03,186.03
            C 434.21,186.80 437.40,187.52 440.48,188.54
              441.32,188.82 442.10,189.23 442.87,189.68
              442.87,189.68 445.13,191.11 445.13,191.11
@@ -902,11 +994,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              432.49,176.89 432.52,176.99 432.52,176.99
              432.21,177.19 431.96,177.57 431.75,178.14
              430.99,180.15 430.27,182.18 429.71,184.24
-             429.36,185.52 429.71,185.71 431.03,186.03" />
-  <path id="path58"
-        className={styles.muscle} data-elem="Hamstrings"
-        stroke="black" strokeWidth="0"
-        d="M 434.82,322.36
+             429.36,185.52 429.71,185.71 431.03,186.03'
+      />
+      <path
+        id='path58'
+        className={styles.muscle}
+        data-elem='Hamstrings'
+        stroke='black'
+        strokeWidth='0'
+        d='M 434.82,322.36
            C 435.93,323.13 436.89,324.09 437.93,324.95
              438.28,325.24 438.65,325.50 439.19,325.91
              439.48,324.90 439.65,324.07 439.97,323.29
@@ -915,22 +1011,30 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              441.33,314.11 440.26,312.11 439.06,309.86
              438.81,310.34 438.69,310.50 438.65,310.67
              437.79,314.07 436.20,317.16 434.26,320.11
-             433.54,321.21 433.74,321.62 434.82,322.36" />
-  <path id="path60"
-        className={styles.muscle} data-elem="Lats"
-        stroke="black" strokeWidth="0"
-        d="M 446.16,166.84
+             433.54,321.21 433.74,321.62 434.82,322.36'
+      />
+      <path
+        id='path60'
+        className={styles.muscle}
+        data-elem='Lats'
+        stroke='black'
+        strokeWidth='0'
+        d='M 446.16,166.84
            C 444.58,168.72 443.04,170.63 441.50,172.50
              443.05,173.60 444.59,174.58 446.00,175.71
              446.86,176.40 447.49,177.34 448.30,178.09
              448.60,178.37 449.21,178.65 449.51,178.53
              449.82,178.40 450.13,177.76 450.06,177.41
              449.34,173.89 448.56,170.38 447.72,166.88
-             447.53,166.08 446.81,166.06 446.16,166.84" />
-  <path id="path62"
-        className={styles.muscle} data-elem="Calves"
-        stroke="black" strokeWidth="0"
-        d="M 445.04,355.80
+             447.53,166.08 446.81,166.06 446.16,166.84'
+      />
+      <path
+        id='path62'
+        className={styles.muscle}
+        data-elem='Calves'
+        stroke='black'
+        strokeWidth='0'
+        d='M 445.04,355.80
            C 445.38,359.38 445.29,363.00 445.58,366.58
              445.81,369.61 447.92,370.87 451.00,370.05
              455.05,368.98 458.08,366.72 458.45,362.45
@@ -942,11 +1046,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              443.65,319.95 443.09,320.49 442.84,320.91
              442.04,322.28 441.59,323.72 441.59,325.35
              441.58,329.63 442.41,333.81 442.99,338.03
-             443.80,343.93 444.48,349.86 445.04,355.80" />
-  <path id="path64"
-        className={styles.muscle} data-elem="Calves"
-        stroke="black" strokeWidth="0"
-        d="M 432.29,380.53
+             443.80,343.93 444.48,349.86 445.04,355.80'
+      />
+      <path
+        id='path64'
+        className={styles.muscle}
+        data-elem='Calves'
+        stroke='black'
+        strokeWidth='0'
+        d='M 432.29,380.53
            C 433.40,381.41 434.63,381.43 435.95,380.70
              439.00,379.01 440.64,376.49 441.69,373.67
              443.04,370.01 443.56,366.26 443.57,362.48
@@ -960,11 +1068,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              431.71,344.21 430.33,346.48 428.25,353.24
              426.65,358.46 426.07,363.45 426.64,368.76
              426.90,371.21 427.71,373.95 429.59,377.24
-             429.96,377.89 431.65,380.01 432.29,380.53" />
-  <path id="path66"
-        className={styles.muscle} data-elem="Glutes"
-        stroke="black" strokeWidth="0"
-        d="M 424.40,232.59
+             429.96,377.89 431.65,380.01 432.29,380.53'
+      />
+      <path
+        id='path66'
+        className={styles.muscle}
+        data-elem='Glutes'
+        stroke='black'
+        strokeWidth='0'
+        d='M 424.40,232.59
            C 429.67,235.69 435.46,237.94 441.58,239.60
              443.95,240.25 445.11,239.44 444.76,237.31
              444.43,234.27 443.96,231.23 443.80,228.18
@@ -976,11 +1088,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              428.73,186.43 427.74,186.99 427.22,188.85
              424.62,198.20 419.82,206.79 413.60,214.80
              411.72,217.20 411.67,219.22 412.98,221.68
-             415.46,226.35 419.58,229.74 424.40,232.59" />
-  <path id="path68"
-        className={styles.muscle} data-elem="Calves"
-        stroke="black" strokeWidth="0"
-        d="M 435.16,400.96
+             415.46,226.35 419.58,229.74 424.40,232.59'
+      />
+      <path
+        id='path68'
+        className={styles.muscle}
+        data-elem='Calves'
+        stroke='black'
+        strokeWidth='0'
+        d='M 435.16,400.96
            C 435.80,403.90 435.68,408.43 434.86,411.24
              434.49,412.51 434.02,413.76 433.62,415.03
              433.48,415.49 433.43,415.97 433.28,416.72
@@ -1007,11 +1123,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              442.31,376.62 441.32,378.52 439.63,380.05
              436.39,382.97 434.38,383.07 430.92,380.26
              431.36,382.20 431.74,383.91 432.13,385.61
-             433.40,391.29 433.93,395.27 435.16,400.96" />
-  <path id="path70"
-        className={styles.muscle} data-elem="Hamstrings"
-        stroke="black" strokeWidth="0"
-        d="M 429.00,338.21
+             433.40,391.29 433.93,395.27 435.16,400.96'
+      />
+      <path
+        id='path70'
+        className={styles.muscle}
+        data-elem='Hamstrings'
+        stroke='black'
+        strokeWidth='0'
+        d='M 429.00,338.21
            C 429.23,338.17 429.46,338.13 429.69,338.09
              429.69,338.09 429.79,327.66 429.79,327.66
              429.83,326.68 429.94,325.69 429.92,324.71
@@ -1034,10 +1154,14 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              415.78,266.09 415.88,279.95 416.44,290.10
              416.76,295.71 418.39,304.42 420.34,311.87
              422.59,320.53 423.36,325.91 427.66,335.88
-             428.14,336.65 428.55,337.43 429.00,338.21" />
-  <path id="path72" className={styles.empty}
-        stroke="black" strokeWidth="0"
-        d="M 461.30,429.86
+             428.14,336.65 428.55,337.43 429.00,338.21'
+      />
+      <path
+        id='path72'
+        className={styles.empty}
+        stroke='black'
+        strokeWidth='0'
+        d='M 461.30,429.86
            C 458.70,429.23 451.30,429.96 449.61,430.09
              447.70,427.42 447.55,427.30 445.92,423.73
              445.92,423.73 445.90,423.74 445.90,423.74
@@ -1051,11 +1175,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              451.12,452.01 451.98,450.52 453.10,449.37
              456.83,445.50 463.09,446.82 466.76,442.64
              468.79,440.32 468.99,437.86 468.16,435.70
-             467.07,432.86 464.17,430.56 461.30,429.86" />
-  <path id="path74"
-        className={styles.muscle} data-elem="Hamstrings"
-        stroke="black" strokeWidth="0"
-        d="M 441.45,241.64
+             467.07,432.86 464.17,430.56 461.30,429.86'
+      />
+      <path
+        id='path74'
+        className={styles.muscle}
+        data-elem='Hamstrings'
+        stroke='black'
+        strokeWidth='0'
+        d='M 441.45,241.64
            C 440.46,241.28 439.45,240.94 438.44,240.64
              436.85,240.18 436.23,240.55 436.10,242.07
              435.85,244.93 435.62,247.81 435.72,250.66
@@ -1080,10 +1208,14 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              450.64,211.95 449.28,213.23 448.21,214.79
              445.94,218.14 445.41,221.86 445.29,225.66
              445.12,230.79 446.16,235.77 447.42,240.71
-             447.37,243.31 443.19,242.21 441.45,241.64" />
-  <path id="path76" className={styles.empty}
-        stroke="black" strokeWidth="0"
-        d="M 529.77,230.19
+             447.37,243.31 443.19,242.21 441.45,241.64'
+      />
+      <path
+        id='path76'
+        className={styles.empty}
+        stroke='black'
+        strokeWidth='0'
+        d='M 529.77,230.19
            C 526.63,228.79 523.50,227.38 521.44,224.54
              520.75,223.60 519.98,222.71 519.24,221.81
              517.12,219.22 514.71,216.93 511.48,215.59
@@ -1131,11 +1263,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              518.19,230.97 519.03,231.73 519.86,232.00
              521.91,232.67 524.05,233.10 526.17,233.54
              527.85,233.90 529.25,233.38 530.26,232.04
-             531.00,231.06 530.90,230.69 529.77,230.19" />
-  <path id="path78"
-        className={styles.muscle} data-elem="Triceps"
-        stroke="black" strokeWidth="0"
-        d="M 478.44,132.70
+             531.00,231.06 530.90,230.69 529.77,230.19'
+      />
+      <path
+        id='path78'
+        className={styles.muscle}
+        data-elem='Triceps'
+        stroke='black'
+        strokeWidth='0'
+        d='M 478.44,132.70
            C 477.17,132.60 475.86,132.25 474.77,131.75
              472.83,130.86 471.05,129.76 468.96,128.62
              468.99,129.09 469.03,129.35 469.03,129.62
@@ -1159,11 +1295,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              481.50,153.43 482.01,153.04 482.10,152.23
              482.37,149.83 482.84,147.43 482.80,145.04
              482.73,141.31 482.10,137.61 480.56,134.07
-             480.20,133.25 479.68,132.80 478.44,132.70" />
-  <path id="path80"
-        className={styles.muscle} data-elem="Forearms"
-        stroke="black" strokeWidth="0"
-        d="M 483.49,158.01
+             480.20,133.25 479.68,132.80 478.44,132.70'
+      />
+      <path
+        id='path80'
+        className={styles.muscle}
+        data-elem='Forearms'
+        stroke='black'
+        strokeWidth='0'
+        d='M 483.49,158.01
            C 487.25,161.99 490.63,166.23 493.44,170.86
              493.60,171.12 493.87,171.31 494.09,171.54
              494.21,171.47 494.32,171.41 494.44,171.34
@@ -1171,11 +1311,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              484.87,148.12 484.72,148.13 484.56,148.13
              484.36,148.53 484.08,148.91 483.99,149.33
              483.55,151.44 483.18,153.57 482.75,155.68
-             482.57,156.59 482.84,157.32 483.49,158.01" />
-  <path id="path82"
-        className={styles.muscle} data-elem="Triceps"
-        stroke="black" strokeWidth="0"
-        d="M 466.43,137.75
+             482.57,156.59 482.84,157.32 483.49,158.01'
+      />
+      <path
+        id='path82'
+        className={styles.muscle}
+        data-elem='Triceps'
+        stroke='black'
+        strokeWidth='0'
+        d='M 466.43,137.75
            C 466.50,137.55 466.56,137.34 466.58,137.14
              466.79,135.14 466.99,133.14 467.13,131.75
              466.82,129.82 466.57,128.54 466.41,127.25
@@ -1185,11 +1329,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              453.64,109.93 453.63,110.30 453.63,110.63
              453.65,115.00 453.56,119.37 453.74,123.73
              454.00,129.73 456.89,134.72 461.26,139.01
-             463.57,141.28 465.45,140.75 466.43,137.75" />
-  <path id="path84"
-        className={styles.muscle} data-elem="Triceps"
-        stroke="black" strokeWidth="0"
-        d="M 465.31,111.50
+             463.57,141.28 465.45,140.75 466.43,137.75'
+      />
+      <path
+        id='path84'
+        className={styles.muscle}
+        data-elem='Triceps'
+        stroke='black'
+        strokeWidth='0'
+        d='M 465.31,111.50
            C 464.02,111.23 462.74,110.93 461.05,110.56
              461.36,111.45 461.48,112.00 461.74,112.50
              463.17,115.34 464.82,118.12 466.05,121.01
@@ -1199,11 +1347,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              480.15,125.50 479.92,123.17 479.22,120.94
              478.34,118.21 477.07,115.56 475.92,112.89
              475.60,112.16 475.11,111.53 473.87,111.81
-             470.99,112.47 468.13,112.09 465.31,111.50" />
-  <path id="path86"
-        className={styles.muscle} data-elem="Forearms"
-        stroke="black" strokeWidth="0"
-        d="M 507.15,213.55
+             470.99,112.47 468.13,112.09 465.31,111.50'
+      />
+      <path
+        id='path86'
+        className={styles.muscle}
+        data-elem='Forearms'
+        stroke='black'
+        strokeWidth='0'
+        d='M 507.15,213.55
            C 508.29,213.77 508.51,213.26 508.10,212.14
              505.85,206.00 503.54,199.88 501.38,193.70
              500.36,190.76 499.65,187.71 498.76,184.71
@@ -1245,11 +1397,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              474.38,178.75 477.47,186.07 481.08,193.19
              484.92,200.78 488.96,208.28 492.89,215.84
              493.38,216.80 493.97,216.75 494.83,216.36
-             498.72,214.58 502.56,212.64 507.15,213.55" />
-  <path id="path88"
-        className={styles.muscle} data-elem="Shoulders"
-        stroke="black" strokeWidth="0"
-        d="M 439.90,90.50
+             498.72,214.58 502.56,212.64 507.15,213.55'
+      />
+      <path
+        id='path88'
+        className={styles.muscle}
+        data-elem='Shoulders'
+        stroke='black'
+        strokeWidth='0'
+        d='M 439.90,90.50
            C 439.84,91.35 440.15,91.90 440.89,92.40
              442.70,93.63 444.57,94.83 446.15,96.32
              449.24,99.22 452.02,102.46 455.17,105.28
@@ -1260,10 +1416,14 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              472.41,97.39 470.83,92.89 467.44,89.27
              463.08,84.64 457.68,81.65 451.71,79.64
              450.88,79.36 449.84,79.33 448.98,79.53
-             444.58,80.55 440.20,85.93 439.90,90.50" />
-  <path id="path90" className={styles.empty}
-        stroke="black" strokeWidth="0"
-        d="M 325.88,218.03
+             444.58,80.55 440.20,85.93 439.90,90.50'
+      />
+      <path
+        id='path90'
+        className={styles.empty}
+        stroke='black'
+        strokeWidth='0'
+        d='M 325.88,218.03
            C 323.79,217.00 321.69,215.97 319.51,215.14
              318.73,214.85 317.94,214.75 317.16,214.80
              317.19,214.75 317.20,214.72 317.20,214.72
@@ -1311,11 +1471,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              322.96,239.01 323.85,236.98 324.75,234.68
              325.63,232.42 326.86,230.06 326.46,227.61
              326.52,224.80 326.60,221.99 326.60,219.18
-             326.59,218.78 326.23,218.20 325.88,218.03" />
-  <path id="path92"
-        className={styles.muscle} data-elem="Forearms"
-        stroke="black" strokeWidth="0"
-        d="M 328.92,170.86
+             326.59,218.78 326.23,218.20 325.88,218.03'
+      />
+      <path
+        id='path92'
+        className={styles.muscle}
+        data-elem='Forearms'
+        stroke='black'
+        strokeWidth='0'
+        d='M 328.92,170.86
            C 331.73,166.23 335.11,161.99 338.87,158.01
              339.52,157.32 339.80,156.59 339.61,155.68
              339.18,153.57 338.81,151.44 338.37,149.33
@@ -1323,11 +1487,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              337.65,148.13 337.49,148.12 337.33,148.12
              332.60,155.30 328.07,162.55 327.92,171.34
              328.04,171.41 328.15,171.47 328.27,171.54
-             328.49,171.31 328.76,171.12 328.92,170.86" />
-  <path id="path94"
-        className={styles.muscle} data-elem="Forearms"
-        stroke="black" strokeWidth="0"
-        d="M 355.58,156.70
+             328.49,171.31 328.76,171.12 328.92,170.86'
+      />
+      <path
+        id='path94'
+        className={styles.muscle}
+        data-elem='Forearms'
+        stroke='black'
+        strokeWidth='0'
+        d='M 355.58,156.70
            C 355.59,156.41 355.36,155.93 355.14,155.87
              354.89,155.80 354.44,156.04 354.24,156.27
              353.09,157.56 351.97,158.87 350.89,160.21
@@ -1367,11 +1535,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              344.89,186.07 347.98,178.75 350.48,171.20
              350.94,169.78 351.85,168.51 352.52,167.15
              353.47,165.20 354.59,163.29 355.25,161.25
-             355.71,159.84 355.54,158.22 355.58,156.70" />
-  <path id="path96"
-        className={styles.muscle} data-elem="Shoulders"
-        stroke="black" strokeWidth="0"
-        d="M 349.30,110.19
+             355.71,159.84 355.54,158.22 355.58,156.70'
+      />
+      <path
+        id='path96'
+        className={styles.muscle}
+        data-elem='Shoulders'
+        stroke='black'
+        strokeWidth='0'
+        d='M 349.30,110.19
            C 350.53,110.32 351.75,110.47 352.37,110.54
              358.40,110.63 363.20,108.85 367.19,105.28
              370.34,102.46 373.12,99.22 376.21,96.32
@@ -1382,11 +1554,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              364.68,81.65 359.28,84.64 354.93,89.27
              351.53,92.89 349.96,97.39 349.10,102.16
              348.71,104.40 348.57,106.68 348.31,108.93
-             348.22,109.69 348.54,110.10 349.30,110.19" />
-  <path id="path98"
-        className={styles.muscle} data-elem="Triceps"
-        stroke="black" strokeWidth="0"
-        d="M 368.73,110.63
+             348.22,109.69 348.54,110.10 349.30,110.19'
+      />
+      <path
+        id='path98'
+        className={styles.muscle}
+        data-elem='Triceps'
+        stroke='black'
+        strokeWidth='0'
+        d='M 368.73,110.63
            C 368.73,110.30 368.72,109.93 368.58,109.64
              368.32,109.10 367.99,108.23 367.62,108.19
              366.96,108.13 365.95,108.40 365.59,108.87
@@ -1396,11 +1572,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              355.80,137.34 355.86,137.55 355.93,137.75
              356.91,140.75 358.79,141.28 361.10,139.01
              365.47,134.72 368.36,129.73 368.62,123.73
-             368.80,119.37 368.71,115.00 368.73,110.63" />
-  <path id="path100"
-        className={styles.muscle} data-elem="Triceps"
-        stroke="black" strokeWidth="0"
-        d="M 341.97,153.63
+             368.80,119.37 368.71,115.00 368.73,110.63'
+      />
+      <path
+        id='path100'
+        className={styles.muscle}
+        data-elem='Triceps'
+        stroke='black'
+        strokeWidth='0'
+        d='M 341.97,153.63
            C 343.63,153.95 345.24,154.50 346.81,155.06
              347.35,155.25 347.82,155.34 348.23,155.27
              348.23,155.27 351.89,155.00 351.89,155.00
@@ -1424,11 +1604,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              342.68,132.80 342.16,133.25 341.80,134.07
              340.26,137.61 339.63,141.31 339.56,145.04
              339.52,147.43 340.00,149.83 340.26,152.23
-             340.35,153.04 340.86,153.43 341.97,153.63" />
-  <path id="path102"
-        className={styles.muscle} data-elem="Triceps"
-        stroke="black" strokeWidth="0"
-        d="M 346.98,130.86
+             340.35,153.04 340.86,153.43 341.97,153.63'
+      />
+      <path
+        id='path102'
+        className={styles.muscle}
+        data-elem='Triceps'
+        stroke='black'
+        strokeWidth='0'
+        d='M 346.98,130.86
            C 350.90,128.13 354.53,125.22 356.32,121.01
              357.54,118.12 359.19,115.34 360.62,112.50
              360.88,112.00 361.00,111.45 361.31,110.56
@@ -1438,10 +1622,14 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              345.29,115.56 344.01,118.21 343.15,120.94
              342.44,123.17 342.21,125.50 341.84,127.79
              341.75,128.33 341.89,128.91 342.05,129.45
-             342.72,131.80 344.74,132.42 346.98,130.86" />
-  <path id="path104"
-        fill="#f5f5f5" stroke="black" strokeWidth="1"
-        d="M 163.05,461.45
+             342.72,131.80 344.74,132.42 346.98,130.86'
+      />
+      <path
+        id='path104'
+        fill='#f5f5f5'
+        stroke='black'
+        strokeWidth='1'
+        d='M 163.05,461.45
            C 158.90,461.45 155.08,459.99 151.36,456.99
              151.06,456.75 150.77,456.51 150.48,456.27
              149.03,455.08 147.89,454.14 146.36,453.53
@@ -1757,11 +1945,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              178.15,449.36 179.90,451.95 179.27,454.54
              178.93,455.92 177.99,457.03 176.62,457.64
              172.09,459.65 167.66,461.45 163.05,461.45
-             163.05,461.45 163.05,461.45 163.05,461.45 Z" />
-  <path id="path106"
-        className={styles.muscle} data-elem="Chest"
-        stroke="black" strokeWidth="0"
-        d="M 128.00,122.83
+             163.05,461.45 163.05,461.45 163.05,461.45 Z'
+      />
+      <path
+        id='path106'
+        className={styles.muscle}
+        data-elem='Chest'
+        stroke='black'
+        strokeWidth='0'
+        d='M 128.00,122.83
            C 132.18,123.49 136.25,123.15 140.14,121.62
              145.31,119.58 149.70,116.28 153.73,112.49
              154.47,111.79 154.70,110.91 154.40,109.98
@@ -1771,11 +1963,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              131.78,85.18 127.51,86.71 123.26,88.29
              119.12,89.83 116.94,93.03 116.62,97.33
              116.32,101.36 116.14,105.41 116.31,109.44
-             116.56,115.50 121.62,121.81 128.00,122.83" />
-  <path id="path108"
-        className={styles.muscle} data-elem="Abdominals"
-        stroke="black" strokeWidth="0"
-        d="M 124.01,216.93
+             116.56,115.50 121.62,121.81 128.00,122.83'
+      />
+      <path
+        id='path108'
+        className={styles.muscle}
+        data-elem='Abdominals'
+        stroke='black'
+        strokeWidth='0'
+        d='M 124.01,216.93
            C 127.66,211.39 129.67,205.22 131.16,198.84
              132.43,193.41 133.29,187.93 133.58,182.34
              133.72,179.75 132.62,178.53 130.03,178.85
@@ -1785,11 +1981,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              115.32,197.53 115.09,210.03 115.16,210.04
              115.16,213.81 115.16,217.59 115.17,221.37
              115.17,222.78 115.33,222.87 116.71,222.46
-             119.83,221.53 122.21,219.67 124.01,216.93" />
-  <path id="path110"
-        className={styles.muscle} data-elem="Abdominals"
-        stroke="black" strokeWidth="0"
-        d="M 113.13,184.90
+             119.83,221.53 122.21,219.67 124.01,216.93'
+      />
+      <path
+        id='path110'
+        className={styles.muscle}
+        data-elem='Abdominals'
+        stroke='black'
+        strokeWidth='0'
+        d='M 113.13,184.90
            C 112.97,183.30 112.15,182.24 110.54,181.81
              109.81,181.62 109.12,181.24 108.39,181.05
              105.40,180.29 102.42,179.47 99.40,178.88
@@ -1799,11 +1999,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              108.73,221.02 111.32,222.00 114.28,222.83
              114.33,221.88 114.41,221.20 114.40,220.52
              114.36,212.51 114.42,204.50 114.22,196.50
-             114.12,192.63 113.51,188.77 113.13,184.90" />
-  <path id="path112"
-        className={styles.muscle} data-elem="Obliques"
-        stroke="black" strokeWidth="0"
-        d="M 125.27,217.07
+             114.12,192.63 113.51,188.77 113.13,184.90'
+      />
+      <path
+        id='path112'
+        className={styles.muscle}
+        data-elem='Obliques'
+        stroke='black'
+        strokeWidth='0'
+        d='M 125.27,217.07
            C 125.09,217.39 125.10,217.82 125.02,218.20
              125.41,218.20 125.87,218.33 126.20,218.18
              127.38,217.66 128.62,217.18 129.65,216.44
@@ -1815,11 +2019,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              144.93,173.36 142.29,176.69 138.49,178.77
              136.30,179.97 135.45,181.45 135.46,183.84
              135.49,188.83 134.47,193.68 133.09,198.45
-             131.22,204.97 128.54,211.14 125.27,217.07" />
-  <path id="path114"
-        className={styles.muscle} data-elem="Obliques"
-        stroke="black" strokeWidth="0"
-        d="M 97.07,214.29
+             131.22,204.97 128.54,211.14 125.27,217.07'
+      />
+      <path
+        id='path114'
+        className={styles.muscle}
+        data-elem='Obliques'
+        stroke='black'
+        strokeWidth='0'
+        d='M 97.07,214.29
            C 99.04,215.92 101.02,217.56 103.56,218.25
              103.88,218.33 104.26,218.19 104.62,218.15
              104.55,217.83 104.56,217.48 104.41,217.20
@@ -1832,11 +2040,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              81.20,168.73 80.92,169.26 80.80,169.83
              80.19,172.85 79.48,175.86 79.05,178.91
              78.44,183.21 78.48,187.48 80.18,191.62
-             83.88,200.63 89.61,208.11 97.07,214.29" />
-  <path id="path116"
-        className={styles.muscle} data-elem="Abdominals"
-        stroke="black" strokeWidth="0"
-        d="M 115.63,177.74
+             83.88,200.63 89.61,208.11 97.07,214.29'
+      />
+      <path
+        id='path116'
+        className={styles.muscle}
+        data-elem='Abdominals'
+        stroke='black'
+        strokeWidth='0'
+        d='M 115.63,177.74
            C 115.65,179.88 116.89,180.73 118.92,180.17
              122.26,179.25 125.60,178.34 128.98,177.57
              130.39,177.25 131.45,176.62 132.17,175.41
@@ -1847,11 +2059,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              115.57,162.52 115.56,162.87 115.56,163.21
              115.56,165.58 115.56,167.94 115.56,170.30
              115.58,170.30 115.60,170.30 115.62,170.30
-             115.62,172.78 115.61,175.26 115.63,177.74" />
-  <path id="path118"
-        className={styles.muscle} data-elem="Abdominals"
-        stroke="black" strokeWidth="0"
-        d="M 100.30,177.50
+             115.62,172.78 115.61,175.26 115.63,177.74'
+      />
+      <path
+        id='path118'
+        className={styles.muscle}
+        data-elem='Abdominals'
+        stroke='black'
+        strokeWidth='0'
+        d='M 100.30,177.50
            C 103.85,178.35 107.39,179.28 110.91,180.25
              112.64,180.72 113.82,179.88 113.85,178.06
              113.94,173.64 114.15,169.23 114.12,164.81
@@ -1861,11 +2077,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              100.98,158.71 97.81,160.00 94.91,161.93
              94.06,162.51 93.60,163.18 93.79,164.24
              94.25,168.25 95.34,172.06 97.50,175.52
-             98.15,176.56 99.06,177.20 100.30,177.50" />
-  <path id="path120"
-        className={styles.muscle} data-elem="Abdominals"
-        stroke="black" strokeWidth="0"
-        d="M 115.59,154.23
+             98.15,176.56 99.06,177.20 100.30,177.50'
+      />
+      <path
+        id='path120'
+        className={styles.muscle}
+        data-elem='Abdominals'
+        stroke='black'
+        strokeWidth='0'
+        d='M 115.59,154.23
            C 115.61,155.82 115.88,156.08 117.49,156.12
              119.51,156.17 121.53,156.18 123.55,156.17
              127.52,156.13 131.13,157.28 134.46,159.41
@@ -1877,11 +2097,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              119.44,141.18 118.79,141.18 118.15,141.25
              116.35,141.43 115.94,141.83 115.65,143.62
              115.59,143.95 115.56,144.30 115.56,144.64
-             115.56,147.84 115.54,151.03 115.59,154.23" />
-  <path id="path122"
-        className={styles.muscle} data-elem="Abdominals"
-        stroke="black" strokeWidth="0"
-        d="M 113.79,142.93
+             115.56,147.84 115.54,151.03 115.59,154.23'
+      />
+      <path
+        id='path122'
+        className={styles.muscle}
+        data-elem='Abdominals'
+        stroke='black'
+        strokeWidth='0'
+        d='M 113.79,142.93
            C 113.63,141.98 113.08,141.52 112.09,141.38
              106.45,140.63 101.57,142.46 97.19,145.83
              96.35,146.47 95.51,147.41 95.17,148.38
@@ -1893,11 +2117,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              108.47,156.09 108.47,156.11 108.47,156.13
              109.84,156.13 111.22,156.13 112.59,156.13
              113.34,156.13 113.81,155.81 113.89,155.00
-             114.31,150.97 114.46,146.95 113.79,142.93" />
-  <path id="path124"
-        className={styles.muscle} data-elem="Abdominals"
-        stroke="black" strokeWidth="0"
-        d="M 115.58,129.73
+             114.31,150.97 114.46,146.95 113.79,142.93'
+      />
+      <path
+        id='path124'
+        className={styles.muscle}
+        data-elem='Abdominals'
+        stroke='black'
+        strokeWidth='0'
+        d='M 115.58,129.73
            C 115.56,132.16 115.55,134.60 115.56,137.04
              115.56,137.96 116.07,138.54 116.95,138.74
              117.51,138.87 118.08,138.94 118.64,138.99
@@ -1909,11 +2137,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              126.04,124.51 123.71,123.59 121.40,122.62
              120.53,122.26 119.80,122.52 119.30,123.26
              118.12,125.03 116.97,126.83 115.85,128.63
-             115.66,128.94 115.59,129.36 115.58,129.73" />
-  <path id="path126"
-        className={styles.muscle} data-elem="Abdominals"
-        stroke="black" strokeWidth="0"
-        d="M 113.76,128.72
+             115.66,128.94 115.59,129.36 115.58,129.73'
+      />
+      <path
+        id='path126'
+        className={styles.muscle}
+        data-elem='Abdominals'
+        stroke='black'
+        strokeWidth='0'
+        d='M 113.76,128.72
            C 112.63,126.83 111.41,124.99 110.18,123.16
              109.73,122.48 109.05,122.30 108.26,122.60
              106.58,123.22 104.88,123.78 103.23,124.46
@@ -1926,11 +2158,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              108.79,139.30 110.53,139.08 112.26,138.76
              113.68,138.50 114.03,138.01 114.04,136.57
              114.04,134.51 114.05,132.45 114.03,130.39
-             114.02,129.83 114.03,129.18 113.76,128.72" />
-  <path id="path128"
-        className={styles.muscle} data-elem="Obliques"
-        stroke="black" strokeWidth="0"
-        d="M 134.28,178.67
+             114.02,129.83 114.03,129.18 113.76,128.72'
+      />
+      <path
+        id='path128'
+        className={styles.muscle}
+        data-elem='Obliques'
+        stroke='black'
+        strokeWidth='0'
+        d='M 134.28,178.67
            C 135.80,178.08 137.44,177.63 138.74,176.72
              142.62,174.02 145.10,170.17 146.78,165.84
              147.58,163.80 147.29,161.70 146.02,159.83
@@ -1940,11 +2176,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              138.19,156.68 138.78,161.29 138.44,165.97
              138.11,170.47 136.77,174.56 133.37,177.76
              133.19,177.94 133.06,178.17 132.66,178.69
-             133.43,178.69 133.91,178.81 134.28,178.67" />
-  <path id="path130"
-        className={styles.muscle} data-elem="Obliques"
-        stroke="black" strokeWidth="0"
-        d="M 96.36,177.87
+             133.43,178.69 133.91,178.81 134.28,178.67'
+      />
+      <path
+        id='path130'
+        className={styles.muscle}
+        data-elem='Obliques'
+        stroke='black'
+        strokeWidth='0'
+        d='M 96.36,177.87
            C 93.31,175.14 91.86,171.59 91.33,167.64
              90.63,162.39 91.23,157.23 92.57,152.14
              92.68,151.73 92.71,151.30 92.78,150.88
@@ -1955,10 +2195,14 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              84.09,168.66 85.19,170.60 86.47,172.39
              88.38,175.05 90.74,177.28 93.94,178.36
              94.81,178.66 95.73,179.06 96.79,178.44
-             96.58,178.17 96.50,177.99 96.36,177.87" />
-  <path id="path132" className={styles.empty}
-        stroke="black" strokeWidth="0"
-        d="M 104.03,61.80
+             96.58,178.17 96.50,177.99 96.36,177.87'
+      />
+      <path
+        id='path132'
+        className={styles.empty}
+        stroke='black'
+        strokeWidth='0'
+        d='M 104.03,61.80
            C 103.06,61.49 102.16,60.94 100.91,60.35
              100.91,60.35 100.05,62.86 100.05,62.86
              99.87,65.02 99.64,67.18 99.55,69.35
@@ -1968,10 +2212,14 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              112.76,85.17 113.26,84.85 113.30,83.65
              113.35,82.13 113.38,80.59 113.19,79.09
              112.70,75.08 111.25,71.36 109.79,67.61
-             108.67,64.75 106.98,62.76 104.03,61.80" />
-  <path id="path134" className={styles.empty}
-        stroke="black" strokeWidth="0"
-        d="M 116.30,83.66
+             108.67,64.75 106.98,62.76 104.03,61.80'
+      />
+      <path
+        id='path134'
+        className={styles.empty}
+        stroke='black'
+        strokeWidth='0'
+        d='M 116.30,83.66
            C 116.30,84.79 116.73,85.05 117.64,84.53
              118.89,83.82 120.25,83.13 121.20,82.09
              123.48,79.60 125.62,76.96 127.68,74.28
@@ -1981,10 +2229,14 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              126.72,61.24 125.11,61.94 123.59,62.79
              122.75,63.25 121.75,63.79 121.34,64.56
              119.17,68.65 117.42,72.93 116.64,77.52
-             116.30,79.53 116.30,81.61 116.30,83.66" />
-  <path id="path136" className={styles.empty}
-        stroke="black" strokeWidth="0"
-        d="M 109.84,65.48
+             116.30,79.53 116.30,81.61 116.30,83.66'
+      />
+      <path
+        id='path136'
+        className={styles.empty}
+        stroke='black'
+        strokeWidth='0'
+        d='M 109.84,65.48
            C 111.79,70.01 113.40,74.63 113.80,79.59
              113.83,79.97 113.93,80.36 114.10,80.69
              114.24,80.96 114.53,81.15 114.76,81.38
@@ -1993,11 +2245,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              116.19,74.83 117.46,70.78 119.13,66.84
              119.45,66.09 119.73,65.33 120.03,64.57
              120.03,64.57 109.53,64.57 109.53,64.57
-             109.63,64.87 109.71,65.19 109.84,65.48" />
-  <path id="path138"
-        className={styles.muscle} data-elem="Chest"
-        stroke="black" strokeWidth="0"
-        d="M 115.70,124.93
+             109.63,64.87 109.71,65.19 109.84,65.48'
+      />
+      <path
+        id='path138'
+        className={styles.muscle}
+        data-elem='Chest'
+        stroke='black'
+        strokeWidth='0'
+        d='M 115.70,124.93
            C 116.59,123.70 117.47,122.46 118.32,121.20
              118.61,120.76 118.81,120.26 119.06,119.77
              118.96,119.45 118.93,119.13 118.77,118.89
@@ -2006,11 +2262,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              112.62,115.92 111.67,117.44 110.74,118.97
              110.55,119.30 110.53,119.94 110.72,120.25
              111.72,121.86 112.79,123.44 113.91,124.98
-             114.45,125.72 115.15,125.69 115.70,124.93" />
-  <path id="path140"
-        className={styles.muscle} data-elem="Biceps"
-        stroke="black" strokeWidth="0"
-        d="M 49.72,164.55
+             114.45,125.72 115.15,125.69 115.70,124.93'
+      />
+      <path
+        id='path140'
+        className={styles.muscle}
+        data-elem='Biceps'
+        stroke='black'
+        strokeWidth='0'
+        d='M 49.72,164.55
            C 49.74,165.40 49.90,166.25 50.02,167.32
              50.27,167.02 50.37,166.93 50.44,166.81
              51.85,164.42 53.07,161.88 54.71,159.66
@@ -2021,11 +2281,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              58.64,114.39 51.92,114.52 46.86,125.43
              44.67,130.15 44.23,132.58 43.93,137.71
              43.78,140.37 44.59,145.02 46.86,147.85
-             49.98,151.75 49.59,159.48 49.72,164.55" />
-  <path id="path142"
-        className={styles.muscle} data-elem="Shoulders"
-        stroke="black" strokeWidth="0"
-        d="M 53.58,115.39
+             49.98,151.75 49.59,159.48 49.72,164.55'
+      />
+      <path
+        id='path142'
+        className={styles.muscle}
+        data-elem='Shoulders'
+        stroke='black'
+        strokeWidth='0'
+        d='M 53.58,115.39
            C 55.17,114.35 57.67,113.27 59.35,112.42
              61.32,111.43 66.87,110.54 68.88,109.64
              72.80,107.90 72.98,109.06 75.32,104.96
@@ -2037,11 +2301,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              59.33,88.28 55.15,92.97 53.87,96.29
              51.53,102.38 52.08,109.59 51.85,116.06
              51.84,116.23 51.93,116.40 52.02,116.76
-             52.40,116.42 53.28,115.59 53.58,115.39" />
-  <path id="path144"
-        className={styles.muscle} data-elem="Forearms"
-        stroke="black" strokeWidth="0"
-        d="M 62.31,163.12
+             52.40,116.42 53.28,115.59 53.58,115.39'
+      />
+      <path
+        id='path144'
+        className={styles.muscle}
+        data-elem='Forearms'
+        stroke='black'
+        strokeWidth='0'
+        d='M 62.31,163.12
            C 63.71,160.46 64.19,157.56 63.39,154.58
              63.25,154.08 62.91,153.46 62.49,153.27
              62.20,153.14 61.50,153.55 61.18,153.90
@@ -2054,11 +2322,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              39.39,220.02 39.65,219.45 39.88,218.87
              43.00,211.29 47.28,204.56 50.36,196.97
              53.06,190.34 56.21,182.49 58.55,175.72
-             60.09,171.29 60.12,167.29 62.31,163.12" />
-  <path id="path146"
-        className={styles.muscle} data-elem="Forearms"
-        stroke="black" strokeWidth="0"
-        d="M 27.08,209.38
+             60.09,171.29 60.12,167.29 62.31,163.12'
+      />
+      <path
+        id='path146'
+        className={styles.muscle}
+        data-elem='Forearms'
+        stroke='black'
+        strokeWidth='0'
+        d='M 27.08,209.38
            C 30.78,205.15 33.99,200.56 36.87,195.74
              43.13,185.26 47.45,174.13 48.40,161.83
              48.65,158.50 48.73,155.22 47.21,152.10
@@ -2067,11 +2339,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              33.32,189.39 30.42,199.31 25.84,208.81
              25.52,209.49 25.10,210.11 24.73,210.76
              24.85,210.87 24.96,210.98 25.08,211.10
-             25.75,210.53 26.50,210.03 27.08,209.38" />
-  <path id="path148"
-        className={styles.muscle} data-elem="Biceps"
-        stroke="black" strokeWidth="0"
-        d="M 62.71,151.36
+             25.75,210.53 26.50,210.03 27.08,209.38'
+      />
+      <path
+        id='path148'
+        className={styles.muscle}
+        data-elem='Biceps'
+        stroke='black'
+        strokeWidth='0'
+        d='M 62.71,151.36
            C 63.28,151.31 63.91,150.47 64.20,149.99
              64.90,148.86 66.62,146.19 67.19,144.99
              70.04,139.00 70.97,137.01 72.13,130.96
@@ -2081,11 +2357,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              70.77,117.31 68.74,128.01 68.38,129.24
              66.83,134.62 65.35,140.02 63.86,145.42
              63.43,146.98 63.07,148.57 62.68,150.14
-             62.81,150.23 62.54,151.37 62.71,151.36" />
-  <path id="path150"
-        className={styles.muscle} data-elem="Biceps"
-        stroke="black" strokeWidth="0"
-        d="M 160.10,114.96
+             62.81,150.23 62.54,151.37 62.71,151.36'
+      />
+      <path
+        id='path150'
+        className={styles.muscle}
+        data-elem='Biceps'
+        stroke='black'
+        strokeWidth='0'
+        d='M 160.10,114.96
            C 160.64,121.59 161.87,128.11 163.78,134.48
              164.74,137.69 165.80,140.87 166.86,144.05
              168.73,149.65 171.29,154.88 174.82,159.66
@@ -2096,11 +2376,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              184.94,145.02 185.76,140.37 185.60,137.71
              185.30,132.58 184.87,130.15 182.68,125.43
              177.61,114.52 170.89,114.39 163.98,111.93
-             161.46,111.02 159.88,112.29 160.10,114.96" />
-  <path id="path152"
-        className={styles.muscle} data-elem="Shoulders"
-        stroke="black" strokeWidth="0"
-        d="M 145.59,86.76
+             161.46,111.02 159.88,112.29 160.10,114.96'
+      />
+      <path
+        id='path152'
+        className={styles.muscle}
+        data-elem='Shoulders'
+        stroke='black'
+        strokeWidth='0'
+        d='M 145.59,86.76
            C 146.96,92.75 151.13,99.57 154.22,104.96
              156.56,109.06 156.74,107.90 160.65,109.64
              162.67,110.54 168.21,111.43 170.18,112.42
@@ -2112,11 +2396,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              162.73,82.66 159.09,81.86 152.93,80.92
              152.27,80.82 151.35,80.76 150.79,81.09
              149.27,82.00 147.83,83.08 146.44,84.18
-             145.66,84.81 145.36,85.71 145.59,86.76" />
-  <path id="path154"
-        className={styles.muscle} data-elem="Forearms"
-        stroke="black" strokeWidth="0"
-        d="M 184.01,182.16
+             145.66,84.81 145.36,85.71 145.59,86.76'
+      />
+      <path
+        id='path154'
+        className={styles.muscle}
+        data-elem='Forearms'
+        stroke='black'
+        strokeWidth='0'
+        d='M 184.01,182.16
            C 182.46,177.62 180.92,173.06 179.01,168.66
              177.34,164.81 174.77,161.45 172.04,158.24
              170.81,156.80 169.62,155.31 168.35,153.90
@@ -2129,11 +2417,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              189.89,219.45 190.15,220.02 190.40,220.59
              190.54,220.56 190.68,220.53 190.83,220.50
              190.89,219.68 191.04,218.87 191.01,218.05
-             190.61,205.71 187.98,193.80 184.01,182.16" />
-  <path id="path156"
-        className={styles.muscle} data-elem="Forearms"
-        stroke="black" strokeWidth="0"
-        d="M 182.33,152.10
+             190.61,205.71 187.98,193.80 184.01,182.16'
+      />
+      <path
+        id='path156'
+        className={styles.muscle}
+        data-elem='Forearms'
+        stroke='black'
+        strokeWidth='0'
+        d='M 182.33,152.10
            C 180.80,155.22 180.88,158.50 181.14,161.83
              182.08,174.13 186.40,185.26 192.66,195.74
              195.54,200.56 198.76,205.15 202.46,209.38
@@ -2142,11 +2434,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              204.43,210.11 204.02,209.49 203.69,208.81
              199.12,199.31 196.21,189.39 195.39,178.81
              194.62,168.95 191.67,159.76 185.65,151.73
-             184.29,149.90 183.34,150.04 182.33,152.10" />
-  <path id="path158"
-        className={styles.muscle} data-elem="Biceps"
-        stroke="black" strokeWidth="0"
-        d="M 166.82,151.36
+             184.29,149.90 183.34,150.04 182.33,152.10'
+      />
+      <path
+        id='path158'
+        className={styles.muscle}
+        data-elem='Biceps'
+        stroke='black'
+        strokeWidth='0'
+        d='M 166.82,151.36
            C 166.99,151.37 166.72,150.23 166.86,150.14
              166.46,148.57 166.10,146.98 165.67,145.42
              164.18,140.02 162.71,134.62 161.15,129.24
@@ -2156,11 +2452,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              156.95,125.74 157.27,130.26 157.40,130.96
              158.57,137.01 159.49,139.00 162.34,144.99
              162.91,146.19 164.64,148.86 165.33,149.99
-             165.62,150.47 166.25,151.31 166.82,151.36" />
-  <path id="path160"
-        className={styles.muscle} data-elem="Chest"
-        stroke="black" strokeWidth="0"
-        d="M 114.71,95.58
+             165.62,150.47 166.25,151.31 166.82,151.36'
+      />
+      <path
+        id='path160'
+        className={styles.muscle}
+        data-elem='Chest'
+        stroke='black'
+        strokeWidth='0'
+        d='M 114.71,95.58
            C 114.89,95.35 115.00,95.27 115.02,95.18
              115.68,92.72 116.69,90.44 118.43,88.53
              118.64,88.30 118.61,87.85 118.69,87.50
@@ -2169,10 +2469,14 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              111.81,87.38 111.31,87.52 110.84,87.54
              111.01,87.97 111.09,88.49 111.37,88.83
              112.74,90.47 113.65,92.33 114.26,94.36
-             114.37,94.74 114.53,95.10 114.71,95.58" />
-  <path id="path162" className={styles.empty}
-        stroke="black" strokeWidth="0"
-        d="M 93.39,43.60
+             114.37,94.74 114.53,95.10 114.71,95.58'
+      />
+      <path
+        id='path162'
+        className={styles.empty}
+        stroke='black'
+        strokeWidth='0'
+        d='M 93.39,43.60
            C 93.66,44.18 93.97,44.80 94.42,45.23
              94.72,45.51 95.32,45.61 95.75,45.54
              95.75,45.54 97.45,45.59 97.45,45.59
@@ -2194,10 +2498,14 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              95.02,29.05 95.01,30.57 95.11,32.06
              95.11,32.06 92.71,33.36 92.71,33.36
              91.34,33.53 89.84,35.83 90.38,37.06
-             91.35,39.25 92.36,41.43 93.39,43.60" />
-  <path id="path164" className={styles.empty}
-        stroke="black" strokeWidth="0"
-        d="M 79.71,412.49
+             91.35,39.25 92.36,41.43 93.39,43.60'
+      />
+      <path
+        id='path164'
+        className={styles.empty}
+        stroke='black'
+        strokeWidth='0'
+        d='M 79.71,412.49
            C 79.61,412.26 79.22,411.99 79.04,412.03
              78.82,412.09 78.56,412.44 78.53,412.69
              78.28,414.61 77.99,416.53 77.92,418.46
@@ -2214,11 +2522,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              90.47,440.04 90.59,439.64 90.62,439.24
              90.87,436.24 91.07,433.24 91.28,430.24
              91.44,427.99 90.67,426.17 89.11,424.48
-             85.68,420.73 81.85,417.26 79.71,412.49" />
-  <path id="path166"
-        className={styles.muscle} data-elem="Calves"
-        stroke="black" strokeWidth="0"
-        d="M 94.81,346.10
+             85.68,420.73 81.85,417.26 79.71,412.49'
+      />
+      <path
+        id='path166'
+        className={styles.muscle}
+        data-elem='Calves'
+        stroke='black'
+        strokeWidth='0'
+        d='M 94.81,346.10
            C 94.77,345.86 94.63,338.63 94.42,338.10
              94.22,338.70 93.09,342.82 93.01,343.14
              92.73,344.36 92.47,345.59 92.19,346.81
@@ -2247,11 +2559,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              88.87,409.29 88.71,403.45 89.55,399.31
              91.63,388.97 94.77,384.69 96.95,374.36
              97.92,369.81 98.16,363.49 97.15,358.77
-             96.19,354.30 95.64,350.59 94.81,346.10" />
-  <path id="path168"
-        className={styles.muscle} data-elem="Calves"
-        stroke="black" strokeWidth="0"
-        d="M 89.90,310.63
+             96.19,354.30 95.64,350.59 94.81,346.10'
+      />
+      <path
+        id='path168'
+        className={styles.muscle}
+        data-elem='Calves'
+        stroke='black'
+        strokeWidth='0'
+        d='M 89.90,310.63
            C 89.35,311.67 88.76,312.72 88.42,313.84
              87.19,317.76 85.96,321.69 84.92,325.67
              83.66,330.50 82.83,335.43 82.94,340.46
@@ -2266,11 +2582,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              94.22,329.77 93.78,324.67 93.26,319.59
              92.95,316.65 92.23,313.76 91.63,310.85
              91.55,310.48 91.15,310.03 90.81,309.92
-             90.59,309.86 90.08,310.30 89.90,310.63" />
-  <path id="path170"
-        className={styles.muscle} data-elem="Quads"
-        stroke="black" strokeWidth="0"
-        d="M 98.39,269.85
+             90.59,309.86 90.08,310.30 89.90,310.63'
+      />
+      <path
+        id='path170'
+        className={styles.muscle}
+        data-elem='Quads'
+        stroke='black'
+        strokeWidth='0'
+        d='M 98.39,269.85
            C 98.33,270.21 98.24,270.57 98.21,270.93
              97.87,274.80 97.58,278.68 97.20,282.55
              96.90,285.46 96.66,288.40 96.09,291.27
@@ -2281,11 +2601,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              95.34,333.63 95.45,333.64 95.55,333.65
              99.74,323.86 101.95,313.60 102.45,302.95
              102.99,291.71 101.95,280.64 98.86,269.81
-             98.71,269.82 98.55,269.84 98.39,269.85" />
-  <path id="path172"
-        className={styles.muscle} data-elem="Quads"
-        stroke="black" strokeWidth="0"
-        d="M 95.65,269.75
+             98.71,269.82 98.55,269.84 98.39,269.85'
+      />
+      <path
+        id='path172'
+        className={styles.muscle}
+        data-elem='Quads'
+        stroke='black'
+        strokeWidth='0'
+        d='M 95.65,269.75
            C 95.73,264.98 95.58,260.18 94.51,255.53
              92.85,248.29 90.84,241.13 89.07,233.91
              86.68,224.21 84.38,214.49 82.04,204.79
@@ -2305,11 +2629,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              80.70,321.12 83.31,317.46 85.70,313.66
              87.96,310.08 90.00,306.35 91.28,302.28
              93.64,294.74 94.44,286.92 95.25,279.11
-             95.58,276.01 95.60,272.87 95.65,269.75" />
-  <path id="path174"
-        className={styles.muscle} data-elem="Quads"
-        stroke="black" strokeWidth="0"
-        d="M 108.84,225.24
+             95.58,276.01 95.60,272.87 95.65,269.75'
+      />
+      <path
+        id='path174'
+        className={styles.muscle}
+        data-elem='Quads'
+        stroke='black'
+        strokeWidth='0'
+        d='M 108.84,225.24
            C 106.63,223.43 100.82,220.73 98.71,218.80
              93.08,213.68 90.27,212.08 86.11,205.66
              85.16,204.20 84.27,202.70 83.35,201.22
@@ -2322,11 +2650,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              103.47,274.88 105.14,269.24 105.53,266.37
              107.68,256.43 107.79,254.80 108.84,246.48
              109.82,238.30 110.01,236.87 110.01,232.26
-             110.01,227.97 110.07,226.24 108.84,225.24" />
-  <path id="path176"
-        className={styles.muscle} data-elem="Quads"
-        stroke="black" strokeWidth="0"
-        d="M 68.30,275.34
+             110.01,227.97 110.07,226.24 108.84,225.24'
+      />
+      <path
+        id='path176'
+        className={styles.muscle}
+        data-elem='Quads'
+        stroke='black'
+        strokeWidth='0'
+        d='M 68.30,275.34
            C 68.32,275.60 75.63,303.92 75.71,304.19
              75.94,302.37 73.80,274.89 73.95,266.76
              74.17,255.40 75.57,245.74 76.61,234.43
@@ -2339,11 +2671,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              76.34,196.78 75.80,199.79 74.96,202.72
              72.10,212.75 68.60,224.48 67.71,234.79
              67.13,241.61 65.44,249.80 65.76,255.84
-             66.15,262.99 67.13,267.34 68.30,275.34" />
-  <path id="path178"
-        className={styles.muscle} data-elem="Calves"
-        stroke="black" strokeWidth="0"
-        d="M 140.06,310.63
+             66.15,262.99 67.13,267.34 68.30,275.34'
+      />
+      <path
+        id='path178'
+        className={styles.muscle}
+        data-elem='Calves'
+        stroke='black'
+        strokeWidth='0'
+        d='M 140.06,310.63
            C 139.89,310.30 139.37,309.86 139.16,309.92
              138.81,310.03 138.41,310.48 138.33,310.85
              137.74,313.76 137.01,316.65 136.71,319.59
@@ -2358,11 +2694,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              146.80,351.27 146.90,345.86 147.02,340.46
              147.14,335.43 146.30,330.50 145.04,325.67
              144.00,321.69 142.77,317.76 141.55,313.84
-             141.20,312.72 140.61,311.67 140.06,310.63" />
-  <path id="path180"
-        className={styles.muscle} data-elem="Quads"
-        stroke="black" strokeWidth="0"
-        d="M 152.52,325.64
+             141.20,312.72 140.61,311.67 140.06,310.63'
+      />
+      <path
+        id='path180'
+        className={styles.muscle}
+        data-elem='Quads'
+        stroke='black'
+        strokeWidth='0'
+        d='M 152.52,325.64
            C 152.54,321.57 152.50,317.76 152.60,313.96
              152.70,309.35 152.87,304.74 153.10,300.13
              153.55,291.03 154.23,281.94 154.49,272.84
@@ -2382,11 +2722,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              135.53,286.92 136.33,294.74 138.69,302.28
              139.96,306.35 142.00,310.08 144.26,313.66
              146.66,317.46 149.27,321.12 151.79,324.84
-             151.95,325.08 152.18,325.27 152.52,325.64" />
-  <path id="path182"
-        className={styles.muscle} data-elem="Quads"
-        stroke="black" strokeWidth="0"
-        d="M 134.73,333.62
+             151.95,325.08 152.18,325.27 152.52,325.64'
+      />
+      <path
+        id='path182'
+        className={styles.muscle}
+        data-elem='Quads'
+        stroke='black'
+        strokeWidth='0'
+        d='M 134.73,333.62
            C 134.68,332.24 134.61,330.86 134.60,329.48
              134.55,322.18 134.93,314.93 137.19,307.90
              137.35,307.42 137.32,306.84 137.21,306.33
@@ -2397,11 +2741,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              131.41,269.84 131.26,269.82 131.10,269.81
              128.01,280.64 126.98,291.71 127.51,302.95
              128.01,313.60 130.23,323.86 134.41,333.65
-             134.52,333.64 134.62,333.63 134.73,333.62" />
-  <path id="path184"
-        className={styles.muscle} data-elem="Calves"
-        stroke="black" strokeWidth="0"
-        d="M 139.32,424.05
+             134.52,333.64 134.62,333.63 134.73,333.62'
+      />
+      <path
+        id='path184'
+        className={styles.muscle}
+        data-elem='Calves'
+        stroke='black'
+        strokeWidth='0'
+        d='M 139.32,424.05
            C 141.70,421.08 144.08,418.10 146.45,415.12
              148.97,411.96 152.26,405.62 153.51,401.86
              156.87,391.85 157.28,386.72 158.94,376.31
@@ -2430,11 +2778,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              141.25,403.45 141.10,409.29 139.84,413.31
              138.78,416.70 138.50,420.33 137.91,423.85
              137.85,424.21 138.01,424.61 138.12,425.30
-             138.67,424.74 139.02,424.42 139.32,424.05" />
-  <path id="path186"
-        className={styles.muscle} data-elem="Quads"
-        stroke="black" strokeWidth="0"
-        d="M 161.67,275.34
+             138.67,424.74 139.02,424.42 139.32,424.05'
+      />
+      <path
+        id='path186'
+        className={styles.muscle}
+        data-elem='Quads'
+        stroke='black'
+        strokeWidth='0'
+        d='M 161.67,275.34
            C 162.84,267.34 163.81,262.99 164.20,255.84
              164.53,249.80 162.84,241.61 162.25,234.79
              161.37,224.48 157.87,212.75 155.00,202.72
@@ -2447,11 +2799,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              152.88,230.49 153.18,232.45 153.36,234.43
              154.39,245.74 155.80,255.40 156.01,266.76
              156.17,274.89 154.02,302.37 154.26,304.19
-             154.33,303.92 161.64,275.60 161.67,275.34" />
-  <path id="path188"
-        className={styles.muscle} data-elem="Quads"
-        stroke="black" strokeWidth="0"
-        d="M 129.16,270.61
+             154.33,303.92 161.64,275.60 161.67,275.34'
+      />
+      <path
+        id='path188'
+        className={styles.muscle}
+        data-elem='Quads'
+        stroke='black'
+        strokeWidth='0'
+        d='M 129.16,270.61
            C 132.77,254.88 136.72,239.25 141.63,223.88
              143.77,217.18 145.61,210.42 146.74,203.48
              146.86,202.76 146.90,202.02 146.98,201.28
@@ -2464,10 +2820,14 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              122.17,254.80 122.29,256.43 124.43,266.37
              124.83,269.24 126.49,274.88 126.96,277.74
              127.02,278.05 127.13,278.34 127.45,278.62
-             128.01,275.95 128.55,273.27 129.16,270.61" />
-  <path id="path190" className={styles.empty}
-        stroke="black" strokeWidth="0"
-        d="M 168.23,443.60
+             128.01,275.95 128.55,273.27 129.16,270.61'
+      />
+      <path
+        id='path190'
+        className={styles.empty}
+        stroke='black'
+        strokeWidth='0'
+        d='M 168.23,443.60
            C 163.44,440.64 160.47,437.79 157.08,433.34
              157.08,433.34 154.01,430.18 154.01,430.18
              154.01,430.18 152.04,418.46 152.04,418.46
@@ -2484,11 +2844,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              149.85,451.57 151.40,453.03 153.31,454.58
              160.83,460.64 167.33,458.36 175.35,454.81
              177.15,454.00 176.13,451.81 174.35,449.57
-             172.14,446.78 168.74,443.92 168.23,443.60" />
-  <path id="path192"
-        className={styles.muscle} data-elem="Obliques"
-        stroke="black" strokeWidth="0"
-        d="M 133.30,127.21
+             172.14,446.78 168.74,443.92 168.23,443.60'
+      />
+      <path
+        id='path192'
+        className={styles.muscle}
+        data-elem='Obliques'
+        stroke='black'
+        strokeWidth='0'
+        d='M 133.30,127.21
            C 134.46,133.05 135.57,138.89 136.92,144.67
              137.30,146.28 138.27,147.83 139.28,149.17
              140.60,150.93 142.19,152.50 143.76,154.05
@@ -2503,11 +2867,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              150.26,119.02 135.99,124.40 135.99,124.40
              135.99,124.40 135.99,124.41 135.99,124.41
              135.78,124.42 135.56,124.44 135.32,124.48
-             133.82,124.70 133.01,125.72 133.30,127.21" />
-  <path id="path194"
-        className={styles.muscle} data-elem="Obliques"
-        stroke="black" strokeWidth="0"
-        d="M 79.63,119.11
+             133.82,124.70 133.01,125.72 133.30,127.21'
+      />
+      <path
+        id='path194'
+        className={styles.muscle}
+        data-elem='Obliques'
+        stroke='black'
+        strokeWidth='0'
+        d='M 79.63,119.11
            C 79.59,119.09 79.56,119.08 79.52,119.06
              79.52,119.06 79.39,119.02 79.39,119.02
              79.39,119.02 79.39,119.02 79.39,119.02
@@ -2528,11 +2896,15 @@ const Illustration = ({ toggleMuscle, muscles = [], exerciseCount }) => {
              96.64,125.60 95.80,124.63 93.88,124.42
              93.80,124.42 93.73,124.42 93.65,124.41
              93.65,124.41 93.66,124.40 93.66,124.40
-             93.66,124.40 79.63,119.11 79.63,119.11" />
-  <path id="path196"
-        className={styles.muscle} data-elem="Traps"
-stroke="black" strokeWidth="0"
-        d="M 130.40,72.56
+             93.66,124.40 79.63,119.11 79.63,119.11'
+      />
+      <path
+        id='path196'
+        className={styles.muscle}
+        data-elem='Traps'
+        stroke='black'
+        strokeWidth='0'
+        d='M 130.40,72.56
            C 128.92,75.95 126.41,78.57 123.97,81.24
              122.71,82.62 121.38,83.93 120.11,85.30
              119.94,85.49 119.93,85.84 119.85,86.11
@@ -2546,11 +2918,15 @@ stroke="black" strokeWidth="0"
              149.88,80.15 144.98,78.00 144.98,78.00
              143.88,77.53 143.00,77.18 142.15,76.78
              138.83,75.24 135.52,73.69 132.21,72.13
-             131.47,71.78 130.79,71.65 130.40,72.56" />
-  <path id="path198"
-        className={styles.muscle} data-elem="Chest"
-        stroke="black" strokeWidth="0"
-        d="M 112.42,97.33
+             131.47,71.78 130.79,71.65 130.40,72.56'
+      />
+      <path
+        id='path198'
+        className={styles.muscle}
+        data-elem='Chest'
+        stroke='black'
+        strokeWidth='0'
+        d='M 112.42,97.33
            C 112.10,93.03 109.92,89.83 105.78,88.29
              101.53,86.71 97.26,85.18 92.93,83.86
              89.70,82.87 85.51,86.37 84.42,89.25
@@ -2560,11 +2936,15 @@ stroke="black" strokeWidth="0"
              79.34,116.28 83.73,119.58 88.90,121.62
              92.79,123.15 96.86,123.49 101.04,122.83
              107.42,121.81 112.48,115.50 112.73,109.44
-             112.90,105.41 112.72,101.36 112.42,97.33" />
-  <path id="path200"
-        className={styles.muscle} data-elem="Traps"
-stroke="black" strokeWidth="0"
-        d="M 85.02,84.19
+             112.90,105.41 112.72,101.36 112.42,97.33'
+      />
+      <path
+        id='path200'
+        className={styles.muscle}
+        data-elem='Traps'
+        stroke='black'
+        strokeWidth='0'
+        d='M 85.02,84.19
            C 86.82,83.05 90.21,81.65 92.21,82.21
              92.23,82.21 92.25,82.22 92.27,82.22
              93.75,82.66 95.25,83.04 96.74,83.43
@@ -2578,10 +2958,14 @@ stroke="black" strokeWidth="0"
              93.52,73.69 90.21,75.24 86.89,76.78
              86.04,77.18 85.16,77.53 84.06,78.00
              84.06,78.00 79.16,80.15 79.16,80.15
-             79.16,80.15 84.02,81.63 85.02,84.19" />
-  <path id="path202" className={styles.empty}
-        stroke="black" strokeWidth="0"
-        d="M 36.97,219.69
+             79.16,80.15 84.02,81.63 85.02,84.19'
+      />
+      <path
+        id='path202'
+        className={styles.empty}
+        stroke='black'
+        strokeWidth='0'
+        d='M 36.97,219.69
            C 37.21,215.21 37.71,210.75 38.11,206.27
              38.17,205.62 38.23,204.98 38.29,204.33
              38.29,204.33 39.72,196.96 39.72,196.96
@@ -2632,10 +3016,13 @@ stroke="black" strokeWidth="0"
              31.09,242.82 31.12,242.80 31.12,242.80
              31.12,242.80 35.83,236.53 35.83,236.53
              38.95,232.60 39.35,229.23 37.74,224.61
-             37.19,223.07 36.88,221.32 36.97,219.69" />
-  <path className={styles.empty}
-        stroke="black" strokeWidth="0"
-        d="M 225.01,229.23
+             37.19,223.07 36.88,221.32 36.97,219.69'
+      />
+      <path
+        className={styles.empty}
+        stroke='black'
+        strokeWidth='0'
+        d='M 225.01,229.23
            C 223.26,228.48 221.52,227.71 219.76,227.00
              219.76,227.00 219.76,227.00 219.76,227.00
              219.76,227.00 217.26,223.91 217.26,223.91
@@ -2686,10 +3073,15 @@ stroke="black" strokeWidth="0"
              212.39,231.85 214.52,231.02 214.52,231.02
              216.95,231.59 219.40,232.12 221.80,232.65
              223.33,232.41 224.57,231.80 225.25,230.44
-             225.40,230.13 225.23,229.33 225.01,229.23" />
-      <path data-elem="Traps" className={styles.muscleContainer}
-        fill="transparent" stroke="black" strokeWidth="0"
-        d="M 410.93,37.50
+             225.40,230.13 225.23,229.33 225.01,229.23'
+      />
+      <path
+        data-elem='Traps'
+        className={styles.muscleContainer}
+        fill='transparent'
+        stroke='black'
+        strokeWidth='0'
+        d='M 410.93,37.50
            C 410.93,37.50 416.18,38.40 416.18,38.40
              416.18,38.40 418.73,39.60 418.73,39.60
              418.73,39.60 422.18,43.05 422.18,43.05
@@ -2733,10 +3125,15 @@ stroke="black" strokeWidth="0"
              399.82,48.15 400.42,44.40 400.42,44.40
              400.42,44.40 403.28,40.95 403.28,40.95
              403.28,40.95 408.08,38.40 408.08,38.40
-             408.08,38.40 410.78,37.80 410.78,37.80" />
-  <path data-elem="Traps" className={styles.muscleContainer}
-        fill="transparent" stroke="black" strokeWidth="0"
-        d="M 85.67,85.05
+             408.08,38.40 410.78,37.80 410.78,37.80'
+      />
+      <path
+        data-elem='Traps'
+        className={styles.muscleContainer}
+        fill='transparent'
+        stroke='black'
+        strokeWidth='0'
+        d='M 85.67,85.05
            C 85.67,85.05 87.62,84.15 87.62,84.15
              87.62,84.15 89.87,83.25 89.72,83.25
              89.57,83.25 92.27,83.10 92.27,83.10
@@ -2773,10 +3170,15 @@ stroke="black" strokeWidth="0"
              76.21,78.45 77.86,79.95 77.86,79.95
              77.86,79.95 80.42,81.30 80.42,81.30
              80.42,81.30 82.52,82.65 82.52,82.65
-             82.52,82.65 84.77,85.20 84.77,85.20" />
-    <path data-elem="Chest" className={styles.muscleContainer}
-        fill="transparent" stroke="black" strokeWidth="0"
-        d="M 72.50,111.50
+             82.52,82.65 84.77,85.20 84.77,85.20'
+      />
+      <path
+        data-elem='Chest'
+        className={styles.muscleContainer}
+        fill='transparent'
+        stroke='black'
+        strokeWidth='0'
+        d='M 72.50,111.50
            C 72.50,111.50 77.50,102.50 77.50,102.25
              77.50,102.00 81.75,94.00 81.75,94.00
              81.75,94.00 84.50,87.50 84.50,87.50
@@ -2806,10 +3208,15 @@ stroke="black" strokeWidth="0"
              103.00,124.00 98.50,124.75 98.50,124.75
              98.50,124.75 91.75,123.25 91.75,123.25
              91.75,123.25 80.00,118.00 80.00,118.00
-             80.00,118.00 73.00,111.75 73.00,111.75" />
-  <path data-elem="Shoulders" className={styles.muscleContainer}
-        fill="transparent" stroke="black" strokeWidth="0"
-        d="M 453.25,76.50
+             80.00,118.00 73.00,111.75 73.00,111.75'
+      />
+      <path
+        data-elem='Shoulders'
+        className={styles.muscleContainer}
+        fill='transparent'
+        stroke='black'
+        strokeWidth='0'
+        d='M 453.25,76.50
            C 453.25,76.50 462.00,80.25 462.00,80.25
              462.00,80.25 467.75,85.50 467.75,85.50
              467.75,85.50 473.00,92.50 473.00,92.50
@@ -2826,10 +3233,15 @@ stroke="black" strokeWidth="0"
              439.00,90.00 441.00,86.00 441.00,86.00
              441.00,86.00 443.50,81.75 443.50,81.75
              443.50,81.75 448.50,78.00 448.50,78.00
-             448.50,78.00 453.75,76.75 453.75,76.75" />
-  <path data-elem="Shoulders" className={styles.muscleContainer}
-        fill="transparent" stroke="black" strokeWidth="0"
-        d="M 364.00,79.50
+             448.50,78.00 453.75,76.75 453.75,76.75'
+      />
+      <path
+        data-elem='Shoulders'
+        className={styles.muscleContainer}
+        fill='transparent'
+        stroke='black'
+        strokeWidth='0'
+        d='M 364.00,79.50
            C 364.00,79.50 357.50,82.75 357.50,82.75
              357.50,82.75 352.50,87.50 352.50,87.50
              352.50,87.50 349.25,93.50 349.25,93.50
@@ -2846,10 +3258,15 @@ stroke="black" strokeWidth="0"
              382.25,85.50 378.50,80.25 378.50,80.25
              378.50,80.25 374.25,79.00 374.25,79.00
              374.25,79.00 369.50,78.25 369.50,78.25
-             369.50,78.25 370.75,78.25 367.25,78.75" />
-  <path data-elem="Shoulders" className={styles.muscleContainer}
-        fill="transparent" stroke="black" strokeWidth="0"
-        d="M 144.25,85.00
+             369.50,78.25 370.75,78.25 367.25,78.75'
+      />
+      <path
+        data-elem='Shoulders'
+        className={styles.muscleContainer}
+        fill='transparent'
+        stroke='black'
+        strokeWidth='0'
+        d='M 144.25,85.00
            C 144.25,85.00 150.50,79.25 150.75,79.25
              151.00,79.25 157.25,78.50 157.25,78.50
              157.25,78.50 167.00,81.75 167.00,81.75
@@ -2864,10 +3281,15 @@ stroke="black" strokeWidth="0"
              159.00,111.00 155.25,107.75 155.25,107.75
              155.25,107.75 149.25,97.00 149.25,97.00
              149.25,97.00 146.25,90.50 146.25,90.50
-             146.25,90.50 145.00,87.00 145.00,87.00" />
-  <path data-elem="Shoulders" className={styles.muscleContainer}
-        fill="transparent" stroke="black" strokeWidth="0"
-        d="M 82.75,82.25
+             146.25,90.50 145.00,87.00 145.00,87.00'
+      />
+      <path
+        data-elem='Shoulders'
+        className={styles.muscleContainer}
+        fill='transparent'
+        stroke='black'
+        strokeWidth='0'
+        d='M 82.75,82.25
            C 82.75,82.25 75.75,78.50 75.75,78.50
              75.75,78.50 64.00,80.50 64.00,80.50
              64.00,80.50 58.25,85.25 58.25,85.25
@@ -2881,10 +3303,15 @@ stroke="black" strokeWidth="0"
              71.50,110.00 76.00,105.00 76.00,105.00
              76.00,105.00 80.75,96.50 80.75,96.50
              80.75,96.50 85.00,86.25 85.00,86.25
-             85.00,86.25 82.75,82.50 82.75,82.50" />
-  <path data-elem="Biceps" className={styles.muscleContainer}
-        fill="transparent" stroke="black" strokeWidth="0"
-        d="M 155.50,113.75
+             85.00,86.25 82.75,82.50 82.75,82.50'
+      />
+      <path
+        data-elem='Biceps'
+        className={styles.muscleContainer}
+        fill='transparent'
+        stroke='black'
+        strokeWidth='0'
+        d='M 155.50,113.75
            C 155.50,113.75 155.25,124.75 155.25,124.75
              155.25,124.75 156.00,137.75 156.00,137.75
              156.00,137.75 159.50,143.75 159.50,143.75
@@ -2902,10 +3329,15 @@ stroke="black" strokeWidth="0"
              181.00,118.25 174.50,115.00 174.50,115.00
              174.50,115.00 165.50,111.75 165.50,111.75
              165.50,111.75 158.25,111.00 158.25,111.00
-             158.25,111.00 155.25,113.50 155.25,113.50" />
-  <path data-elem="Biceps" className={styles.muscleContainer}
-        fill="transparent" stroke="black" strokeWidth="0"
-        d="M 49.25,117.25
+             158.25,111.00 155.25,113.50 155.25,113.50'
+      />
+      <path
+        data-elem='Biceps'
+        className={styles.muscleContainer}
+        fill='transparent'
+        stroke='black'
+        strokeWidth='0'
+        d='M 49.25,117.25
            C 49.25,117.25 45.50,120.75 45.50,120.75
              45.50,120.75 42.00,129.00 42.00,129.00
              42.00,129.00 41.25,137.75 41.25,137.75
@@ -2925,11 +3357,16 @@ stroke="black" strokeWidth="0"
              73.00,113.00 71.25,111.50 71.25,111.50
              71.25,111.50 68.00,110.50 68.00,110.50
              68.00,110.50 57.75,114.25 57.75,114.25
-             57.75,114.25 49.50,117.50 49.50,117.50" />
+             57.75,114.25 49.50,117.50 49.50,117.50'
+      />
 
-    <path data-elem="Forearms" className={styles.muscleContainer}
-        fill="transparent" stroke="black" strokeWidth="0"
-        d="M 464.50,162.00
+      <path
+        data-elem='Forearms'
+        className={styles.muscleContainer}
+        fill='transparent'
+        stroke='black'
+        strokeWidth='0'
+        d='M 464.50,162.00
            C 464.50,162.00 485.75,208.75 485.75,208.75
              485.75,208.75 491.00,215.75 491.00,215.75
              491.00,215.75 492.00,218.25 492.00,218.25
@@ -2948,10 +3385,15 @@ stroke="black" strokeWidth="0"
              481.25,154.00 472.50,156.75 472.50,156.75
              472.50,156.75 464.75,155.00 464.75,155.00
              464.75,155.00 463.75,157.50 463.75,157.50
-             463.75,157.50 463.50,159.50 464.50,162.25" />
-  <path data-elem="Forearms" className={styles.muscleContainer}
-        fill="transparent" stroke="black" strokeWidth="0"
-        d="M 334.25,147.25
+             463.75,157.50 463.50,159.50 464.50,162.25'
+      />
+      <path
+        data-elem='Forearms'
+        className={styles.muscleContainer}
+        fill='transparent'
+        stroke='black'
+        strokeWidth='0'
+        d='M 334.25,147.25
            C 334.25,147.25 326.75,161.25 326.75,161.25
              326.75,161.25 324.25,172.50 324.25,172.50
              324.25,172.50 324.00,180.00 324.00,180.00
@@ -2970,10 +3412,15 @@ stroke="black" strokeWidth="0"
              350.00,156.50 342.75,155.25 342.75,155.25
              342.75,155.25 340.25,153.25 340.25,153.25
              340.25,153.25 338.00,146.25 338.00,146.25
-             338.00,146.25 333.75,147.50 333.75,147.50" />
-  <path data-elem="Forearms" className={styles.muscleContainer}
-        fill="transparent" stroke="black" strokeWidth="0"
-        d="M 168.50,176.75
+             338.00,146.25 333.75,147.50 333.75,147.50'
+      />
+      <path
+        data-elem='Forearms'
+        className={styles.muscleContainer}
+        fill='transparent'
+        stroke='black'
+        strokeWidth='0'
+        d='M 168.50,176.75
            C 168.50,176.75 171.50,183.25 171.50,183.25
              171.50,183.25 175.50,195.75 175.50,195.75
              175.50,195.75 184.50,212.50 184.50,212.50
@@ -3002,10 +3449,15 @@ stroke="black" strokeWidth="0"
              167.00,152.25 164.00,152.00 164.00,152.00
              164.00,152.00 164.00,155.00 164.00,155.00
              164.00,155.00 165.25,164.00 165.25,164.00
-             165.25,164.00 167.25,175.75 167.25,175.75" />
-  <path data-elem="Forearms" className={styles.muscleContainer}
-        fill="transparent" stroke="black" strokeWidth="0"
-        d="M 43.75,147.00
+             165.25,164.00 167.25,175.75 167.25,175.75'
+      />
+      <path
+        data-elem='Forearms'
+        className={styles.muscleContainer}
+        fill='transparent'
+        stroke='black'
+        strokeWidth='0'
+        d='M 43.75,147.00
            C 43.75,147.00 37.50,154.25 37.50,154.25
              37.50,154.25 34.25,163.00 34.25,163.00
              34.25,163.00 32.00,173.00 32.00,173.00
@@ -3032,11 +3484,16 @@ stroke="black" strokeWidth="0"
              50.75,166.00 50.00,157.50 50.00,157.50
              50.00,157.50 48.25,150.25 48.25,150.25
              48.25,150.25 46.75,148.75 46.75,148.75
-             46.75,148.75 43.50,146.75 43.50,146.75" />
+             46.75,148.75 43.50,146.75 43.50,146.75'
+      />
 
-<path data-elem="Triceps" className={styles.muscleContainer}
-        fill="transparent" stroke="black" strokeWidth="0"
-        d="M 453.25,106.50
+      <path
+        data-elem='Triceps'
+        className={styles.muscleContainer}
+        fill='transparent'
+        stroke='black'
+        strokeWidth='0'
+        d='M 453.25,106.50
            C 453.25,106.50 454.00,137.75 454.00,137.75
              454.00,137.75 458.50,145.50 458.50,145.50
              458.50,145.50 464.50,154.50 464.50,154.50
@@ -3052,10 +3509,15 @@ stroke="black" strokeWidth="0"
              475.50,111.00 467.75,111.00 467.75,111.00
              467.75,111.00 462.00,110.25 462.00,110.25
              462.00,110.25 458.25,108.75 458.25,108.75
-             458.25,108.75 456.25,108.00 453.75,106.75" />
-  <path data-elem="Triceps" className={styles.muscleContainer}
-        fill="transparent" stroke="black" strokeWidth="0"
-        d="M 345.00,110.00
+             458.25,108.75 456.25,108.00 453.75,106.75'
+      />
+      <path
+        data-elem='Triceps'
+        className={styles.muscleContainer}
+        fill='transparent'
+        stroke='black'
+        strokeWidth='0'
+        d='M 345.00,110.00
            C 345.00,110.00 340.50,118.25 340.50,118.25
              340.50,118.25 339.00,128.75 339.00,128.75
              339.00,128.75 337.75,137.25 337.75,137.25
@@ -3071,11 +3533,16 @@ stroke="black" strokeWidth="0"
              369.75,105.50 364.50,109.00 364.50,109.00
              364.50,109.00 357.00,111.00 357.00,111.00
              357.00,111.00 350.00,111.25 350.00,111.25
-             350.00,111.25 344.75,110.25 344.75,110.25" />
+             350.00,111.25 344.75,110.25 344.75,110.25'
+      />
 
-<path data-elem="Obliques" className={styles.muscleContainer}
-        fill="transparent" stroke="black" strokeWidth="0"
-        d="M 131.50,125.25
+      <path
+        data-elem='Obliques'
+        className={styles.muscleContainer}
+        fill='transparent'
+        stroke='black'
+        strokeWidth='0'
+        d='M 131.50,125.25
            C 131.50,125.25 135.75,145.25 135.75,145.25
              135.75,145.25 136.75,154.00 136.75,154.00
              136.75,154.00 137.00,164.75 137.00,164.75
@@ -3098,10 +3565,15 @@ stroke="black" strokeWidth="0"
              154.50,116.00 152.00,117.00 152.00,117.00
              152.00,117.00 145.75,120.25 145.75,120.25
              145.75,120.25 138.25,123.50 138.25,123.50
-             138.25,123.50 131.50,125.00 131.50,125.00" />
-  <path data-elem="Obliques" className={styles.muscleContainer}
-        fill="transparent" stroke="black" strokeWidth="0"
-        d="M 75.00,115.75
+             138.25,123.50 131.50,125.00 131.50,125.00'
+      />
+      <path
+        data-elem='Obliques'
+        className={styles.muscleContainer}
+        fill='transparent'
+        stroke='black'
+        strokeWidth='0'
+        d='M 75.00,115.75
            C 75.00,115.75 74.00,138.50 74.00,138.50
              74.00,138.50 75.50,151.00 75.50,151.00
              75.50,151.00 75.75,163.25 75.75,163.25
@@ -3124,11 +3596,16 @@ stroke="black" strokeWidth="0"
              94.00,142.75 96.75,127.75 96.75,127.75
              96.75,127.75 98.50,125.00 98.50,125.00
              98.50,125.00 80.50,119.00 80.50,119.00
-             80.50,119.00 75.25,115.50 75.25,115.50" />
+             80.50,119.00 75.25,115.50 75.25,115.50'
+      />
 
-<path data-elem="Abdominals" className={styles.muscleContainer}
-        fill="transparent" stroke="black" strokeWidth="0"
-        d="M 100.75,123.75
+      <path
+        data-elem='Abdominals'
+        className={styles.muscleContainer}
+        fill='transparent'
+        stroke='black'
+        strokeWidth='0'
+        d='M 100.75,123.75
            C 100.75,123.75 97.50,126.50 97.50,126.50
              97.50,126.50 94.50,140.25 94.50,140.25
              94.50,140.25 93.00,152.50 93.00,152.50
@@ -3157,11 +3634,16 @@ stroke="black" strokeWidth="0"
              122.50,122.00 119.50,122.00 119.50,122.00
              119.50,122.00 114.50,126.75 114.50,126.75
              114.50,126.75 109.50,120.75 109.50,120.75
-             109.50,120.75 101.00,124.00 101.00,124.00" />
+             109.50,120.75 101.00,124.00 101.00,124.00'
+      />
 
-<path data-elem="Quads" className={styles.muscleContainer}
-        fill="transparent" stroke="black" strokeWidth="0"
-        d="M 77.00,190.50
+      <path
+        data-elem='Quads'
+        className={styles.muscleContainer}
+        fill='transparent'
+        stroke='black'
+        strokeWidth='0'
+        d='M 77.00,190.50
            C 77.00,190.50 83.75,201.75 83.75,201.75
              83.75,201.75 88.25,208.75 88.25,208.75
              88.25,208.75 95.25,214.50 95.25,214.50
@@ -3217,11 +3699,16 @@ stroke="black" strokeWidth="0"
              120.75,258.75 118.25,247.00 118.25,247.00
              118.25,247.00 118.25,236.75 118.25,236.75
              118.25,236.75 118.00,228.75 118.00,228.75
-             118.00,228.75 118.00,224.50 118.00,224.50" />
+             118.00,228.75 118.00,224.50 118.00,224.50'
+      />
 
-<path data-elem="Lats" className={styles.muscleContainer}
-        fill="transparent" stroke="black" strokeWidth="0"
-        d="M 415.75,134.25
+      <path
+        data-elem='Lats'
+        className={styles.muscleContainer}
+        fill='transparent'
+        stroke='black'
+        strokeWidth='0'
+        d='M 415.75,134.25
            C 415.75,134.25 422.25,123.00 422.25,123.00
              422.25,123.00 432.00,109.75 432.00,109.75
              432.00,109.75 436.25,101.25 436.25,101.25
@@ -3252,10 +3739,15 @@ stroke="black" strokeWidth="0"
              436.00,165.75 433.25,156.25 433.25,156.25
              433.25,156.25 428.25,148.25 428.25,148.25
              428.25,148.25 422.50,142.00 422.50,142.00
-             422.50,142.00 418.50,137.75 416.00,134.75" />
-  <path data-elem="Lats" className={styles.muscleContainer}
-        fill="transparent" stroke="black" strokeWidth="0"
-        d="M 385.00,92.75
+             422.50,142.00 418.50,137.75 416.00,134.75'
+      />
+      <path
+        data-elem='Lats'
+        className={styles.muscleContainer}
+        fill='transparent'
+        stroke='black'
+        strokeWidth='0'
+        d='M 385.00,92.75
            C 385.00,92.75 379.75,94.25 379.75,94.50
              379.75,94.75 372.75,102.25 372.75,102.25
              372.75,102.25 370.25,106.75 370.25,106.75
@@ -3285,11 +3777,16 @@ stroke="black" strokeWidth="0"
              398.75,120.75 393.75,112.75 393.75,112.75
              393.75,112.75 388.75,106.00 388.75,106.00
              388.75,106.00 386.25,99.25 386.25,99.25
-             386.25,99.25 385.25,93.75 385.25,93.75" />
+             386.25,99.25 385.25,93.75 385.25,93.75'
+      />
 
-<path data-elem="Glutes" className={styles.muscleContainer}
-        fill="transparent" stroke="black" strokeWidth="0"
-        d="M 394.25,186.00
+      <path
+        data-elem='Glutes'
+        className={styles.muscleContainer}
+        fill='transparent'
+        stroke='black'
+        strokeWidth='0'
+        d='M 394.25,186.00
            C 394.25,186.00 387.50,187.25 387.50,187.25
              387.50,187.25 376.00,194.00 376.00,194.00
              376.00,194.00 370.00,202.75 370.00,202.75
@@ -3326,11 +3823,16 @@ stroke="black" strokeWidth="0"
              408.25,210.75 402.50,201.50 402.50,201.50
              402.50,201.50 399.50,192.50 399.50,192.50
              399.50,192.50 397.25,186.25 397.25,186.25
-             397.25,186.25 394.50,185.75 394.50,185.75" />
+             397.25,186.25 394.50,185.75 394.50,185.75'
+      />
 
-<path data-elem="Hamstrings" className={styles.muscleContainer}
-        fill="transparent" stroke="black" strokeWidth="0"
-        d="M 414.25,228.25
+      <path
+        data-elem='Hamstrings'
+        className={styles.muscleContainer}
+        fill='transparent'
+        stroke='black'
+        strokeWidth='0'
+        d='M 414.25,228.25
            C 414.25,228.25 421.50,232.00 421.50,232.00
              421.50,232.00 437.75,239.75 437.75,239.75
              437.75,239.75 445.50,240.50 445.50,240.50
@@ -3361,10 +3863,15 @@ stroke="black" strokeWidth="0"
              414.50,295.25 414.25,274.50 414.25,274.50
              414.25,274.50 414.00,251.50 414.00,251.50
              414.00,251.50 414.25,237.25 414.25,237.25
-             414.25,237.25 414.75,232.00 414.75,229.25" />
-  <path data-elem="Hamstrings" className={styles.muscleContainer}
-        fill="transparent" stroke="black" strokeWidth="0"
-        d="M 365.50,209.50
+             414.25,237.25 414.75,232.00 414.75,229.25'
+      />
+      <path
+        data-elem='Hamstrings'
+        className={styles.muscleContainer}
+        fill='transparent'
+        stroke='black'
+        strokeWidth='0'
+        d='M 365.50,209.50
            C 365.50,209.50 370.00,210.00 370.00,210.00
              370.00,210.00 375.00,213.50 375.00,213.50
              375.00,213.50 377.50,219.25 377.50,219.25
@@ -3398,11 +3905,16 @@ stroke="black" strokeWidth="0"
              366.75,295.00 363.00,268.50 363.00,268.50
              363.00,268.50 362.00,246.25 362.00,246.25
              362.00,246.25 362.25,216.50 362.25,216.50
-             362.25,216.50 364.25,211.75 365.00,209.25" />
+             362.25,216.50 364.25,211.75 365.00,209.25'
+      />
 
-<path data-elem="Calves" className={styles.muscleContainer}
-        fill="transparent" stroke="black" strokeWidth="0"
-        d="M 428.50,342.00
+      <path
+        data-elem='Calves'
+        className={styles.muscleContainer}
+        fill='transparent'
+        stroke='black'
+        strokeWidth='0'
+        d='M 428.50,342.00
            C 428.50,342.00 424.50,355.00 424.50,355.00
              424.50,355.00 424.75,364.25 424.50,364.25
              424.25,364.25 424.75,374.50 424.75,374.75
@@ -3428,10 +3940,15 @@ stroke="black" strokeWidth="0"
              436.75,324.75 432.50,322.75 432.50,322.75
              432.50,322.75 431.25,324.75 431.25,324.75
              431.25,324.75 430.75,338.00 430.75,338.00
-             430.75,338.00 429.00,342.25 429.00,342.25" />
-  <path data-elem="Calves" className={styles.muscleContainer}
-        fill="transparent" stroke="black" strokeWidth="0"
-        d="M 370.00,328.00
+             430.75,338.00 429.00,342.25 429.00,342.25'
+      />
+      <path
+        data-elem='Calves'
+        className={styles.muscleContainer}
+        fill='transparent'
+        stroke='black'
+        strokeWidth='0'
+        d='M 370.00,328.00
            C 370.00,328.00 365.25,339.75 365.25,339.75
              365.25,339.75 361.75,349.00 361.75,349.00
              361.75,349.00 361.75,362.25 361.75,362.25
@@ -3457,10 +3974,15 @@ stroke="black" strokeWidth="0"
              384.00,326.25 381.25,322.00 381.25,322.00
              381.25,322.00 378.75,319.00 378.75,319.00
              378.75,319.00 374.00,325.75 374.00,325.75
-             374.00,325.75 370.00,327.75 370.00,327.75" />
-  <path data-elem="Calves" className={styles.muscleContainer}
-        fill="transparent" stroke="black" strokeWidth="0"
-        d="M 137.50,309.75
+             374.00,325.75 370.00,327.75 370.00,327.75'
+      />
+      <path
+        data-elem='Calves'
+        className={styles.muscleContainer}
+        fill='transparent'
+        stroke='black'
+        strokeWidth='0'
+        d='M 137.50,309.75
            C 137.50,309.75 135.75,325.75 135.75,325.75
              135.75,325.75 134.50,335.75 134.50,335.75
              134.50,335.75 131.25,347.00 131.25,347.00
@@ -3482,10 +4004,15 @@ stroke="black" strokeWidth="0"
              159.00,337.50 154.75,330.00 154.75,329.75
              154.75,329.50 147.25,320.25 147.25,320.25
              147.25,320.25 142.75,314.25 142.75,314.25
-             142.75,314.25 141.75,310.75 139.50,309.25" />
-  <path data-elem="Calves" className={styles.muscleContainer}
-        fill="transparent" stroke="black" strokeWidth="0"
-        d="M 90.50,307.75
+             142.75,314.25 141.75,310.75 139.50,309.25'
+      />
+      <path
+        data-elem='Calves'
+        className={styles.muscleContainer}
+        fill='transparent'
+        stroke='black'
+        strokeWidth='0'
+        d='M 90.50,307.75
            C 90.50,307.75 77.50,324.75 77.50,324.75
              77.50,324.75 72.50,337.00 72.50,337.00
              72.50,337.00 68.25,350.75 68.25,350.75
@@ -3503,12 +4030,16 @@ stroke="black" strokeWidth="0"
              101.25,365.75 97.50,346.75 97.50,346.75
              97.50,346.75 95.25,332.50 95.25,332.50
              95.25,332.50 94.50,319.75 94.50,319.75
-             94.50,319.75 92.75,310.25 92.75,310.25" />
+             94.50,319.75 92.75,310.25 92.75,310.25'
+      />
 
-
-<path data-elem="Lower back" className={styles.muscleContainer}
-        fill="transparent" stroke="black" strokeWidth="0"
-        d="M 411.25,142.25
+      <path
+        data-elem='Lower back'
+        className={styles.muscleContainer}
+        fill='transparent'
+        stroke='black'
+        strokeWidth='0'
+        d='M 411.25,142.25
            C 411.25,142.25 407.25,135.50 407.25,135.50
              407.25,135.50 396.75,146.00 396.75,146.00
              396.75,146.00 393.25,151.25 393.25,151.25
@@ -3533,8 +4064,10 @@ stroke="black" strokeWidth="0"
              431.25,152.50 426.25,145.00 426.25,145.00
              426.25,145.00 418.00,136.50 418.00,136.50
              418.00,136.50 415.25,135.50 415.25,135.50
-             415.25,135.50 411.00,143.00 411.00,142.75" />
-</svg>
+             415.25,135.50 411.00,143.00 411.00,142.75'
+      />
+    </svg>
+  )
 }
 
 export default Illustration

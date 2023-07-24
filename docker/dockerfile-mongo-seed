@@ -1,0 +1,7 @@
+FROM mongo:7.0.0-rc6
+
+ADD docker/mongo-init.sh /tmp/mongo-init.sh
+
+ADD lib/dump/prod /tmp/
+
+CMD [ "/tmp/mongo-init.sh" ]

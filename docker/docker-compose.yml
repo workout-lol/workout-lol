@@ -1,0 +1,37 @@
+version: '3.7'
+services:
+  workout-lol:
+    build: 
+      context: ..
+      dockerfile: docker/dockerfile
+    ports:
+      - 3000:3000
+    depends_on:
+      mongodb:
+        condition: service_healthy
+
+  mongodb:
+    image: mongo:7.0.0-rc6
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongoadmin
+      - MONGO_INITDB_ROOT_PASSWORD=secret
+      - MONGO_INITDB_DATABASE=db
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: echo 'db.stats().ok' | mongosh localhost:27017/test --quiet
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  mongoseed:
+    build:
+      context: ..
+      dockerfile: docker/dockerfile-mongo-seed
+    depends_on:
+      mongodb:
+        condition: service_healthy
+
+volumes:
+  mongo-data:

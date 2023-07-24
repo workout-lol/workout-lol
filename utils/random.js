@@ -1,2 +1,2 @@
-export const getRandomNumberBetween = (min, max) =>  Math.floor(Math.random() * (max - min + 1) + min)
-    
+export const getRandomNumberBetween = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min)

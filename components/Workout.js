@@ -15,6 +15,7 @@ import {
   Box,
   AspectRatio,
   LoadingOverlay,
+  useMantineTheme,
 } from '@mantine/core'
 import { IconCheck, IconAlertCircle, IconShare } from '@tabler/icons-react'
 import party from 'party-js'
@@ -169,7 +170,8 @@ const Workout = ({ workout, updateProgress, user }) => {
   const [active, setActive] = useState(0)
   const [opened, setOpened] = useState(false)
   const [sets, setSets] = useState([])
-
+  const theme = useMantineTheme()
+  const background = colorScheme === 'dark' ? theme.white : theme.colors.blue[6]
   const handleChange = (value, index) => {
     const newSets = [...sets.slice(0, index), value, ...sets.slice(index + 1)]
     setSets(newSets)
@@ -271,9 +273,11 @@ const Workout = ({ workout, updateProgress, user }) => {
             and to repeat workouts.
           </Text>
           <Button
-            variant='white'
+            variant='outline'
+            mt='md'
             leftIcon={<IconShare size='1rem' />}
             onClick={() => setOpened(true)}
+            color={background}
           >
             Share my journey success
           </Button>

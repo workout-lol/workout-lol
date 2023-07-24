@@ -8,13 +8,13 @@ import {
   Menu,
   ActionIcon,
 } from '@mantine/core'
-import { Avatar } from '@mantine/core'
 import {
   IconLogin,
   IconUserPlus,
   IconLogout,
   IconSun,
   IconMoonStars,
+  IconMenu2,
 } from '@tabler/icons-react'
 import { useSession, signIn, signOut } from 'next-auth/react'
 
@@ -29,6 +29,7 @@ const Header = () => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme()
   const dark = colorScheme === 'dark'
   const { data: user = {} } = account
+
   const userAvatar =
     session &&
     session.user.email &&
@@ -67,15 +68,23 @@ const Header = () => {
         </ActionIcon>
         <Menu shadow='md' width={200} style={{ cursor: 'pointer' }}>
           <Menu.Target>
-            <Avatar radius='xl' color={!!userAvatar ? 'blue' : undefined}>
-              {userAvatar ? userAvatar : ''}
-            </Avatar>
+            <ActionIcon
+              variant='outline'
+              title='Open menu'
+              color={session ? 'blue' : 'grey'}
+            >
+              {!userAvatar && <IconMenu2 size='1.1rem' />}
+              {userAvatar && <Text>{userAvatar}</Text>}
+            </ActionIcon>
           </Menu.Target>
           <Menu.Dropdown>
+            <Link href='/workouts' className={styles.link}>
+              <Menu.Item>Public Workouts</Menu.Item>
+            </Link>
+            <Menu.Divider />
             <Link href='/profile' className={styles.link}>
               <Menu.Item>Profile</Menu.Item>
             </Link>
-            <Menu.Divider />
             {!session && (
               <>
                 <Menu.Item

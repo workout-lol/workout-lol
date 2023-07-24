@@ -34,7 +34,6 @@ const createOauthUser = async ({ email, provider, defaultSlug }) => {
 export const authOptions = {
   callbacks: {
     async signIn({ account, profile }) {
-      console.log(account, profile)
       if (account.provider === 'google') {
         const user = await createOauthUser({
           email: profile.email,

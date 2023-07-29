@@ -60,3 +60,14 @@ export const muscleToColor = {
   Traps: 'orange',
   Triceps: 'gray',
 }
+
+export const equipmentLabels = {
+  none: 'Bodyweight',
+  dumbbell: 'Dumbbell',
+  barbell: 'Barbell',
+  kettlebell: 'Kettlebell',
+  band: 'Band',
+  plate: 'Plate',
+  'pull-up-bar': 'Pull-up bar',
+  bench: 'Bench',
+}

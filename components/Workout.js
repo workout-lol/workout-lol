@@ -12,7 +12,6 @@ import {
   Input,
   Tooltip,
   Title,
-  Box,
   AspectRatio,
   LoadingOverlay,
   Modal,

@@ -8,19 +8,8 @@ import {
   Timeline,
   Accordion,
 } from '@mantine/core'
-import { muscleToColor } from '../Exercises/utils'
+import { muscleToColor, equipmentLabels } from '../Exercises/utils'
 import VideoIcon from '../Exercises/VideoIcon'
-
-const equipmentLabels = {
-  none: 'Bodyweight',
-  dumbbell: 'Dumbbell',
-  barbell: 'Barbell',
-  kettlebell: 'Kettlebell',
-  band: 'Band',
-  plate: 'Plate',
-  'pull-up-bar': 'Pull-up bar',
-  bench: 'Bench',
-}
 
 const PublicWorkout = ({
   workout,

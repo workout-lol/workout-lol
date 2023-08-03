@@ -89,6 +89,7 @@ const ActiveExercise = ({
   sets,
   user,
   active,
+  workoutSteps
 }) => {
   const workouts =
     user &&
@@ -156,7 +157,8 @@ const ActiveExercise = ({
             prevSet={prevSets[2]}
           />
         </Flex>
-        <Button onClick={() => changeStep(1)}>Next Exercise</Button>
+        <Button onClick={() => changeStep(1)}>{active < workoutSteps ? 'Next Exercise' : 'Finish Workout'}</Button>
+        {active == workoutSteps && sets.length <= 2 && (<Button ml='sm' onClick={() => changeStep(-workoutSteps)}>Start Next Set</Button>)}
       </Flex>
     </>
   )
@@ -226,6 +228,7 @@ const Workout = ({ workout, updateProgress, user }) => {
                   changeStep={changeStep}
                   user={user}
                   active={active}
+                  workoutSteps={workout.length - 1}
                 />
               </Timeline.Item>
             ) : (

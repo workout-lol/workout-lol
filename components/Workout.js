@@ -22,6 +22,8 @@ import party from 'party-js'
 import InfoCard from './InfoCard'
 import { randomId } from '@mantine/hooks'
 
+const NOTE_NOT_SET = {}
+
 const RepInput = ({ index, handleChange, sets, prevSet }) => (
   <Input
     placeholder={`${index + 1}. Set`}
@@ -111,7 +113,7 @@ const ActiveExercise = ({
   const prevExercise =
     allCompletetExercises.find((e) => e._id === exercise._id) || {}
   const prevSets = prevExercise.sets || []
-  if (note == null) {
+  if (note == NOTE_NOT_SET) {
     note = prevExercise.note || ''
     setNote(note)
   }
@@ -208,7 +210,7 @@ const Workout = ({ workout, updateProgress, user }) => {
   const confettiDom = useRef(null)
   const [active, setActive] = useState(0)
   const [sets, setSets] = useState([])
-  const [note, setNote] = useState(null)
+  const [note, setNote] = useState(NOTE_NOT_SET)
 
   const handleChange = (value, index) => {
     const newSets = [...sets.slice(0, index), value, ...sets.slice(index + 1)]
@@ -223,7 +225,7 @@ const Workout = ({ workout, updateProgress, user }) => {
 
     updateProgress({ index: active, sets, note })
     setSets((userWorkout.exercises[newIndex] || {}).sets || [])
-    setNote((userWorkout.exercises[newIndex] || {}).note)
+    setNote((userWorkout.exercises[newIndex] || {}).note || NOTE_NOT_SET)
     setActive(newIndex)
 
     if (active === workout.length - 1 && update > 0) {

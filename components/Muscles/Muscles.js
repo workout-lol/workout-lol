@@ -50,6 +50,7 @@ const Muscles = ({
   return (
     <div className={styles.svgContainer}>
       <FullscreenLoader isVisible={isLoading} />
+      {/* hide difficulty levels
       <MultiSelect
         mb='md'
         data={difficultyData}
@@ -57,6 +58,7 @@ const Muscles = ({
         placeholder='Pick all that you like (optional)'
         onChange={setDifficulties}
       />
+      */}
       <Text fs='italic' ta='center' mb='lg'>
         Select the muscles you would like to train. (2-3 recommended)
       </Text>

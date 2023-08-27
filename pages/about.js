@@ -7,26 +7,22 @@ export default function Home() {
       <Text fw='bold'>About</Text>
       <Text>
         <p>
-          Welcome to Workout.lol! I&apos;m{' '}
-          <a href='https://vincentwill.com'>Vincent</a>, the creator of this
-          small side project.
+          Welcome to Workout.lol!
         </p>
         <p>
           Workout.lol is a free and open-source platform designed to help you
-          achieve your fitness goals. I used the exercises and videos from the
-          awesome <a href='https://musclewiki.com/'>MuscleWiki</a> website (with
-          their consent).
+          achieve your fitness goals. We are building a library of exercises and videos
+          and also working on suggestion, tracking and feedback features.
         </p>
         <p>
           Workout.lol is still in beta. Your feedback is highly valued, so
-          please don&apos;t hesitate to reach out to me on{' '}
-          <a href='https://twitter.com/wweb_dev'>Twitter</a> or via{' '}
-          <a href='mailto:info@workout.lol'>E-Mail</a> if you encounter any bugs
+          please don&apos;t hesitate to reach out to me via{' '}
+          <a href='mailto:info@workout.lol'>mail</a> if you encounter any bugs
           or have specific requests.
         </p>
         <p>
           If you enjoy using Workout.lol and would like to contribute to its
-          development and maintenance, you can support me by making a{' '}
+          development and maintenance, you can support us by making a{' '}
           <a href='https://ko-fi.com/workout_lol'>donation</a> to help cover the
           running costs.
         </p>
@@ -34,7 +30,7 @@ export default function Home() {
         <br />
         Cheers,
         <br />
-        Vincent
+        The Workout.lol Crew
       </Text>
     </Layout>
   )

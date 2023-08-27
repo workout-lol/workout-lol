@@ -220,13 +220,13 @@ const Workout = ({ workout, updateProgress, user }) => {
   return (
     <div>
       <InfoCard>
-        Disclaimer: All exercises and videos are provided by{' '}
+        Keep Workout.lol free. Support us by making a{' '}
         <a
-          href='https://musclewiki.com/'
+          href='https://ko-fi.com/workout_lol'
           target='_blank'
           rel='noopener noreferrer'
         >
-          musclewiki.com
+          donation.
         </a>
       </InfoCard>
       {active < workout.length && (

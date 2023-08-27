@@ -3,7 +3,7 @@ import { Indicator, ActionIcon, Modal, Text } from '@mantine/core'
 import { IconBell } from '@tabler/icons-react'
 import { useLocalStorage } from '../../utils/useAccount'
 
-const releaseNotesDate = '2023-07-24T06:52:20.623Z'
+const releaseNotesDate = '2023-08-27T10:03:20.415Z'
 const dateString = new Date(releaseNotesDate).toLocaleDateString()
 
 const IconContainer = ({ children, lastVisit }) =>
@@ -36,20 +36,20 @@ const ReleaseNotes = () => {
         onClose={() => setOpened(false)}
         title={`What's New: ${dateString}`}
       >
-        <Text fw={700}>Increased Video Size</Text>
+        <Text fw={700}>Announcement About Videos</Text>
         <Text mb='sm'>
-          As requested by some people, the videos you see while doing the
-          workout are now bigger and can be opened in fullscreen by clicking on
-          them.
+          As our agreement with MuscleWiki has come to an end, we have 
+          removed/replaced the videos for our exercise. Some exercises
+          will not have videos for now - we are working on replacing them.
         </Text>
 
         {/* <Text mb="sm">
         Is there anything you would like to see on workout.lol that would improve your experience?
         Let me know via <a href="mailto:info@workout.lol">Email</a>, <a href="https://twitter.com/wweb_dev" target="_blank" rel="noopener noreferrer">Twitter</a> or <a href="https://github.com/Vincenius/workout-lol/issues" target="_blank" rel="noopener noreferrer">GitHub</a>.
       </Text> */}
-        <Text mb='sm'>Enjoy your workout 💪!</Text>
+        <Text mb='sm'>Thank you for your patience. Enjoy your workout 💪!</Text>
         <Text>Cheers,</Text>
-        <Text>Vincent</Text>
+        <Text>The Workout.lol Crew</Text>
       </Modal>
     </>
   )

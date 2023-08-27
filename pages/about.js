@@ -30,7 +30,7 @@ export default function Home() {
         <br />
         Cheers,
         <br />
-        The Workout.lol Crew
+        Workout.lol Crew
       </Text>
     </Layout>
   )

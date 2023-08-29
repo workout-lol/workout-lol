@@ -6,13 +6,12 @@ export default function Home() {
     <Layout>
       <Text fw='bold'>About</Text>
       <Text>
-        <p>
-          Welcome to Workout.lol!
-        </p>
+        <p>Welcome to Workout.lol!</p>
         <p>
           Workout.lol is a free and open-source platform designed to help you
-          achieve your fitness goals. We are building a library of exercises and videos
-          and also working on suggestion, tracking and feedback features.
+          achieve your fitness goals. We are building a library of exercises and
+          videos and also working on suggestion, tracking feedback and feature
+          requests.
         </p>
         <p>
           Workout.lol is still in beta. Your feedback is highly valued, so

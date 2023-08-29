@@ -36,13 +36,14 @@ const ReleaseNotes = () => {
         onClose={() => setOpened(false)}
         title={`What's New: ${dateString}`}
       >
-        <Text fw={700}>Announcement About Videos</Text>
+        <Text fw={700}>Announcement About Videos & Instructions</Text>
         <Text mb='sm'>
-          As our agreement with MuscleWiki has come to an end, we have 
-          removed/replaced the videos for our exercise. Some exercises
-          will not have videos for now - we are working on replacing them.
+          As our agreement with MuscleWiki has come to an end, we have
+          removed/replaced the videos and instructions for our exercise. Some
+          exercises will not have videos and instructions and for now - we are
+          working on replacing them. All instructions will be live by 29th
+          August. Videos will take a few weeks.
         </Text>
-
         {/* <Text mb="sm">
         Is there anything you would like to see on workout.lol that would improve your experience?
         Let me know via <a href="mailto:info@workout.lol">Email</a>, <a href="https://twitter.com/wweb_dev" target="_blank" rel="noopener noreferrer">Twitter</a> or <a href="https://github.com/Vincenius/workout-lol/issues" target="_blank" rel="noopener noreferrer">GitHub</a>.

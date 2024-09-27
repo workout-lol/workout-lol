@@ -73,7 +73,7 @@ export default function App(props) {
         <link rel='mask-icon' href='/icons/logo.png' color='#efd36c' />
         <link rel='shortcut icon' href='/favicon.ico' />
 
-        <!-- Google tag (gtag.js) -->
+        
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-1D4ECEBPES"></script>
         <script>
               window.dataLayer = window.dataLayer || [];

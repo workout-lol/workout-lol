@@ -73,9 +73,12 @@ export default function App(props) {
         <link rel='mask-icon' href='/icons/logo.png' color='#efd36c' />
         <link rel='shortcut icon' href='/favicon.ico' />
 
-        
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-1D4ECEBPES"></script>
-        <script dangerouslySetInnerHTML={{
+        <script
+          async
+          src='https://www.googletagmanager.com/gtag/js?id=G-1D4ECEBPES'
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
@@ -84,7 +87,6 @@ export default function App(props) {
             `,
           }}
         />
-  
       </Head>
 
       <SessionProvider session={session}>

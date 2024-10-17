@@ -44,8 +44,9 @@
 7. Open your browser to http://localhost:3000
 
 ## Steps to run it with docker
+
 1. Clone the repository to your local machine <br>
-   `git clone https://github.com/Vincenius/workout-lol.git`
+   `git clone https://github.com/workout-lol/workout-lol.git`
 2. Copy the `.env.docker` file to `.env` and set environment variables as described in the file (do not modify the `MONGODB_URI` if you wish to use the mongodb container) <br>
 3. Run the docker compose file at the root of the project <br>
    `docker compose -f docker/docker-compose.yml up -d --build`

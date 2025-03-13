@@ -109,13 +109,14 @@ export default function Home() {
     router.push('/profile')
   }
 
-  const updateProgress = ({ index, sets }) => {
+  const updateProgress = ({ index, sets, note }) => {
     const allWorkouts = (user.workouts || []).sort((a, b) =>
       a.created_at.localeCompare(b.created_at)
     )
     const latestWorkout = allWorkouts[allWorkouts.length - 1]
     latestWorkout.exercises[index].completed = true
     latestWorkout.exercises[index].sets = sets
+    latestWorkout.exercises[index].note = note
 
     setAccount({ ...user, workouts: allWorkouts })
   }

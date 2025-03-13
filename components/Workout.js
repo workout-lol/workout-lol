@@ -22,6 +22,8 @@ import party from 'party-js'
 import InfoCard from './InfoCard'
 import { randomId } from '@mantine/hooks'
 
+const NOTE_NOT_SET = {}
+
 const RepInput = ({ index, handleChange, sets, prevSet }) => (
   <Input
     placeholder={`${index + 1}. Set`}
@@ -91,9 +93,12 @@ const ActiveExercise = ({
   exercise,
   changeStep,
   handleChange,
+  setNote,
   sets,
+  note,
   user,
   active,
+  workoutSteps
 }) => {
   const workouts =
     user &&
@@ -109,6 +114,10 @@ const ActiveExercise = ({
   const prevExercise =
     allCompletetExercises.find((e) => e._id === exercise._id) || {}
   const prevSets = prevExercise.sets || []
+  if (note == NOTE_NOT_SET) {
+    note = prevExercise.note || ''
+    setNote(note)
+  }
   const [opened, setOpened] = useState(false)
 
   return (
@@ -185,7 +194,14 @@ const ActiveExercise = ({
             prevSet={prevSets[2]}
           />
         </Flex>
-        <Button onClick={() => changeStep(1)}>Next Exercise</Button>
+        <Input
+          placeholder='your notes, like weights'
+          value={note}
+          onChange={(e) => setNote(e.target.value)}
+          mr='sm'
+        />
+        <Button onClick={() => changeStep(1)}>{active < workoutSteps ? 'Next Exercise' : 'Finish Workout'}</Button>
+        {active == workoutSteps && sets.length <= 2 && (<Button ml='sm' onClick={() => changeStep(-workoutSteps)}>Start Next Set</Button>)}
       </Flex>
     </>
   )
@@ -196,6 +212,7 @@ const Workout = ({ workout, updateProgress, user }) => {
   const confettiDom = useRef(null)
   const [active, setActive] = useState(0)
   const [sets, setSets] = useState([])
+  const [note, setNote] = useState(NOTE_NOT_SET)
 
   const handleChange = (value, index) => {
     const newSets = [...sets.slice(0, index), value, ...sets.slice(index + 1)]
@@ -208,8 +225,9 @@ const Workout = ({ workout, updateProgress, user }) => {
     )[0]
     const newIndex = active + update
 
-    updateProgress({ index: active, sets })
+    updateProgress({ index: active, sets, note })
     setSets((userWorkout.exercises[newIndex] || {}).sets || [])
+    setNote((userWorkout.exercises[newIndex] || {}).note || NOTE_NOT_SET)
     setActive(newIndex)
 
     if (active === workout.length - 1 && update > 0) {
@@ -251,10 +269,13 @@ const Workout = ({ workout, updateProgress, user }) => {
                 <ActiveExercise
                   exercise={exercise}
                   handleChange={handleChange}
+                  setNote={setNote}
                   sets={sets}
+                  note={note}
                   changeStep={changeStep}
                   user={user}
                   active={active}
+                  workoutSteps={workout.length - 1}
                 />
               </Timeline.Item>
             ) : (

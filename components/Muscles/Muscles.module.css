@@ -1,9 +1,11 @@
-.svgContainer, .svgContainerDark {
+.svgContainer,
+.svgContainerDark {
   margin: 2em 0;
   position: relative;
 }
 
-.illustration, .illustrationDark {
+.illustration,
+.illustrationDark {
   width: 100%;
   height: auto;
 }
@@ -16,30 +18,42 @@
 
 .illustration .empty,
 .illustration .muscle {
-  fill: #757575;
+  fill: #757575; /* default gray */
 }
 .illustrationDark .empty,
 .illustrationDark .muscle {
-  fill: #25262b;
+  fill: #25262b; /* dark mode default */
 }
+
 .muscleContainer {
   z-index: 1;
   cursor: pointer;
 }
 
-.illustration .muscle.enabled {
-  fill: #bdbdbd;
-}
-
-.illustrationDark .muscle.enabled {
-  fill: #5c5f66;
-}
-
-.muscle.enabled.hover {
-  fill: #69b0ee;
+/* Hover state */
+.muscle:hover {
+  fill: #d3d3d3;
   cursor: pointer;
 }
 
+/* Selected muscles (red highlight) */
+.muscle.selected {
+  fill: red !important;
+}
+
+/* Keep these for legacy support, but they won’t control selection anymore */
+.illustration .muscle.enabled {
+  fill: #bdbdbd;
+}
+.illustrationDark .muscle.enabled {
+  fill: #5c5f66;
+}
+.muscle.enabled.hover {
+  fill: #69b0ee;
+}
 .muscle.enabled.active {
   fill: #228be6;
+}
+.muscle.enabled.selected {
+  fill: red !important;
 }

@@ -82,6 +82,10 @@ export default function Home() {
 
   const updateEquipment = (update) => {
     setAccount({ ...user, equipment: update })
+
+    if (workout.length) {
+      setWorkout([])
+    }
   }
 
   const saveWorkout = () => {

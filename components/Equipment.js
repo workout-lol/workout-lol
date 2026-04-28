@@ -77,6 +77,11 @@ const BaseConfigure = ({ equipment, updateEquipment }) => {
           id='bench'
           {...{ equipment, updateEquipment }}
         />
+        <Equipment
+          caption='Cable'
+          id='cable'
+          {...{ equipment, updateEquipment }}
+        />
       </Flex>
     </>
   )

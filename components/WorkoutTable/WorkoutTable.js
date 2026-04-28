@@ -28,6 +28,7 @@ const ShareIcon = ({ workout = {}, mobile }) => (
                 variant='subtle'
                 onClick={copy}
                 mr={mobile ? 'md' : 0}
+                aria-label='Copy workout share link'
               >
                 <IconShare />
               </ActionIcon>
@@ -90,7 +91,11 @@ const WorkoutTable = ({ workouts, deleteWorkout, viewOnly = false }) => {
                   <td>
                     <Link href={`/?repeat_id=${w.id}`}>
                       <Tooltip label='Repeat workout'>
-                        <ActionIcon color='blue' variant='subtle'>
+                        <ActionIcon
+                          color='blue'
+                          variant='subtle'
+                          aria-label='Repeat workout'
+                        >
                           <IconRepeat />
                         </ActionIcon>
                       </Tooltip>
@@ -102,6 +107,7 @@ const WorkoutTable = ({ workouts, deleteWorkout, viewOnly = false }) => {
                         color='red'
                         variant='subtle'
                         onClick={() => deleteWorkout(w.id)}
+                        aria-label='Delete workout'
                       >
                         <IconTrash />
                       </ActionIcon>
@@ -140,7 +146,12 @@ const WorkoutTable = ({ workouts, deleteWorkout, viewOnly = false }) => {
                   {isLoggedIn && <ShareIcon workout={w} mobile={true} />}
                   <Link href={`/?repeat_id=${w.id}`}>
                     <Tooltip label='Repeat workout'>
-                      <ActionIcon color='blue' variant='subtle' mr='sm'>
+                      <ActionIcon
+                        color='blue'
+                        variant='subtle'
+                        mr='sm'
+                        aria-label='Repeat workout'
+                      >
                         <IconRepeat />
                       </ActionIcon>
                     </Tooltip>

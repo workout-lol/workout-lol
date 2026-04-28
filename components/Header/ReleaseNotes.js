@@ -27,7 +27,11 @@ const ReleaseNotes = () => {
   return (
     <>
       <IconContainer lastVisit={lastVisit}>
-        <ActionIcon variant='subtle' onClick={showNotes}>
+        <ActionIcon
+          variant='subtle'
+          onClick={showNotes}
+          aria-label='Show release notes'
+        >
           <IconBell size='1rem' />
         </ActionIcon>
       </IconContainer>

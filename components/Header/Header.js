@@ -62,12 +62,18 @@ const Header = () => {
           color={dark ? 'yellow' : 'blue'}
           onClick={() => toggleColorScheme()}
           title='Toggle color scheme'
+          aria-label='Toggle color scheme'
         >
           {dark ? <IconSun size='1.1rem' /> : <IconMoonStars size='1.1rem' />}
         </ActionIcon>
         <Menu shadow='md' width={200} style={{ cursor: 'pointer' }}>
           <Menu.Target>
-            <Avatar radius='xl' color={!!userAvatar ? 'blue' : undefined}>
+            <Avatar
+              radius='xl'
+              color={!!userAvatar ? 'blue' : undefined}
+              role='button'
+              aria-label='Open account menu'
+            >
               {userAvatar ? userAvatar : ''}
             </Avatar>
           </Menu.Target>

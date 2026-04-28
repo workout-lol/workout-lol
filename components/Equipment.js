@@ -4,6 +4,8 @@ import { Flex, Button, Image, Text } from '@mantine/core'
 const Equipment = ({ caption, id, equipment, updateEquipment }) => (
   <Button
     variant={equipment.includes(id) ? 'light' : 'outline'}
+    aria-pressed={equipment.includes(id)}
+    aria-label={`${caption} equipment`}
     onClick={() => {
       equipment.includes(id)
         ? updateEquipment(equipment.filter((e) => e !== id))

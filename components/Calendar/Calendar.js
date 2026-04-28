@@ -13,7 +13,12 @@ const Calendar = ({ workouts = [], variant = 'small' }) => {
     <>
       {variant !== 'small' && (
         <Flex justify='center'>
-          <Checkbox mr={3} className={styles.future} readOnly />
+          <Checkbox
+            mr={3}
+            className={styles.future}
+            readOnly
+            aria-label='Future workout day'
+          />
           {[...Array(columns)]
             .map((x, i) => {
               const date = new Date()
@@ -115,6 +120,7 @@ const Calendar = ({ workouts = [], variant = 'small' }) => {
                           mb={3}
                           className={className}
                           readOnly
+                          aria-label={`${date.toDateString()} workout completed`}
                         />
                       </Tooltip>
                     )

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -17,7 +17,13 @@ import {
   LoadingOverlay,
   Modal,
 } from '@mantine/core'
-import { IconCheck, IconAlertCircle } from '@tabler/icons-react'
+import {
+  IconCheck,
+  IconAlertCircle,
+  IconPlayerPlay,
+  IconPlayerPause,
+  IconRefresh,
+} from '@tabler/icons-react'
 import party from 'party-js'
 import InfoCard from './InfoCard'
 import { randomId } from '@mantine/hooks'
@@ -49,6 +55,62 @@ const RepInput = ({ index, handleChange, sets, prevSet }) => (
     }
   />
 )
+
+const formatElapsedTime = (seconds) => {
+  const minutes = Math.floor(seconds / 60)
+  const remainingSeconds = seconds % 60
+  return `${minutes.toString().padStart(2, '0')}:${remainingSeconds
+    .toString()
+    .padStart(2, '0')}`
+}
+
+const WorkoutStopwatch = () => {
+  const [seconds, setSeconds] = useState(0)
+  const [isRunning, setIsRunning] = useState(false)
+
+  useEffect(() => {
+    if (!isRunning) return
+
+    const interval = setInterval(() => {
+      setSeconds((currentSeconds) => currentSeconds + 1)
+    }, 1000)
+
+    return () => clearInterval(interval)
+  }, [isRunning])
+
+  return (
+    <Flex align='center' gap='xs' my='xs' wrap='wrap'>
+      <Text fw={600} sx={{ fontVariantNumeric: 'tabular-nums' }}>
+        Rest timer: {formatElapsedTime(seconds)}
+      </Text>
+      <Button
+        size='xs'
+        variant='light'
+        leftIcon={
+          isRunning ? (
+            <IconPlayerPause size='0.8rem' />
+          ) : (
+            <IconPlayerPlay size='0.8rem' />
+          )
+        }
+        onClick={() => setIsRunning((running) => !running)}
+      >
+        {isRunning ? 'Pause' : 'Start'}
+      </Button>
+      <Button
+        size='xs'
+        variant='subtle'
+        leftIcon={<IconRefresh size='0.8rem' />}
+        onClick={() => {
+          setIsRunning(false)
+          setSeconds(0)
+        }}
+      >
+        Reset
+      </Button>
+    </Flex>
+  )
+}
 
 const ExerciseVideo = ({ video, sx, ...rest }) => {
   const [isReady, setIsReady] = useState(false)
@@ -116,7 +178,7 @@ const ActiveExercise = ({
       <Text mr='xs' fw={500}>
         {exercise.title}
       </Text>
-      {/* idea - display clock button which triggers eine stop clock */}
+      <WorkoutStopwatch />
 
       {active !== 0 && (
         <Button

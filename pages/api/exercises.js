@@ -2,7 +2,7 @@ import { ObjectId } from 'mongodb'
 import NextCors from 'nextjs-cors'
 import { getExercisesByAggregation } from '../../lib/db-helper'
 
-export const getQuery = (match) => [
+export const getQuery = (match, { includeStretches = false } = {}) => [
   {
     $addFields: {
       mainMuscle: {
@@ -22,7 +22,7 @@ export const getQuery = (match) => [
               'Medicine Ball',
               'Machine',
               'Cables',
-              'Stretches', // todo re-add and sort
+              ...(includeStretches ? [] : ['Stretches']),
             ],
           },
         },
@@ -57,35 +57,43 @@ const handler = async (req, res) => {
 
     res.status(200).json(workouts)
   } else if (req.method === 'GET') {
-    const { equipment = '', muscles = '', difficulty = '' } = req.query
+    const {
+      equipment = '',
+      muscles = '',
+      difficulty = '',
+      includeStretches = '',
+    } = req.query
     const mappedEquipment = equipment.split(',').filter(Boolean)
     const mappedMuscles = muscles.split(',').filter(Boolean)
     const mappedDifficulties = difficulty.split(',').filter(Boolean)
-    const query = getQuery([
-      {
-        mainMuscle: {
-          $in: mappedMuscles,
+    const query = getQuery(
+      [
+        {
+          mainMuscle: {
+            $in: mappedMuscles,
+          },
         },
-      },
-      {
-        equipment: {
-          $not: {
-            $elemMatch: {
-              $nin: mappedEquipment,
+        {
+          equipment: {
+            $not: {
+              $elemMatch: {
+                $nin: mappedEquipment,
+              },
             },
           },
         },
-      },
-      ...(mappedDifficulties.length
-        ? [
-            {
-              difficulty: {
-                $in: mappedDifficulties,
+        ...(mappedDifficulties.length
+          ? [
+              {
+                difficulty: {
+                  $in: mappedDifficulties,
+                },
               },
-            },
-          ]
-        : []),
-    ])
+            ]
+          : []),
+      ],
+      { includeStretches: includeStretches === 'true' }
+    )
 
     const workouts = await getExercisesByAggregation(query)
 

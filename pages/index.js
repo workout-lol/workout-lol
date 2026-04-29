@@ -26,6 +26,7 @@ export default function Home() {
 
   const [active, setActive] = useState(0)
   const [difficulties, setDifficulties] = useState([])
+  const [includeStretches, setIncludeStretches] = useState(false)
   const [error, setError] = useState()
   const nextStep = () => {
     if (active === 2) {
@@ -141,12 +142,21 @@ export default function Home() {
               equipment,
               setDifficulties,
               difficulties,
+              includeStretches,
+              setIncludeStretches,
             }}
           />
         </Stepper.Step>
         <Stepper.Step label='Exercises' description='Customize your workout'>
           <Exercises
-            {...{ equipment, muscles, workout, setWorkout, difficulties }}
+            {...{
+              equipment,
+              muscles,
+              workout,
+              setWorkout,
+              difficulties,
+              includeStretches,
+            }}
           />
         </Stepper.Step>
         <Stepper.Completed>

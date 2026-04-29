@@ -32,6 +32,9 @@ const createOauthUser = async ({ email, provider, defaultSlug }) => {
 }
 
 export const authOptions = {
+  pages: {
+    signIn: '/auth/signin',
+  },
   callbacks: {
     async signIn({ account, profile }) {
       console.log(account, profile)

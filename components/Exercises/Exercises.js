@@ -39,12 +39,13 @@ const Exercises = ({
   workout,
   setWorkout,
   difficulties,
+  includeWarmups = false,
 }) => {
   const { colorScheme } = useMantineColorScheme()
   const defaultCount = Math.round(6 / muscles.length) || 1 // default around 6 exercises
   const sortedEquipments = equipment.sort().join(',')
   const sortedMuscles = muscles.sort().join(',')
-  const query = `?equipment=${sortedEquipments}&muscles=${sortedMuscles}`
+  const query = `?equipment=${sortedEquipments}&muscles=${sortedMuscles}&includeStretches=${includeWarmups}`
   const {
     data = [],
     error,
@@ -56,11 +57,17 @@ const Exercises = ({
   const exerciseData = difficulties.length
     ? data.filter((d) => difficulties.includes(d.difficulty))
     : data
+  const workoutExerciseData = exerciseData.filter(
+    (exercise) => exercise.category !== 'Stretches'
+  )
+  const warmupData = exerciseData.filter(
+    (exercise) => exercise.category === 'Stretches'
+  )
 
   useEffect(() => {
     // first load
     if (exerciseData.length && !workout.length) {
-      const exercises = shuffle(exerciseData).reduce((acc, curr) => {
+      const exercises = shuffle(workoutExerciseData).reduce((acc, curr) => {
         if (
           acc.filter((e) => e.mainMuscle === curr.mainMuscle).length <
           defaultCount
@@ -75,9 +82,26 @@ const Exercises = ({
         'mainMuscle'
       )
 
-      setWorkout(sortedArray)
+      const warmups = includeWarmups
+        ? muscles
+            .map((muscle) =>
+              shuffle(warmupData).find((warmup) => warmup.mainMuscle === muscle)
+            )
+            .filter(Boolean)
+        : []
+
+      setWorkout([...warmups, ...sortedArray])
     }
-  }, [exerciseData, defaultCount, workout, setWorkout])
+  }, [
+    exerciseData,
+    workoutExerciseData,
+    warmupData,
+    includeWarmups,
+    defaultCount,
+    muscles,
+    workout,
+    setWorkout,
+  ])
 
   const shuffleExercise = (exercise) => {
     const newExercise = shuffle(exerciseData)

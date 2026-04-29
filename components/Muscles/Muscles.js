@@ -1,6 +1,6 @@
 import React from 'react'
 import useSWR from 'swr'
-import { Text, MultiSelect } from '@mantine/core'
+import { Text, MultiSelect, Switch } from '@mantine/core'
 import Illustration from './Illustration'
 import FullscreenLoader from '../../components/FullscreenLoader'
 import styles from './Muscles.module.css'
@@ -18,6 +18,8 @@ const Muscles = ({
   equipment = [],
   setDifficulties,
   difficulties = [],
+  includeWarmups = false,
+  setIncludeWarmups,
 }) => {
   const sortedEquipments = equipment.sort().join(',')
   const query = `?equipment=${sortedEquipments}`
@@ -59,6 +61,17 @@ const Muscles = ({
         onChange={setDifficulties}
       />
       */}
+      <Switch
+        checked={includeWarmups}
+        onChange={(event) => {
+          setIncludeWarmups(event.currentTarget.checked)
+          if (workout.length) {
+            setWorkout([])
+          }
+        }}
+        label='Add warm-ups before my workout'
+        mb='md'
+      />
       <Text fs='italic' ta='center' mb='lg'>
         Select the muscles you would like to train. (2-3 recommended)
       </Text>

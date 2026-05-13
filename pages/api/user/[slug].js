@@ -33,13 +33,16 @@ const handler = async (req, res) => {
 
     const ids = user.workouts.map((w) => w.exercises.map((e) => e.id)).flat()
 
-    const query = getQuery([
-      {
-        _id: {
-          $in: ids.map((e) => new ObjectId(e)),
+    const query = getQuery(
+      [
+        {
+          _id: {
+            $in: ids.map((e) => new ObjectId(e)),
+          },
         },
-      },
-    ])
+      ],
+      { includeYoga: true }
+    )
 
     const workouts = await getExercisesByAggregation(query)
 

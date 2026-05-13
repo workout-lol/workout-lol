@@ -1,6 +1,9 @@
 // import { ObjectId } from 'mongodb'
 import NextCors from 'nextjs-cors'
 import { getExercisesByAggregation } from '../../lib/db-helper' // updateExercise
+import { getQuery } from './exercises'
+
+const includesYoga = (value) => value === 'true' || value === '1'
 
 const handler = async (req, res) => {
   await NextCors(req, res, {
@@ -11,49 +14,24 @@ const handler = async (req, res) => {
   })
 
   if (req.method === 'GET') {
-    const { equipment = [] } = req.query
+    const { equipment = [], includeYoga = '' } = req.query
     const mappedEquipment = equipment.split(',').filter(Boolean)
 
     const query = [
-      {
-        $addFields: {
-          mainMuscle: {
-            $arrayElemAt: ['$targets', 0],
-          },
-        },
-      },
-      {
-        $match: {
-          $and: [
-            {
-              equipment: {
-                $not: {
-                  $elemMatch: {
-                    $nin: mappedEquipment,
-                  },
+      ...getQuery(
+        [
+          {
+            equipment: {
+              $not: {
+                $elemMatch: {
+                  $nin: mappedEquipment,
                 },
               },
             },
-            {
-              category: {
-                $nin: [
-                  'Yoga',
-                  'TRX',
-                  'Medicine Ball',
-                  'Machine',
-                  'Cables',
-                  'Stretches', // todo re-add and sort
-                ],
-              },
-            },
-            {
-              difficulty: {
-                $nin: ['Yoga'],
-              },
-            },
-          ],
-        },
-      },
+          },
+        ],
+        { includeYoga: includesYoga(includeYoga) }
+      ),
       {
         $project: {
           item: 1,

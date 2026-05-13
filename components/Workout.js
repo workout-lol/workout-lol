@@ -191,11 +191,11 @@ const ActiveExercise = ({
   )
 }
 
-const Workout = ({ workout, updateProgress, user }) => {
+const Workout = ({ workout, updateProgress, user, initialActive = 0 }) => {
   const { colorScheme } = useMantineColorScheme()
   const confettiDom = useRef(null)
-  const [active, setActive] = useState(0)
-  const [sets, setSets] = useState([])
+  const [active, setActive] = useState(initialActive)
+  const [sets, setSets] = useState(workout[initialActive]?.sets || [])
 
   const handleChange = (value, index) => {
     const newSets = [...sets.slice(0, index), value, ...sets.slice(index + 1)]

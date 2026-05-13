@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { Group, Button, Stepper } from '@mantine/core'
+import { Group, Button, Stepper, Modal, Text } from '@mantine/core'
 import { v4 as uuidv4 } from 'uuid'
 
 import Equipment from '../components/Equipment'
@@ -10,6 +10,16 @@ import Workout from '../components/Workout'
 import Layout from '../components/Layout/Layout'
 import useAccount from '../utils/useAccount'
 import useWorkout from '../utils/useWorkout'
+
+const getLatestIncompleteWorkout = (workouts = []) =>
+  [...workouts]
+    .filter((w) => (w.exercises || []).some((e) => !e.completed))
+    .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))[0]
+
+const getFirstIncompleteExerciseIndex = (exercises = []) => {
+  const index = exercises.findIndex((e) => !e.completed)
+  return index === -1 ? 0 : index
+}
 
 export default function Home() {
   const router = useRouter()
@@ -23,13 +33,19 @@ export default function Home() {
   )
   const shareWorkoutId = router.query && router.query.share_id
   const { data: shareWorkout, isLoading } = useWorkout(shareWorkoutId)
+  const latestIncompleteWorkout = getLatestIncompleteWorkout(user.workouts)
+  const latestIncompleteWorkoutId = latestIncompleteWorkout?.id
 
   const [active, setActive] = useState(0)
   const [difficulties, setDifficulties] = useState([])
   const [error, setError] = useState()
+  const [resumeModalOpen, setResumeModalOpen] = useState(false)
+  const [dismissedResumeWorkoutId, setDismissedResumeWorkoutId] = useState()
+  const [initialExerciseIndex, setInitialExerciseIndex] = useState(0)
   const nextStep = () => {
     if (active === 2) {
       saveWorkout()
+      setInitialExerciseIndex(0)
     }
     setActive((current) => (current < 3 ? current + 1 : current))
   }
@@ -80,6 +96,26 @@ export default function Home() {
     }
   }, [repeatWorkout, shareWorkout, workout, router])
 
+  useEffect(() => {
+    if (
+      active === 0 &&
+      !workout.length &&
+      latestIncompleteWorkoutId &&
+      latestIncompleteWorkoutId !== dismissedResumeWorkoutId &&
+      !repeatWorkoutId &&
+      !shareWorkoutId
+    ) {
+      setResumeModalOpen(true)
+    }
+  }, [
+    active,
+    dismissedResumeWorkoutId,
+    latestIncompleteWorkoutId,
+    repeatWorkoutId,
+    shareWorkoutId,
+    workout.length,
+  ])
+
   const updateEquipment = (update) => {
     setAccount({ ...user, equipment: update })
   }
@@ -107,6 +143,23 @@ export default function Home() {
   const saveForLater = () => {
     saveWorkout()
     router.push('/profile')
+  }
+
+  const continueIncompleteWorkout = () => {
+    setWorkout(latestIncompleteWorkout.exercises)
+    setMuscles([
+      ...new Set(latestIncompleteWorkout.exercises.map((e) => e.mainMuscle)),
+    ])
+    setInitialExerciseIndex(
+      getFirstIncompleteExerciseIndex(latestIncompleteWorkout.exercises)
+    )
+    setActive(3)
+    setResumeModalOpen(false)
+  }
+
+  const dismissIncompleteWorkout = () => {
+    setDismissedResumeWorkoutId(latestIncompleteWorkoutId)
+    setResumeModalOpen(false)
   }
 
   const updateProgress = ({ index, sets }) => {
@@ -150,9 +203,29 @@ export default function Home() {
           />
         </Stepper.Step>
         <Stepper.Completed>
-          <Workout {...{ workout, updateProgress, user }} />
+          <Workout
+            {...{ workout, updateProgress, user }}
+            initialActive={initialExerciseIndex}
+          />
         </Stepper.Completed>
       </Stepper>
+
+      <Modal
+        opened={resumeModalOpen}
+        onClose={dismissIncompleteWorkout}
+        title='Continue workout?'
+        centered
+      >
+        <Text mb='md'>
+          You have an unfinished workout. Continue from where you left off?
+        </Text>
+        <Group position='right'>
+          <Button variant='subtle' onClick={dismissIncompleteWorkout}>
+            Dismiss
+          </Button>
+          <Button onClick={continueIncompleteWorkout}>Continue workout</Button>
+        </Group>
+      </Modal>
 
       {active !== 3 && (
         <Group position='center' mt='xl'>

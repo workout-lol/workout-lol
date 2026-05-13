@@ -39,12 +39,13 @@ const Exercises = ({
   workout,
   setWorkout,
   difficulties,
+  includeYoga,
 }) => {
   const { colorScheme } = useMantineColorScheme()
   const defaultCount = Math.round(6 / muscles.length) || 1 // default around 6 exercises
   const sortedEquipments = equipment.sort().join(',')
   const sortedMuscles = muscles.sort().join(',')
-  const query = `?equipment=${sortedEquipments}&muscles=${sortedMuscles}`
+  const query = `?equipment=${sortedEquipments}&muscles=${sortedMuscles}&includeYoga=${includeYoga}`
   const {
     data = [],
     error,
@@ -358,7 +359,7 @@ const draggingStyle = (isDragging, isDarkMode) => ({
       ? '2px solid #373A40'
       : '2px solid #d0ebff'
     : isDarkMode
-    ? '2px solid #1A1B1E'
-    : '2px solid #e7f5ff',
+      ? '2px solid #1A1B1E'
+      : '2px solid #e7f5ff',
 })
 export default Exercises

@@ -34,7 +34,12 @@ export default function Home() {
     setActive((current) => (current < 3 ? current + 1 : current))
   }
   const jumpToStep = (step) => {
-    const isFirstStep = active === 0
+    if (step < active) {
+      if (step <= 1) {
+        setMuscles([])
+        setWorkout([])
+      }
+    }
     const hasEquipment = equipment.length > 0
     const isSecondStep = active === 1
     const hasMuscles = muscles.length > 0

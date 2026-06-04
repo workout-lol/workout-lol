@@ -2,11 +2,9 @@ import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
 import TwitterProvider from 'next-auth/providers/twitter'
-import CryptoJS from 'crypto-js'
 import { generateSlug } from 'random-word-slugs'
 import { getUserByQuery, createUser } from '../../../lib/db-helper'
-
-const PASSWORD_HASH_SECRET = process.env.PASSWORD_HASH_SECRET
+import { hashPassword } from '../../../lib/password'
 
 const createOauthUser = async ({ email, provider, defaultSlug }) => {
   const [user] = await getUserByQuery({ email })
@@ -32,6 +30,9 @@ const createOauthUser = async ({ email, provider, defaultSlug }) => {
 }
 
 export const authOptions = {
+  pages: {
+    signIn: '/sign-in',
+  },
   callbacks: {
     async signIn({ account, profile }) {
       console.log(account, profile)
@@ -69,13 +70,9 @@ export const authOptions = {
       },
       async authorize(credentials, req) {
         const { username, password } = credentials
-        const passHash = CryptoJS.SHA256(
-          password,
-          PASSWORD_HASH_SECRET
-        ).toString(CryptoJS.enc.Hex)
         const [user] = await getUserByQuery({ email: username })
 
-        if (user && user.password === passHash) {
+        if (user && user.password === hashPassword(password)) {
           return user
         }
         // Return null if user data could not be retrieved

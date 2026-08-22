@@ -89,9 +89,18 @@ export default function Home() {
           withAsterisk
           required
           icon={<IconLock size='0.8rem' />}
-          mb='md'
+          mb='xs'
           error={error && error.password}
         />
+
+        <Text size='xs' align='right' mb='md'>
+          <a
+            href='/forgot-password'
+            style={{ color: '#228be6', textDecoration: 'none' }}
+          >
+            Forgot password?
+          </a>
+        </Text>
 
         {error && !error.email && !error.password && !error.social && (
           <Text color='red' mt='sm' mb='sm'>

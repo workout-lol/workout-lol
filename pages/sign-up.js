@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { signIn } from 'next-auth/react'
@@ -82,7 +83,12 @@ export default function Home() {
           mb='xs'
           error={error && error.email}
         />
-        <PasswordInput
+        <Group position="apart" mt="xs" mb="xs">
+            <Anchor component={Link} href="/reset-password" size="xs" color="dimmed">
+              Forgot password?
+            </Anchor>
+          </Group>
+          <PasswordInput
           name='password'
           placeholder='Your password'
           label='Password'

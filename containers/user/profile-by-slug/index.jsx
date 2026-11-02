@@ -5,6 +5,7 @@ import Calendar from '../../../components/Calendar/Calendar'
 
 const ProfileBySlug = ({ workouts }) => {
   const hasWorkouts = workouts.length > 0
+  const favoriteWorkouts = workouts.filter((w) => w.favorite)
 
   return (
     <div>
@@ -16,10 +17,18 @@ const ProfileBySlug = ({ workouts }) => {
 
       {hasWorkouts && (
         <>
+          <Calendar variant='full' workouts={workouts} />
+          {favoriteWorkouts.length > 0 && (
+            <>
+              <Text mt='lg' mb='md' fw='bold'>
+                ⭐ Favorite Workouts [{favoriteWorkouts.length}]
+              </Text>
+              <WorkoutTable workouts={favoriteWorkouts} viewOnly />
+            </>
+          )}
           <Text mt='lg' mb='md' fw='bold'>
             💪 Workout History [{workouts.length}]
           </Text>
-          <Calendar variant='full' workouts={workouts} />
           <WorkoutTable workouts={workouts} viewOnly />
         </>
       )}

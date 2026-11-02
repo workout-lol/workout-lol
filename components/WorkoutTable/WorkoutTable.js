@@ -11,7 +11,13 @@ import {
   Popover,
   CopyButton,
 } from '@mantine/core'
-import { IconTrash, IconRepeat, IconShare } from '@tabler/icons-react'
+import {
+  IconTrash,
+  IconRepeat,
+  IconShare,
+  IconStar,
+  IconStarFilled,
+} from '@tabler/icons-react'
 import { useSession } from 'next-auth/react'
 import { muscleToColor } from '../Exercises/utils'
 import styles from './WorkoutTable.module.css'
@@ -41,7 +47,12 @@ const ShareIcon = ({ workout = {}, mobile }) => (
   </CopyButton>
 )
 
-const WorkoutTable = ({ workouts, deleteWorkout, viewOnly = false }) => {
+const WorkoutTable = ({
+  workouts,
+  deleteWorkout,
+  toggleFavorite,
+  viewOnly = false,
+}) => {
   const { colorScheme } = useMantineColorScheme()
   const { data: session } = useSession()
   const isLoggedIn = session && session.user && session.user.email
@@ -82,6 +93,25 @@ const WorkoutTable = ({ workouts, deleteWorkout, viewOnly = false }) => {
               </td>
               {!viewOnly && (
                 <>
+                  {toggleFavorite && (
+                    <td>
+                      <Tooltip
+                        label={
+                          w.favorite
+                            ? 'Remove from favorites'
+                            : 'Mark as favorite'
+                        }
+                      >
+                        <ActionIcon
+                          color='yellow'
+                          variant='subtle'
+                          onClick={() => toggleFavorite(w.id)}
+                        >
+                          {w.favorite ? <IconStarFilled /> : <IconStar />}
+                        </ActionIcon>
+                      </Tooltip>
+                    </td>
+                  )}
                   {isLoggedIn && (
                     <td>
                       <ShareIcon workout={w} />
@@ -137,6 +167,24 @@ const WorkoutTable = ({ workouts, deleteWorkout, viewOnly = false }) => {
 
               {!viewOnly && (
                 <Flex>
+                  {toggleFavorite && (
+                    <Tooltip
+                      label={
+                        w.favorite
+                          ? 'Remove from favorites'
+                          : 'Mark as favorite'
+                      }
+                    >
+                      <ActionIcon
+                        color='yellow'
+                        variant='subtle'
+                        mr='sm'
+                        onClick={() => toggleFavorite(w.id)}
+                      >
+                        {w.favorite ? <IconStarFilled /> : <IconStar />}
+                      </ActionIcon>
+                    </Tooltip>
+                  )}
                   {isLoggedIn && <ShareIcon workout={w} mobile={true} />}
                   <Link href={`/?repeat_id=${w.id}`}>
                     <Tooltip label='Repeat workout'>

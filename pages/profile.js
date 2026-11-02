@@ -40,6 +40,15 @@ export default function Home() {
     setAccount({ ...user, workouts })
   }
 
+  const toggleFavorite = (id) => {
+    const workouts = (user.workouts || []).map((w) =>
+      w.id === id ? { ...w, favorite: !w.favorite } : w
+    )
+    setAccount({ ...user, workouts })
+  }
+
+  const favoriteWorkouts = workouts.filter((w) => w.favorite)
+
   return (
     <Layout>
       {!session && (
@@ -69,13 +78,29 @@ export default function Home() {
           No workouts yet...
         </Text>
       )}
+      {favoriteWorkouts.length > 0 && (
+        <>
+          <Text mt='lg' mb='md' fw='bold'>
+            ⭐ Favorite Workouts [{favoriteWorkouts.length}]
+          </Text>
+          <WorkoutTable
+            workouts={favoriteWorkouts}
+            deleteWorkout={deleteWorkout}
+            toggleFavorite={toggleFavorite}
+          />
+        </>
+      )}
       {workouts.length > 0 && (
         <Text mt='lg' mb='md' fw='bold'>
           Workout History [{workouts.length}]
         </Text>
       )}
       {workouts.length > 0 && (
-        <WorkoutTable workouts={workouts} deleteWorkout={deleteWorkout} />
+        <WorkoutTable
+          workouts={workouts}
+          deleteWorkout={deleteWorkout}
+          toggleFavorite={toggleFavorite}
+        />
       )}
     </Layout>
   )
